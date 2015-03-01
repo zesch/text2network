@@ -20,10 +20,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 
 public class NounphraseExporter extends JCasConsumer_ImplBase {
 	
-	protected static String stopwordList = "stopwords2.txt";
 	protected String outputFile;
 	protected List<Nounphrase> nounphrases;
-	protected Set<String> stopwords;
 
 	@Override
 	public void initialize(UimaContext context) throws ResourceInitializationException {
@@ -64,7 +62,7 @@ public class NounphraseExporter extends JCasConsumer_ImplBase {
 		List<Nounphrase> nounphrases = new ArrayList<Nounphrase>();
 		
 		for (Chunk chunk : JCasUtil.selectCovered(Chunk.class, sentence)) {
-			if (chunk.getChunkValue().equals("NP") && !this.stopwords.contains(chunk.getCoveredText().toLowerCase())) {
+			if (chunk.getChunkValue().equals("NP")) {
 				System.out.println(chunk.getCoveredText());
 				nounphrases.add(new Nounphrase(chunk.getCoveredText()));
 			}

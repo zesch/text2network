@@ -48,8 +48,8 @@ public class ExtractionPipeline {
 		
 		AnalysisEngineDescription chu = createEngineDescription(OpenNlpChunker.class);
 		
-		AnalysisEngineDescription stop = createEngineDescription(StopWordRemover.class,
-																StopWordRemover.PARAM_MODEL_LOCATION, stopwords);
+//		AnalysisEngineDescription stop = createEngineDescription(StopWordRemover.class,
+//																StopWordRemover.PARAM_MODEL_LOCATION, stopwords);
 //		
 //		AnalysisEngineDescription cc = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, output);
 		
@@ -62,7 +62,7 @@ public class ExtractionPipeline {
 //		AnalysisEngineDescription conw = createEngineDescription(Conll2012Writer.class, Conll2012Writer.PARAM_TARGET_LOCATION, "target/output");
 
 		
-		runPipeline(cr, seg, pos, chu, stop, npexp);
+		runPipeline(cr, seg, pos, chu, npexp);
 	}
 
 }
