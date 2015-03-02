@@ -13,6 +13,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordNamedEntityRecognizer;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator;
@@ -28,7 +29,7 @@ import static org.apache.uima.fit.pipeline.SimplePipeline.*;
 
 public class ExtractionPipeline {
 
-	public void startPipeline(String input, String output, String stopwords) throws UIMAException, IOException {
+	public void startPipeline(String input, String output) throws UIMAException, IOException {
 		
 		CollectionReaderDescription cr = createReaderDescription(
 		         TextReader.class,
@@ -36,33 +37,33 @@ public class ExtractionPipeline {
 		         TextReader.PARAM_PATTERNS, new String[] {"[+]*.txt"},
 		         TextReader.PARAM_LANGUAGE, "en");
 		
-		AnalysisEngineDescription seg = createEngineDescription(StanfordSegmenter.class);
+		//Segmenter
+		AnalysisEngineDescription stseg = createEngineDescription(StanfordSegmenter.class);
+		AnalysisEngineDescription seg = createEngineDescription(BreakIteratorSegmenter.class);	
 		
+		//POS
 		AnalysisEngineDescription pos = createEngineDescription(StanfordPosTagger.class);
+		AnalysisEngineDescription tagger = createEngineDescription(OpenNlpPosTagger.class);
 		
-//		AnalysisEngineDescription seg = createEngineDescription(BreakIteratorSegmenter.class);
-//		
-//		AnalysisEngineDescription tagger = createEngineDescription(OpenNlpPosTagger.class);
+		//Parser
+		AnalysisEngineDescription stParser = createEngineDescription(StanfordParser.class);
 		
-//		AnalysisEngineDescription ner = createEngineDescription(StanfordNamedEntityRecognizer.class);
+		//Chunker
+		AnalysisEngineDescription chu = createEngineDescription(OpenNlpChunker.class); //Der OpenNLPChunker nutzt das Penn Treebank Tagset
 		
-		AnalysisEngineDescription chu = createEngineDescription(OpenNlpChunker.class);
-		
-//		AnalysisEngineDescription stop = createEngineDescription(StopWordRemover.class,
-//																StopWordRemover.PARAM_MODEL_LOCATION, stopwords);
-//		
-//		AnalysisEngineDescription cc = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, output);
-		
-		AnalysisEngineDescription npexp = createEngineDescription(NounphraseExporter.class, "outputFile", output);
-		
-		
-		
-//		AnalysisEngineDescription wr = createEngineDescription(TextWriter.class, TextWriter.PARAM_TARGET_LOCATION, "target/output");
-		
+		//Nounphrase
+		AnalysisEngineDescription npAnn = createEngineDescription(NounphraseAnnotator.class);
+		AnalysisEngineDescription npexp = createEngineDescription(ConceptExporter.class, "outputFile", output);
+			
+		//Ausgabe
+		AnalysisEngineDescription wr = createEngineDescription(TextWriter.class, TextWriter.PARAM_TARGET_LOCATION, "target/output");
 //		AnalysisEngineDescription conw = createEngineDescription(Conll2012Writer.class, Conll2012Writer.PARAM_TARGET_LOCATION, "target/output");
+		AnalysisEngineDescription cas = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, "target/output.txt");
 
 		
-		runPipeline(cr, seg, pos, chu, npexp);
+		
+		
+		runPipeline(cr, seg, tagger, chu, npAnn, npexp, cas);
 	}
 
 }

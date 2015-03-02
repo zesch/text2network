@@ -17,18 +17,22 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 
-public class NounphraseExporter extends JCasConsumer_ImplBase {
+public class ConceptExporter extends JCasConsumer_ImplBase 
+{
 	
 	protected String outputFile;
 	protected List<Nounphrase> nounphrases;
 
 	@Override
-	public void initialize(UimaContext context) throws ResourceInitializationException {
+	public void initialize(UimaContext context) throws ResourceInitializationException
+	{
 		
 		super.initialize(context);
 		
-		for (int i = 0; i< context.getConfigParameterNames().length; i = i+1) {
+		for (int i = 0; i< context.getConfigParameterNames().length; i = i+1)
+		{
 			System.out.println(context.getConfigParameterNames()[i]);
 		}
 		
@@ -37,15 +41,15 @@ public class NounphraseExporter extends JCasConsumer_ImplBase {
 	}
 	
 	@Override
-	public void process(JCas aJCas) throws AnalysisEngineProcessException {
+	public void process(JCas aJCas) throws AnalysisEngineProcessException
+	{
 		
 		nounphrases = new ArrayList<Nounphrase>();
 		
-		
-		for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
-			
-			nounphrases.addAll(this.getNounphrase(sentence));
-			
+		for (Concept concept : JCasUtil.select(aJCas, Concept.class))
+		{
+			nounphrases.add(new Nounphrase(concept.getCoveredText()));
+			System.out.println(concept.getCoveredText());
 		}
 		
 		this.export(this.outputFile);
@@ -53,43 +57,41 @@ public class NounphraseExporter extends JCasConsumer_ImplBase {
 	}
 	
 	@Override
-	public void destroy() {
+	public void destroy()
+	{
 		super.destroy();
 	}
-
-	protected List<Nounphrase> getNounphrase(Sentence sentence) {
-		
-		List<Nounphrase> nounphrases = new ArrayList<Nounphrase>();
-		
-		for (Chunk chunk : JCasUtil.selectCovered(Chunk.class, sentence)) {
-			if (chunk.getChunkValue().equals("NP")) {
-				System.out.println(chunk.getCoveredText());
-				nounphrases.add(new Nounphrase(chunk.getCoveredText()));
-			}
-		}
-		return nounphrases;	
-	}
 	
-	protected void export(String outputFile) {
+	protected void export(String outputFile)
+	{
 		
 		FileWriter writer = null;
 		
-		try {
+		try
+		{
 			 writer = new FileWriter(outputFile);
 			 
-			 for(int i = 0; i <nounphrases.size(); i = i+1) {
+			 for(int i = 0; i <nounphrases.size(); i = i+1)
+			 {
 				 writer.write(nounphrases.get(i).getText());
 				 writer.write(System.lineSeparator());
 			 }
 			 
 			 
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			// TODO Automatisch generierter Erfassungsblock
 			e.printStackTrace();
-		} finally {
-			try {
+		}
+		finally
+		{
+			try
+			{
 				writer.close();
-			} catch (IOException e) {
+			}
+			catch (IOException e)
+			{
 				// TODO Automatisch generierter Erfassungsblock
 				e.printStackTrace();
 			}
@@ -97,5 +99,21 @@ public class NounphraseExporter extends JCasConsumer_ImplBase {
 		
 		
 	}
+	
+//	protected List<Nounphrase> getNounphrase(Sentence sentence)
+//	{
+//		
+//		List<Nounphrase> nounphrases = new ArrayList<Nounphrase>();
+//		
+//		for (Chunk chunk : JCasUtil.selectCovered(Chunk.class, sentence))
+//		{
+//			if (chunk.getChunkValue().equals("NP"))
+//			{
+//				System.out.println(chunk.getCoveredText());
+//				nounphrases.add(new Nounphrase(chunk.getCoveredText()));
+//			}
+//		}
+//		return nounphrases;	
+//	}
 
 }

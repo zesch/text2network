@@ -10,12 +10,11 @@ public class Initialize {
 		
 		String input = "input/";
 		String output = "output/output.txt";
-		String stopwords = "input/stopwords2.txt";
 		
 		
 		ExtractionPipeline extractor = new ExtractionPipeline();
 		
-		extractor.startPipeline(input, output, stopwords);
+		extractor.startPipeline(input, output);
 		
 		
 	}
