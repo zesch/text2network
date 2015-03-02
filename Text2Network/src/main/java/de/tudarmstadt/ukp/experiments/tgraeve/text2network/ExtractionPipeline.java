@@ -21,6 +21,7 @@ import de.tudarmstadt.ukp.dkpro.core.stopwordremover.StopWordRemover;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.GraphMLExporter;
 
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -59,11 +60,13 @@ public class ExtractionPipeline {
 		AnalysisEngineDescription wr = createEngineDescription(TextWriter.class, TextWriter.PARAM_TARGET_LOCATION, "target/output");
 //		AnalysisEngineDescription conw = createEngineDescription(Conll2012Writer.class, Conll2012Writer.PARAM_TARGET_LOCATION, "target/output");
 		AnalysisEngineDescription cas = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, "target/output.txt");
+		AnalysisEngineDescription gmlexp = createEngineDescription(GraphMLExporter.class);
+
 
 		
 		
 		
-		runPipeline(cr, seg, tagger, chu, npAnn, npexp, cas);
+		runPipeline(cr, seg, tagger, chu, npAnn, gmlexp, cas);
 	}
 
 }
