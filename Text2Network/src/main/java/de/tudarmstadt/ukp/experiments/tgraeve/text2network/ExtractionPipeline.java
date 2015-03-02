@@ -21,6 +21,7 @@ import de.tudarmstadt.ukp.dkpro.core.stopwordremover.StopWordRemover;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.ConceptExporter;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.GraphMLExporter;
 
 import org.apache.uima.fit.component.CasDumpWriter;

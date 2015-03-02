@@ -1,4 +1,4 @@
-package de.tudarmstadt.ukp.experiments.tgraeve.text2network;
+package de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,6 +17,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.Nounphrase;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 
 public class ConceptExporter extends JCasConsumer_ImplBase 
