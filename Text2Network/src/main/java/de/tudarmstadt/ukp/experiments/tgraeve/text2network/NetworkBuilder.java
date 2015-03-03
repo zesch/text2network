@@ -67,14 +67,31 @@ public class NetworkBuilder extends JCasAnnotator_ImplBase
         				&& chunksSentence.get(i+1).getChunkValue().equals("VP")
         					&& chunksSentence.get(i+2).getChunkValue().equals("NP"))
         		{
-        			System.out.println(chunksSentence.get(i).getCoveredText()+" "+
-        									chunksSentence.get(i+1).getCoveredText()+" "+
+        			System.out.println("NP:VP:NP = " + 
+        								chunksSentence.get(i).getCoveredText()+" -> "+
+        									chunksSentence.get(i+1).getCoveredText()+" -> "+
         										chunksSentence.get(i+2).getCoveredText());
         			edges.add(new Edge(chunksSentence.get(i).getCoveredText(),
         									chunksSentence.get(i+1).getCoveredText(),
         										chunksSentence.get(i+2).getCoveredText()));
-        			edges.toString();
+
+        		} 
+        		else if (chunksSentence.get(i).getChunkValue().equals("NP")
+        						&& chunksSentence.get(i+1).getChunkValue().equals("NP")
+        							&& chunksSentence.get(i+2).getChunkValue().equals("VP"))
+        		{
+        			System.out.println("NP:NP:VP = " + 
+        								chunksSentence.get(i+1).getCoveredText()+" -> "+
+    										chunksSentence.get(i+2).getCoveredText()+" -> "+
+    											chunksSentence.get(i).getCoveredText());
+        			edges.add(new Edge(chunksSentence.get(i+1).getCoveredText(),
+    									chunksSentence.get(i+2).getCoveredText(),
+    										chunksSentence.get(i).getCoveredText()));
         		}
+        		
+        		
+        		
+        		
 	        	i++;
 	        }
 	        

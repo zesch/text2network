@@ -56,7 +56,7 @@ public class GraphMLExporter extends JCasConsumer_ImplBase
 		
 		try
 		{
-			OutputStream out = new FileOutputStream("graph.graphml");
+			OutputStream out = new FileOutputStream("network.graphml");
 			writer.outputGraph(out);
 		} 
 		catch (IOException e)
