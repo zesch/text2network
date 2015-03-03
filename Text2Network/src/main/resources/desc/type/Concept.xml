@@ -18,12 +18,17 @@
         <featureDescription>
           <name>source</name>
           <description/>
-          <rangeTypeName>de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept</rangeTypeName>
+          <rangeTypeName>uima.tcas.Annotation</rangeTypeName>
         </featureDescription>
         <featureDescription>
           <name>target</name>
           <description/>
-          <rangeTypeName>de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept</rangeTypeName>
+          <rangeTypeName>uima.tcas.Annotation</rangeTypeName>
+        </featureDescription>
+      <featureDescription>
+          <name>relation</name>
+          <description/>
+          <rangeTypeName>uima.tcas.Annotation</rangeTypeName>
         </featureDescription>
       </features>
     </typeDescription>

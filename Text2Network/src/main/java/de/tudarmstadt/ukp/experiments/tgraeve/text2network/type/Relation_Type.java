@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Tue Mar 03 01:38:56 CET 2015
+ * Updated by JCasGen Tue Mar 03 14:21:06 CET 2015
  * @generated */
 public class Relation_Type extends Annotation_Type {
   /** @generated 
@@ -93,6 +93,30 @@ public class Relation_Type extends Annotation_Type {
     ll_cas.ll_setRefValue(addr, casFeatCode_target, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_relation;
+  /** @generated */
+  final int     casFeatCode_relation;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public int getRelation(int addr) {
+        if (featOkTst && casFeat_relation == null)
+      jcas.throwFeatMissing("relation", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation");
+    return ll_cas.ll_getRefValue(addr, casFeatCode_relation);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setRelation(int addr, int v) {
+        if (featOkTst && casFeat_relation == null)
+      jcas.throwFeatMissing("relation", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation");
+    ll_cas.ll_setRefValue(addr, casFeatCode_relation, v);}
+    
+  
 
 
 
@@ -106,12 +130,16 @@ public class Relation_Type extends Annotation_Type {
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
  
-    casFeat_source = jcas.getRequiredFeatureDE(casType, "source", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept", featOkTst);
+    casFeat_source = jcas.getRequiredFeatureDE(casType, "source", "uima.tcas.Annotation", featOkTst);
     casFeatCode_source  = (null == casFeat_source) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_source).getCode();
 
  
-    casFeat_target = jcas.getRequiredFeatureDE(casType, "target", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept", featOkTst);
+    casFeat_target = jcas.getRequiredFeatureDE(casType, "target", "uima.tcas.Annotation", featOkTst);
     casFeatCode_target  = (null == casFeat_target) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_target).getCode();
+
+ 
+    casFeat_relation = jcas.getRequiredFeatureDE(casType, "relation", "uima.tcas.Annotation", featOkTst);
+    casFeatCode_relation  = (null == casFeat_relation) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_relation).getCode();
 
   }
 }

@@ -22,11 +22,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.components.Edge;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
 
 public class NetworkBuilder extends JCasAnnotator_ImplBase
 {
 	
-	protected String outputFile;
 	protected List<Chunk> chunksSentence;
 	protected int windowSize = 4;
 
@@ -67,28 +67,34 @@ public class NetworkBuilder extends JCasAnnotator_ImplBase
         				&& chunksSentence.get(i+1).getChunkValue().equals("VP")
         					&& chunksSentence.get(i+2).getChunkValue().equals("NP"))
         		{
-        			System.out.println("NP:VP:NP = " + 
-        								chunksSentence.get(i).getCoveredText()+" -> "+
-        									chunksSentence.get(i+1).getCoveredText()+" -> "+
-        										chunksSentence.get(i+2).getCoveredText());
+//        			System.out.println("NP:VP:NP = " + 
+//        								chunksSentence.get(i).getCoveredText()+" -> "+
+//        									chunksSentence.get(i+1).getCoveredText()+" -> "+
+//        										chunksSentence.get(i+2).getCoveredText());
         			edges.add(new Edge(chunksSentence.get(i).getCoveredText(),
         									chunksSentence.get(i+1).getCoveredText(),
         										chunksSentence.get(i+2).getCoveredText()));
+        			
+        			Relation relation = new Relation(aJCas);
+        			relation.setSource(chunksSentence.get(i));
+        			relation.setRelation(chunksSentence.get(i+1));
+        			relation.setTarget(chunksSentence.get(i+2));
+    				relation.addToIndexes();
+    				System.out.println("+++"+relation.getSource().getCoveredText());
 
         		} 
-        		else if (chunksSentence.get(i).getChunkValue().equals("NP")
-        						&& chunksSentence.get(i+1).getChunkValue().equals("NP")
-        							&& chunksSentence.get(i+2).getChunkValue().equals("VP"))
-        		{
-        			System.out.println("NP:NP:VP = " + 
-        								chunksSentence.get(i+1).getCoveredText()+" -> "+
-    										chunksSentence.get(i+2).getCoveredText()+" -> "+
-    											chunksSentence.get(i).getCoveredText());
-        			edges.add(new Edge(chunksSentence.get(i+1).getCoveredText(),
-    									chunksSentence.get(i+2).getCoveredText(),
-    										chunksSentence.get(i).getCoveredText()));
-        		}
-        		
+//        		else if (chunksSentence.get(i).getChunkValue().equals("NP")
+//        						&& chunksSentence.get(i+1).getChunkValue().equals("NP")
+//        							&& chunksSentence.get(i+2).getChunkValue().equals("VP"))
+//        		{
+//        			System.out.println("NP:NP:VP = " + 
+//        								chunksSentence.get(i+1).getCoveredText()+" -> "+
+//    										chunksSentence.get(i+2).getCoveredText()+" -> "+
+//    											chunksSentence.get(i).getCoveredText());
+//        			edges.add(new Edge(chunksSentence.get(i+1).getCoveredText(),
+//    									chunksSentence.get(i+2).getCoveredText(),
+//    										chunksSentence.get(i).getCoveredText()));
+//        		}
         		
         		
         		

@@ -73,7 +73,7 @@ public class ExtractionPipeline {
 		
 		
 		
-		runPipeline(reader, seg, openPos, openChunker, netBuild);
+		runPipeline(reader, seg, openPos, openChunker, netBuild, gmlexp, cas);
 	}
 
 }
