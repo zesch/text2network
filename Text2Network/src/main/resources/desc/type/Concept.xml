@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
-  <name>Concept</name>
+  <name>ConceptExtraction</name>
   <description/>
   <version/>
   <vendor/>
@@ -10,5 +10,22 @@
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       </typeDescription>
+  <typeDescription>
+      <name>de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation</name>
+      <description/>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>source</name>
+          <description/>
+          <rangeTypeName>de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>target</name>
+          <description/>
+          <rangeTypeName>de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
   </types>
 </typeSystemDescription>

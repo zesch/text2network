@@ -18,6 +18,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.components.Nounphrase;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 
 public class NounphraseAnnotator extends JCasAnnotator_ImplBase
@@ -46,6 +47,11 @@ public class NounphraseAnnotator extends JCasAnnotator_ImplBase
 				concept.setBegin(chunk.getBegin());
 				concept.setEnd(chunk.getEnd());
 				concept.addToIndexes();
+				System.out.println(chunk.getCoveredText());
+			}
+			if (chunk.getChunkValue().equals("VP"))
+			{
+				System.out.println(chunk.getCoveredText());
 			}
 		}
 		

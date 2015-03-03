@@ -20,6 +20,7 @@ import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.stopwordremover.StopWordRemover;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.ConceptExporter;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.GraphMLExporter;
@@ -33,25 +34,27 @@ public class ExtractionPipeline {
 
 	public void startPipeline(String input, String output) throws UIMAException, IOException {
 		
-		CollectionReaderDescription cr = createReaderDescription(
+		CollectionReaderDescription reader = createReaderDescription(
 		         TextReader.class,
 		         TextReader.PARAM_SOURCE_LOCATION, input,
 		         TextReader.PARAM_PATTERNS, new String[] {"[+]*.txt"},
 		         TextReader.PARAM_LANGUAGE, "en");
 		
 		//Segmenter
-		AnalysisEngineDescription stseg = createEngineDescription(StanfordSegmenter.class);
+		AnalysisEngineDescription stSegmenter = createEngineDescription(StanfordSegmenter.class);
 		AnalysisEngineDescription seg = createEngineDescription(BreakIteratorSegmenter.class);	
 		
 		//POS
-		AnalysisEngineDescription pos = createEngineDescription(StanfordPosTagger.class);
-		AnalysisEngineDescription tagger = createEngineDescription(OpenNlpPosTagger.class);
+		AnalysisEngineDescription stPos = createEngineDescription(StanfordPosTagger.class);
+		AnalysisEngineDescription openPos = createEngineDescription(OpenNlpPosTagger.class);
 		
 		//Parser
 		AnalysisEngineDescription stParser = createEngineDescription(StanfordParser.class);
+		AnalysisEngineDescription openParser = createEngineDescription(OpenNlpParser.class);
+
 		
 		//Chunker
-		AnalysisEngineDescription chu = createEngineDescription(OpenNlpChunker.class); //Der OpenNLPChunker nutzt das Penn Treebank Tagset
+		AnalysisEngineDescription openChunker = createEngineDescription(OpenNlpChunker.class); //Der OpenNLPChunker nutzt das Penn Treebank Tagset
 		
 		//Nounphrase
 		AnalysisEngineDescription npAnn = createEngineDescription(NounphraseAnnotator.class);
@@ -62,12 +65,15 @@ public class ExtractionPipeline {
 //		AnalysisEngineDescription conw = createEngineDescription(Conll2012Writer.class, Conll2012Writer.PARAM_TARGET_LOCATION, "target/output");
 		AnalysisEngineDescription cas = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, "target/output.txt");
 		AnalysisEngineDescription gmlexp = createEngineDescription(GraphMLExporter.class);
+		
+		AnalysisEngineDescription netBuild = createEngineDescription(NetworkBuilder.class);
 
 
+
 		
 		
 		
-		runPipeline(cr, seg, tagger, chu, npAnn, gmlexp, cas);
+		runPipeline(reader, seg, openPos, openChunker, netBuild);
 	}
 
 }

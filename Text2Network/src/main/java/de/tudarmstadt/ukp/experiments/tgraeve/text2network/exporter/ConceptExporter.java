@@ -17,7 +17,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.Nounphrase;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.components.Nounphrase;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 
 public class ConceptExporter extends JCasConsumer_ImplBase 
