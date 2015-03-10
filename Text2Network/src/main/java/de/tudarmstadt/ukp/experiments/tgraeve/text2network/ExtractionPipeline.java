@@ -57,7 +57,7 @@ public class ExtractionPipeline {
 		AnalysisEngineDescription openChunker = createEngineDescription(OpenNlpChunker.class); //Der OpenNLPChunker nutzt das Penn Treebank Tagset
 		
 		//Nounphrase
-		AnalysisEngineDescription npAnn = createEngineDescription(NounphraseAnnotator.class);
+		AnalysisEngineDescription npAnn = createEngineDescription(ConceptAnnotator.class);
 		AnalysisEngineDescription npexp = createEngineDescription(ConceptExporter.class, "outputFile", output);
 			
 		//Ausgabe

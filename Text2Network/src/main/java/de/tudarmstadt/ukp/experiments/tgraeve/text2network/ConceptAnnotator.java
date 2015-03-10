@@ -12,17 +12,22 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.components.Nounphrase;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 
-public class NounphraseAnnotator extends JCasAnnotator_ImplBase
+public class ConceptAnnotator extends JCasAnnotator_ImplBase
 {
+	public static final String PARAM_CONCEPT_TYPE = "PARAM_CONCEPT_TYPE";
+	@ConfigurationParameter(name = PARAM_CONCEPT_TYPE, mandatory = true)
+	protected Chunk conceptType;
 	
 	protected String outputFile;
 	protected List<Nounphrase> nounphrases;
@@ -39,7 +44,7 @@ public class NounphraseAnnotator extends JCasAnnotator_ImplBase
 	public void process(JCas aJCas) throws AnalysisEngineProcessException
 	{
 		
-		for (Chunk chunk : JCasUtil.select(aJCas, Chunk.class))
+		for (NC chunk : JCasUtil.select(aJCas, NC.class ))
 		{
 			if (chunk.getChunkValue().equals("NP"))
 			{
