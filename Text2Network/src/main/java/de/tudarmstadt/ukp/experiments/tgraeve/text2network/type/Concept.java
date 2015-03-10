@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Tue Mar 03 14:21:06 CET 2015
+ * Updated by JCasGen Tue Mar 10 12:24:25 CET 2015
  * XML source: /Users/Tobias/Dropbox/Studium/BA II/Programmierung/de.tudarmstadt.ukp.experiments.tgraeve.text2network/src/main/resources/desc/type/Concept.xml
  * @generated */
 public class Concept extends Annotation {
@@ -74,6 +74,26 @@ public class Concept extends Annotation {
    */
   private void readObject() {/*default - does nothing empty block */}
      
-}
+  //*--------------*
+  //* Feature: text
+
+  /** getter for text - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public String getText() {
+    if (Concept_Type.featOkTst && ((Concept_Type)jcasType).casFeat_text == null)
+      jcasType.jcas.throwFeatMissing("text", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((Concept_Type)jcasType).casFeatCode_text);}
+    
+  /** setter for text - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setText(String v) {
+    if (Concept_Type.featOkTst && ((Concept_Type)jcasType).casFeat_text == null)
+      jcasType.jcas.throwFeatMissing("text", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept");
+    jcasType.ll_cas.ll_setStringValue(addr, ((Concept_Type)jcasType).casFeatCode_text, v);}    
+  }
 
     

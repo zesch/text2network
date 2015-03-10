@@ -9,7 +9,14 @@
       <name>de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept</name>
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
-      </typeDescription>
+      <features>
+        <featureDescription>
+          <name>text</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
   <typeDescription>
       <name>de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation</name>
       <description/>
@@ -18,15 +25,32 @@
         <featureDescription>
           <name>source</name>
           <description/>
-          <rangeTypeName>uima.tcas.Annotation</rangeTypeName>
+          <rangeTypeName>de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept</rangeTypeName>
         </featureDescription>
         <featureDescription>
           <name>target</name>
           <description/>
-          <rangeTypeName>uima.tcas.Annotation</rangeTypeName>
+          <rangeTypeName>de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept</rangeTypeName>
         </featureDescription>
       <featureDescription>
           <name>relation</name>
+          <description/>
+          <rangeTypeName>de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.RelationType</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  <typeDescription>
+      <name>de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.RelationType</name>
+      <description/>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>text</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>rType</name>
           <description/>
           <rangeTypeName>uima.tcas.Annotation</rangeTypeName>
         </featureDescription>

@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Tue Mar 03 14:21:06 CET 2015
+ * Updated by JCasGen Tue Mar 10 12:24:25 CET 2015
  * XML source: /Users/Tobias/Dropbox/Studium/BA II/Programmierung/de.tudarmstadt.ukp.experiments.tgraeve.text2network/src/main/resources/desc/type/Concept.xml
  * @generated */
 public class Relation extends Annotation {
@@ -83,16 +83,16 @@ public class Relation extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public Annotation getSource() {
+  public Concept getSource() {
     if (Relation_Type.featOkTst && ((Relation_Type)jcasType).casFeat_source == null)
       jcasType.jcas.throwFeatMissing("source", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation");
-    return (Annotation)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Relation_Type)jcasType).casFeatCode_source)));}
+    return (Concept)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Relation_Type)jcasType).casFeatCode_source)));}
     
   /** setter for source - sets  
    * @generated
    * @param v value to set into the feature 
    */
-  public void setSource(Annotation v) {
+  public void setSource(Concept v) {
     if (Relation_Type.featOkTst && ((Relation_Type)jcasType).casFeat_source == null)
       jcasType.jcas.throwFeatMissing("source", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation");
     jcasType.ll_cas.ll_setRefValue(addr, ((Relation_Type)jcasType).casFeatCode_source, jcasType.ll_cas.ll_getFSRef(v));}    
@@ -105,16 +105,16 @@ public class Relation extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public Annotation getTarget() {
+  public Concept getTarget() {
     if (Relation_Type.featOkTst && ((Relation_Type)jcasType).casFeat_target == null)
       jcasType.jcas.throwFeatMissing("target", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation");
-    return (Annotation)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Relation_Type)jcasType).casFeatCode_target)));}
+    return (Concept)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Relation_Type)jcasType).casFeatCode_target)));}
     
   /** setter for target - sets  
    * @generated
    * @param v value to set into the feature 
    */
-  public void setTarget(Annotation v) {
+  public void setTarget(Concept v) {
     if (Relation_Type.featOkTst && ((Relation_Type)jcasType).casFeat_target == null)
       jcasType.jcas.throwFeatMissing("target", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation");
     jcasType.ll_cas.ll_setRefValue(addr, ((Relation_Type)jcasType).casFeatCode_target, jcasType.ll_cas.ll_getFSRef(v));}    
@@ -127,16 +127,16 @@ public class Relation extends Annotation {
    * @generated
    * @return value of the feature 
    */
-  public Annotation getRelation() {
+  public RelationType getRelation() {
     if (Relation_Type.featOkTst && ((Relation_Type)jcasType).casFeat_relation == null)
       jcasType.jcas.throwFeatMissing("relation", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation");
-    return (Annotation)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Relation_Type)jcasType).casFeatCode_relation)));}
+    return (RelationType)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Relation_Type)jcasType).casFeatCode_relation)));}
     
   /** setter for relation - sets  
    * @generated
    * @param v value to set into the feature 
    */
-  public void setRelation(Annotation v) {
+  public void setRelation(RelationType v) {
     if (Relation_Type.featOkTst && ((Relation_Type)jcasType).casFeat_relation == null)
       jcasType.jcas.throwFeatMissing("relation", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation");
     jcasType.ll_cas.ll_setRefValue(addr, ((Relation_Type)jcasType).casFeatCode_relation, jcasType.ll_cas.ll_getFSRef(v));}    
