@@ -72,7 +72,14 @@ public class ConceptAnnotator extends JCasAnnotator_ImplBase
 			try {
 				for (Entry<AnnotationFS, String> entry : FeaturePathFactory.select(aJCas.getCas(), conceptType.getName()))
 				{
+					System.out.println(conceptType.getName());
 					System.out.println(entry.getValue());
+					
+					Concept concept = new Concept(aJCas);
+					concept.setBegin(entry.getKey().getBegin());
+					concept.setEnd(entry.getKey().getEnd());
+					concept.setText(entry.getKey().getCoveredText());
+					concept.addToIndexes();
 				}
 			} catch (FeaturePathException e) {
 				// TODO Automatisch generierter Erfassungsblock
@@ -92,26 +99,6 @@ public class ConceptAnnotator extends JCasAnnotator_ImplBase
 //				}
 //			}
 //		
-		
-//		for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class))
-//		{
-//			
-//			for (Chunk chunk : JCasUtil.selectCovered(Chunk.class, sentence))
-//			{
-//				if (chunk.getChunkValue().equals("NP"))
-//				{
-//					Network network = new Network(aJCas);
-//					network.setIsNode(true);
-//					network.addToIndexes();
-//				}
-//			}
-//		}
-	}
-	
-	@Override
-	public void destroy()
-	{
-		super.destroy();
 	}
 
 	protected List<Nounphrase> getNounphrase(Sentence sentence)
