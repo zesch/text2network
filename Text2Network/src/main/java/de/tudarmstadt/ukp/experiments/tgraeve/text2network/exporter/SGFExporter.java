@@ -33,6 +33,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
 import eu.sisob.api.parser.sisob.SGFParser;
+import eu.sisob.api.visualization.format.graph.fields.Edge;
 import eu.sisob.api.visualization.format.graph.fields.EdgeSet;
 import eu.sisob.api.visualization.format.graph.fields.Node;
 import eu.sisob.api.visualization.format.graph.fields.NodeSet;
