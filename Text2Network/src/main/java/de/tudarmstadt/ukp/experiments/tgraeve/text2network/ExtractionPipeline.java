@@ -80,7 +80,7 @@ public class ExtractionPipeline {
 		AnalysisEngineDescription treeChunker = createEngineDescription(TreeTaggerChunker.class, TreeTaggerChunker.PARAM_PRINT_TAGSET, true);
 		
 		//Annotator
-		AnalysisEngineDescription concAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, Chunk.class);
+		AnalysisEngineDescription concAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, Chunk.class, ConceptAnnotator.PARAM_CONCEPT_VALUE, "NP");
 		AnalysisEngineDescription npexp = createEngineDescription(ConceptExporter.class, "outputFile", output);
 		AnalysisEngineDescription relAnn = createEngineDescription(RelationAnnotator.class);
 			

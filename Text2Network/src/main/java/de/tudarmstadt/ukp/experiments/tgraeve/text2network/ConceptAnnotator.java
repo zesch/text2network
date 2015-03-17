@@ -54,6 +54,10 @@ public class ConceptAnnotator extends JCasAnnotator_ImplBase
 	@ConfigurationParameter(name = PARAM_CONCEPT_TYPE, mandatory = true)
 	protected Class conceptType;
 	
+	public static final String PARAM_CONCEPT_VALUE = "conceptValue";
+	@ConfigurationParameter(name = PARAM_CONCEPT_VALUE, mandatory = false)
+	protected String conceptValue;
+	
 	protected String outputFile;
 	protected List<Nounphrase> nounphrases;
 
@@ -70,17 +74,41 @@ public class ConceptAnnotator extends JCasAnnotator_ImplBase
 	{
 
 			try {
-				for (Entry<AnnotationFS, String> entry : FeaturePathFactory.select(aJCas.getCas(), conceptType.getName()))
+				
+				if(conceptValue == null)
 				{
-					System.out.println(conceptType.getName());
-					System.out.println(entry.getValue());
-					
-					Concept concept = new Concept(aJCas);
-					concept.setBegin(entry.getKey().getBegin());
-					concept.setEnd(entry.getKey().getEnd());
-					concept.setText(entry.getKey().getCoveredText());
-					concept.addToIndexes();
+					for (Entry<AnnotationFS, String> entry : FeaturePathFactory.select(aJCas.getCas(), conceptType.getName()))
+					{
+						System.out.println(conceptType.getName());
+						System.out.println(entry.getValue());
+						
+						Concept concept = new Concept(aJCas);
+						concept.setBegin(entry.getKey().getBegin());
+						concept.setEnd(entry.getKey().getEnd());
+						concept.setText(entry.getKey().getCoveredText());
+						concept.addToIndexes();
+					}
 				}
+				else
+				{
+					for (Entry<AnnotationFS, String> entry : FeaturePathFactory.select(aJCas.getCas(), conceptType.getName()))
+					{
+						
+						System.out.println(conceptType.getName());
+						System.out.println(entry.getKey().getFeatureValueAsString(entry.getKey().getType().getFeatureByBaseName("chunkValue")));
+						
+						if(entry.getKey().getFeatureValueAsString(entry.getKey().getType().getFeatureByBaseName("chunkValue")).equals(conceptValue))
+						{
+							Concept concept = new Concept(aJCas);
+							concept.setBegin(entry.getKey().getBegin());
+							concept.setEnd(entry.getKey().getEnd());
+							concept.setText(entry.getKey().getCoveredText());
+							concept.addToIndexes();
+						}
+					}
+				}
+				
+				
 			} catch (FeaturePathException e) {
 				// TODO Automatisch generierter Erfassungsblock
 				e.printStackTrace();
