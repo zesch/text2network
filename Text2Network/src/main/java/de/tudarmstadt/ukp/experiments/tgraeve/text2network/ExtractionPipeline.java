@@ -1,9 +1,30 @@
+/*******************************************************************************
+ * Copyright 2010
+ * Ubiquitous Knowledge Processing (UKP) Lab
+ * Technische Universität Darmstadt
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+
 package de.tudarmstadt.ukp.experiments.tgraeve.text2network;
 import java.io.IOException;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.collection.CollectionReaderDescription;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextWriter;
 import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Writer;
@@ -12,6 +33,7 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.*;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerChunker;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordNamedEntityRecognizer;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
@@ -41,7 +63,7 @@ public class ExtractionPipeline {
 		         TextReader.PARAM_LANGUAGE, "en");
 		
 		//Segmenter
-		AnalysisEngineDescription stSegmenter = createEngineDescription(StanfordSegmenter.class);
+		AnalysisEngineDescription stSeg = createEngineDescription(StanfordSegmenter.class);
 		AnalysisEngineDescription seg = createEngineDescription(BreakIteratorSegmenter.class);	
 		
 		//POS
@@ -54,10 +76,11 @@ public class ExtractionPipeline {
 
 		
 		//Chunker
-		AnalysisEngineDescription openChunker = createEngineDescription(OpenNlpChunker.class); //Der OpenNLPChunker nutzt das Penn Treebank Tagset
+		AnalysisEngineDescription openChunker = createEngineDescription(OpenNlpChunker.class, OpenNlpChunker.PARAM_PRINT_TAGSET, true); //Der OpenNLPChunker nutzt das Penn Treebank Tagset
+		AnalysisEngineDescription treeChunker = createEngineDescription(TreeTaggerChunker.class, TreeTaggerChunker.PARAM_PRINT_TAGSET, true);
 		
 		//Nounphrase
-		AnalysisEngineDescription npAnn = createEngineDescription(ConceptAnnotator.class);
+		AnalysisEngineDescription concAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, Sentence.class);
 		AnalysisEngineDescription npexp = createEngineDescription(ConceptExporter.class, "outputFile", output);
 			
 		//Ausgabe
@@ -73,7 +96,7 @@ public class ExtractionPipeline {
 		
 		
 		
-		runPipeline(reader, seg, openPos, openChunker, netBuild, gmlexp, cas);
+		runPipeline(reader, seg, openPos, openChunker, concAnn, cas);
 	}
 
 }

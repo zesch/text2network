@@ -32,21 +32,25 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.components.Edge;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
 
-public class NetworkBuilder extends JCasAnnotator_ImplBase
+public class RelationAnnotator extends JCasAnnotator_ImplBase
 {
 	
-	protected List<Chunk> chunksSentence;
-	protected int windowSize = 4;
+	public static final String PARAM_WINDOW_SIZE = "PARAM_WINDOW_SIZE";
+	@ConfigurationParameter(name = PARAM_WINDOW_SIZE, mandatory = true, defaultValue = "4")
+	protected int windowSize;
+
 
 	@Override
 	public void initialize(UimaContext context) throws ResourceInitializationException
@@ -63,6 +67,7 @@ public class NetworkBuilder extends JCasAnnotator_ImplBase
         for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class))
         {
         	List<Chunk> chunksSentence = new ArrayList<>();
+        	List<Token> tokenSentence = new ArrayList<>();
         	
 	        for (Chunk chunk : JCasUtil.selectCovered(Chunk.class, sentence))
 			{
