@@ -79,9 +79,10 @@ public class ExtractionPipeline {
 		AnalysisEngineDescription openChunker = createEngineDescription(OpenNlpChunker.class, OpenNlpChunker.PARAM_PRINT_TAGSET, true); //Der OpenNLPChunker nutzt das Penn Treebank Tagset
 		AnalysisEngineDescription treeChunker = createEngineDescription(TreeTaggerChunker.class, TreeTaggerChunker.PARAM_PRINT_TAGSET, true);
 		
-		//Nounphrase
-		AnalysisEngineDescription concAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, Sentence.class);
+		//Annotator
+		AnalysisEngineDescription concAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, Chunk.class);
 		AnalysisEngineDescription npexp = createEngineDescription(ConceptExporter.class, "outputFile", output);
+		AnalysisEngineDescription relAnn = createEngineDescription(RelationAnnotator.class);
 			
 		//Ausgabe
 		AnalysisEngineDescription wr = createEngineDescription(TextWriter.class, TextWriter.PARAM_TARGET_LOCATION, "target/output");
@@ -96,7 +97,7 @@ public class ExtractionPipeline {
 		
 		
 		
-		runPipeline(reader, seg, openPos, openChunker, concAnn, cas);
+		runPipeline(reader, seg, openPos, openChunker, concAnn, relAnn, cas);
 	}
 
 }

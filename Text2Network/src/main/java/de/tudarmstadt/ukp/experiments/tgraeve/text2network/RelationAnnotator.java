@@ -35,6 +35,7 @@ import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -61,70 +62,116 @@ public class RelationAnnotator extends JCasAnnotator_ImplBase
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException
 	{	
-        Set<Edge> edges = new HashSet();
-        boolean inWindow;
-        
-        for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class))
-        {
-        	List<Chunk> chunksSentence = new ArrayList<>();
-        	List<Token> tokenSentence = new ArrayList<>();
-        	
-	        for (Chunk chunk : JCasUtil.selectCovered(Chunk.class, sentence))
+		
+		for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) // Selektiert Satz aus Gesamtkonstrukt.
+		{
+			List<Token> tokenSentence = new ArrayList<Token>();
+			int iterator = 0;
+			
+			for (Token token : JCasUtil.selectCovered(Token.class, sentence)) // Selektiert einzelne Token aus Satz.
 			{
-				if (chunk.getChunkValue().equals("NP"))
-				{
-					chunksSentence.add(chunk);
-					System.out.println(chunk.getCoveredText());
-				}
-				if (chunk.getChunkValue().equals("VP"))
-				{
-					chunksSentence.add(chunk);
-					System.out.println(chunk.getCoveredText());
-				}
+				tokenSentence.add(token);
 			}
-	        
-	        int i = 0;
-	        while(i<chunksSentence.size()-windowSize-1)
-	        {
-        		if (chunksSentence.get(i).getChunkValue().equals("NP")
-        				&& chunksSentence.get(i+1).getChunkValue().equals("VP")
-        					&& chunksSentence.get(i+2).getChunkValue().equals("NP"))
-        		{
-//        			System.out.println("NP:VP:NP = " + 
-//        								chunksSentence.get(i).getCoveredText()+" -> "+
-//        									chunksSentence.get(i+1).getCoveredText()+" -> "+
-//        										chunksSentence.get(i+2).getCoveredText());
-        			edges.add(new Edge(chunksSentence.get(i).getCoveredText(),
-        									chunksSentence.get(i+1).getCoveredText(),
-        										chunksSentence.get(i+2).getCoveredText()));
-        			
-        			Relation relation = new Relation(aJCas);
-        			relation.setSource(chunksSentence.get(i));
-        			relation.setRelation(chunksSentence.get(i+1));
-        			relation.setTarget(chunksSentence.get(i+2));
-    				relation.addToIndexes();
-    				System.out.println("+++"+relation.getSource().getCoveredText());
-
-        		} 
-//        		else if (chunksSentence.get(i).getChunkValue().equals("NP")
-//        						&& chunksSentence.get(i+1).getChunkValue().equals("NP")
-//        							&& chunksSentence.get(i+2).getChunkValue().equals("VP"))
+			
+			while (iterator <= tokenSentence.size()-windowSize) // Betrachtet Fenster innerhalb dieses Satzes.
+			{
+				Annotation window = new Annotation(aJCas);
+				window.setBegin(tokenSentence.get(iterator).getBegin());
+				window.setEnd(tokenSentence.get(iterator+windowSize-1).getEnd());
+				
+				List<Concept> conceptsWindow = new ArrayList<Concept>();
+				
+				for (Concept concept : JCasUtil.selectCovered(Concept.class, window)) // Durchsucht das aktuelle Fenster nach Konzepten.
+				{
+					conceptsWindow.add(concept);
+				}
+				
+				if(conceptsWindow.size()>=2)
+				{
+					Relation relation = new Relation(aJCas);
+					relation.setBegin(conceptsWindow.get(0).getBegin());
+					relation.setEnd(conceptsWindow.get(1).getEnd());
+					relation.setSource(conceptsWindow.get(0));
+					relation.setTarget(conceptsWindow.get(1));
+					relation.addToIndexes();
+				}
+				
+				iterator++;
+			}
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+//        Set<Edge> edges = new HashSet();
+//        boolean inWindow;
+//        
+//        for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class))
+//        {
+//        	List<Chunk> chunksSentence = new ArrayList<>();
+//        	List<Token> tokenSentence = new ArrayList<>();
+//        	
+//	        for (Chunk chunk : JCasUtil.selectCovered(Chunk.class, sentence))
+//			{
+//				if (chunk.getChunkValue().equals("NP"))
+//				{
+//					chunksSentence.add(chunk);
+//					System.out.println(chunk.getCoveredText());
+//				}
+//				if (chunk.getChunkValue().equals("VP"))
+//				{
+//					chunksSentence.add(chunk);
+//					System.out.println(chunk.getCoveredText());
+//				}
+//			}
+//	        
+//	        int i = 0;
+//	        while(i<chunksSentence.size()-windowSize-1)
+//	        {
+//        		if (chunksSentence.get(i).getChunkValue().equals("NP")
+//        				&& chunksSentence.get(i+1).getChunkValue().equals("VP")
+//        					&& chunksSentence.get(i+2).getChunkValue().equals("NP"))
 //        		{
-//        			System.out.println("NP:NP:VP = " + 
-//        								chunksSentence.get(i+1).getCoveredText()+" -> "+
-//    										chunksSentence.get(i+2).getCoveredText()+" -> "+
-//    											chunksSentence.get(i).getCoveredText());
-//        			edges.add(new Edge(chunksSentence.get(i+1).getCoveredText(),
-//    									chunksSentence.get(i+2).getCoveredText(),
-//    										chunksSentence.get(i).getCoveredText()));
-//        		}
-        		
-        		
-        		
-	        	i++;
-	        }
-	        
-        }
+////        			System.out.println("NP:VP:NP = " + 
+////        								chunksSentence.get(i).getCoveredText()+" -> "+
+////        									chunksSentence.get(i+1).getCoveredText()+" -> "+
+////        										chunksSentence.get(i+2).getCoveredText());
+//        			edges.add(new Edge(chunksSentence.get(i).getCoveredText(),
+//        									chunksSentence.get(i+1).getCoveredText(),
+//        										chunksSentence.get(i+2).getCoveredText()));
+//        			
+//        			Relation relation = new Relation(aJCas);
+//        			relation.setSource(chunksSentence.get(i));
+//        			relation.setRelation(chunksSentence.get(i+1));
+//        			relation.setTarget(chunksSentence.get(i+2));
+//    				relation.addToIndexes();
+//    				System.out.println("+++"+relation.getSource().getCoveredText());
+//
+//        		} 
+////        		else if (chunksSentence.get(i).getChunkValue().equals("NP")
+////        						&& chunksSentence.get(i+1).getChunkValue().equals("NP")
+////        							&& chunksSentence.get(i+2).getChunkValue().equals("VP"))
+////        		{
+////        			System.out.println("NP:NP:VP = " + 
+////        								chunksSentence.get(i+1).getCoveredText()+" -> "+
+////    										chunksSentence.get(i+2).getCoveredText()+" -> "+
+////    											chunksSentence.get(i).getCoveredText());
+////        			edges.add(new Edge(chunksSentence.get(i+1).getCoveredText(),
+////    									chunksSentence.get(i+2).getCoveredText(),
+////    										chunksSentence.get(i).getCoveredText()));
+////        		}
+//        		
+//        		
+//        		
+//	        	i++;
+//	        }
+//	        
+//        }
         
         
 
