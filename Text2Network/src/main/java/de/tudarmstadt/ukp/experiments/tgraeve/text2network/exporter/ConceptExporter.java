@@ -50,6 +50,7 @@ public class ConceptExporter extends JCasConsumer_ImplBase
 			System.out.println(context.getConfigParameterNames()[i]);
 		}
 		
+		// FIXME ?? what parameter should that be?
 		this.outputFile = context.getConfigParameterValue(context.getConfigParameterNames()[0]).toString();
 
 	}
@@ -68,12 +69,6 @@ public class ConceptExporter extends JCasConsumer_ImplBase
 		
 		this.export(this.outputFile);
 		
-	}
-	
-	@Override
-	public void destroy()
-	{
-		super.destroy();
 	}
 	
 	protected void export(String outputFile)

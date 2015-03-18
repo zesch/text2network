@@ -99,6 +99,7 @@ public class SGFExporter extends JCasConsumer_ImplBase
 			writer = new FileWriter("output/output.sgf");
 			writer.write(parser.encode());
 		} catch (IOException e) {
+			// FIXME Exceptions nie werfen, sondern in AnalysisEngineProcessException wrappen
 			// TODO Automatisch generierter Erfassungsblock
 			e.printStackTrace();
 		} finally {
