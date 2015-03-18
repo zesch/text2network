@@ -18,7 +18,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -39,8 +38,6 @@ import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLTokens;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLWriter;
 
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.components.Nounphrase;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
 
 public class GraphMLExporter extends JCasConsumer_ImplBase

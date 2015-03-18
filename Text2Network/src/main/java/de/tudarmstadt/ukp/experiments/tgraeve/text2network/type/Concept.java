@@ -3,10 +3,9 @@
 /* First created by JCasGen Mon Mar 02 01:35:08 CET 2015 */
 package de.tudarmstadt.ukp.experiments.tgraeve.text2network.type;
 
-import org.apache.uima.jcas.JCas; 
+import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.cas.TOP_Type;
-
 import org.apache.uima.jcas.tcas.Annotation;
 
 

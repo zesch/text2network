@@ -19,6 +19,7 @@
 package de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter;
 
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
@@ -37,10 +38,17 @@ import eu.sisob.api.visualization.format.graph.fields.Edge;
 import eu.sisob.api.visualization.format.graph.fields.EdgeSet;
 import eu.sisob.api.visualization.format.graph.fields.Node;
 import eu.sisob.api.visualization.format.graph.fields.NodeSet;
+import eu.sisob.api.visualization.format.metadata.Metadata;
+
+
+
 
 public class SGFExporter extends JCasConsumer_ImplBase
 {
-	protected Map<String, String> vertexKeyTypes;
+	protected NodeSet nodeset;
+	protected EdgeSet edgeset;
+	protected SGFParser parser;
+	
 	
 	@Override
 	public void initialize(UimaContext context) throws ResourceInitializationException
@@ -48,22 +56,58 @@ public class SGFExporter extends JCasConsumer_ImplBase
 		
 		super.initialize(context);
 		
-		NodeSet nodeset = new NodeSet();
-		EdgeSet edgeset = new EdgeSet();
-		SGFParser parser = new SGFParser();
-		Node node;
-		Edge edge;
-		
+		nodeset = new NodeSet();
+		edgeset = new EdgeSet();
+		parser = new SGFParser();
+
 
 	}
 
 	@Override
 	public void process(JCas jCas) throws AnalysisEngineProcessException
 	{
+		int eId = 1;
 		
 		for(Relation relation : JCasUtil.select(jCas, Relation.class))
 		{
+			Node node1 = new Node(relation.getSource().getCoveredText(), relation.getSource().getCoveredText());
+			if(!nodeset.contains(node1))
+			{
+				nodeset.addNode(node1);
+			}
+			Node node2 = new Node(relation.getTarget().getCoveredText(), relation.getTarget().getCoveredText());
+			if(!nodeset.contains(node2))
+			{
+				nodeset.addNode(node2);
+			}
 			
+			Edge edge = new Edge(Integer.toString(eId), relation.getSource().getCoveredText(), relation.getTarget().getCoveredText());
+			edgeset.add(edge);
+			
+			eId++;
+		}
+		
+		parser.setMetadata(new Metadata("Text2Network", "1 mode network", "false"));
+		parser.setParsingNodeSet(nodeset);
+		parser.setParsingEdgeSet(edgeset);
+		
+		System.out.println(parser.encode());
+		
+		FileWriter writer = null;
+		
+		try {
+			writer = new FileWriter("output/output.sgf");
+			writer.write(parser.encode());
+		} catch (IOException e) {
+			// TODO Automatisch generierter Erfassungsblock
+			e.printStackTrace();
+		} finally {
+			try {
+				writer.close();
+			} catch (IOException e) {
+				// TODO Automatisch generierter Erfassungsblock
+				e.printStackTrace();
+			}
 		}
 		
 		

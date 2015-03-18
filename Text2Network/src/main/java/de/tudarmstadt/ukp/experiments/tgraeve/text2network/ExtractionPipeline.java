@@ -17,40 +17,31 @@
  ******************************************************************************/
 
 package de.tudarmstadt.ukp.experiments.tgraeve.text2network;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
+
 import java.io.IOException;
 
 import org.apache.uima.UIMAException;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.component.CasDumpWriter;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextWriter;
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2012Writer;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.*;
-
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerChunker;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordNamedEntityRecognizer;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator;
-import de.tudarmstadt.ukp.dkpro.core.stopwordremover.StopWordRemover;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordPosTagger;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerChunker;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.ConceptExporter;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.GraphMLExporter;
-
-import org.apache.uima.fit.component.CasDumpWriter;
-import org.apache.uima.resource.ResourceInitializationException;
-
-import static org.apache.uima.fit.pipeline.SimplePipeline.*;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.SGFExporter;
 
 public class ExtractionPipeline {
 
@@ -89,15 +80,15 @@ public class ExtractionPipeline {
 //		AnalysisEngineDescription conw = createEngineDescription(Conll2012Writer.class, Conll2012Writer.PARAM_TARGET_LOCATION, "target/output");
 		AnalysisEngineDescription cas = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, "target/output.txt");
 		AnalysisEngineDescription gmlexp = createEngineDescription(GraphMLExporter.class);
+		AnalysisEngineDescription sgfexp = createEngineDescription(SGFExporter.class);
 		
-		AnalysisEngineDescription netBuild = createEngineDescription(NetworkBuilder.class);
 
 
 
 		
 		
 		
-		runPipeline(reader, seg, openPos, openChunker, concAnn, relAnn, cas);
+		runPipeline(reader, seg, openPos, openChunker, concAnn, relAnn, sgfexp, cas);
 	}
 
 }
