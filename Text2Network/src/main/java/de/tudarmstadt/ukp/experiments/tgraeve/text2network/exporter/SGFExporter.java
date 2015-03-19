@@ -18,12 +18,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter;
 
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
