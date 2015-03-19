@@ -32,6 +32,13 @@
   			<scope>import</scope>
   			<type>pom</type>
   		</dependency>
+  		<dependency>
+  			<groupId>eu.sisob</groupId>
+  			<artifactId>api-data</artifactId>
+  			<version>1.0.1</version>
+  			<scope>import</scope>
+  			<type>pom</type>
+  		</dependency>
   	</dependencies>
   </dependencyManagement>
   <dependencies>
@@ -81,6 +88,11 @@
   		<artifactId>
   			de.tudarmstadt.ukp.dkpro.core.treetagger-asl
   		</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>eu.sisob</groupId>
+  		<artifactId>api-data</artifactId>
+  		<version>1.0.1</version>
   	</dependency>
   </dependencies>
 </project>
