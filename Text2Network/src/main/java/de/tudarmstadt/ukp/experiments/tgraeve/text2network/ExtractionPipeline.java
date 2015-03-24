@@ -29,6 +29,7 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.CasDumpWriter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextWriter;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
@@ -68,10 +69,11 @@ public class ExtractionPipeline {
 		
 		//Chunker
 		AnalysisEngineDescription openChunker = createEngineDescription(OpenNlpChunker.class, OpenNlpChunker.PARAM_PRINT_TAGSET, true); //Der OpenNLPChunker nutzt das Penn Treebank Tagset
+		AnalysisEngineDescription changeChunker = createEngineDescription(ChunkTagChanger.class);
 		AnalysisEngineDescription treeChunker = createEngineDescription(TreeTaggerChunker.class, TreeTaggerChunker.PARAM_PRINT_TAGSET, true);
 		
 		//Annotator
-		AnalysisEngineDescription concAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, Chunk.class, ConceptAnnotator.PARAM_CONCEPT_VALUE, "NP");
+		AnalysisEngineDescription concAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class);
 		AnalysisEngineDescription npexp = createEngineDescription(ConceptExporter.class, "outputFile", output);
 		AnalysisEngineDescription relAnn = createEngineDescription(RelationAnnotator.class);
 			
@@ -88,7 +90,7 @@ public class ExtractionPipeline {
 		
 		
 		
-		runPipeline(reader, seg, openPos, openChunker, concAnn, relAnn, sgfexp, cas);
+		runPipeline(reader, seg, openPos, openChunker, changeChunker, concAnn, cas);
 	}
 
 }

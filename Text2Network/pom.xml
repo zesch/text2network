@@ -84,15 +84,25 @@
   		<version>2.6.0</version>
   	</dependency>
   	<dependency>
+  		<groupId>eu.sisob</groupId>
+  		<artifactId>api-data</artifactId>
+  		<version>1.0.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  	</dependency>
+  	<dependency>
   		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   		<artifactId>
   			de.tudarmstadt.ukp.dkpro.core.treetagger-asl
   		</artifactId>
   	</dependency>
   	<dependency>
-  		<groupId>eu.sisob</groupId>
-  		<artifactId>api-data</artifactId>
-  		<version>1.0.1</version>
+  		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  		<artifactId>
+  			de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl
+  		</artifactId>
   	</dependency>
   </dependencies>
 </project>
