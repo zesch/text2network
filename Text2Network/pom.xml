@@ -104,5 +104,10 @@
   			de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl
   		</artifactId>
   	</dependency>
+  	<dependency>
+  		<groupId>org.apache.httpcomponents</groupId>
+  		<artifactId>httpclient</artifactId>
+  		<version>4.4</version>
+  	</dependency>
   </dependencies>
 </project>

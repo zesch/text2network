@@ -76,6 +76,7 @@ public class ExtractionPipeline {
 		AnalysisEngineDescription concAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class);
 		AnalysisEngineDescription npexp = createEngineDescription(ConceptExporter.class, "outputFile", output);
 		AnalysisEngineDescription relAnn = createEngineDescription(RelationAnnotator.class);
+		AnalysisEngineDescription spotAnn = createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5));
 			
 		//Ausgabe
 		AnalysisEngineDescription wr = createEngineDescription(TextWriter.class, TextWriter.PARAM_TARGET_LOCATION, "target/output");
@@ -90,7 +91,8 @@ public class ExtractionPipeline {
 		
 		
 		
-		runPipeline(reader, seg, openPos, openChunker, changeChunker, concAnn, cas);
+//		runPipeline(reader, seg, openPos, openChunker, changeChunker, concAnn, cas);
+		runPipeline(reader, seg, openPos, openChunker, spotAnn, cas);
 	}
 
 }
