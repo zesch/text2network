@@ -2,6 +2,14 @@ Class: de.tudarmstadt.ukp.experiments.tgraeve.text2network.ConceptAnnotator
   No description found for parameter [conceptType]
   No description found for parameter [conceptValue]
 
+Class: de.tudarmstadt.ukp.experiments.tgraeve.text2network.DBPediaSpotlightClient
+  No description found for parameter [conceptType]
+  No description found for parameter [conceptValue]
+
 Class: de.tudarmstadt.ukp.experiments.tgraeve.text2network.RelationAnnotator
   No description found for parameter [PARAM_WINDOW_SIZE]
+
+Class: de.tudarmstadt.ukp.experiments.tgraeve.text2network.SpotlightAnnotator
+  No description found for parameter [confidence]
+  No description found for parameter [support]
 
