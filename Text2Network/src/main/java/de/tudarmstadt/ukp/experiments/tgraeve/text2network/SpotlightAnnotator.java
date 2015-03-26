@@ -110,21 +110,31 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 			{
 				Node node = list.item(i);
 				Element element = (Element) node;
-				System.out.println(element.getAttribute("surfaceForm")); //TODO löschen
+				int begin = Integer.parseInt(element.getAttribute("offset"));
+				int end = begin + element.getAttribute("surfaceForm").length();
 				
-				for(Chunk chunk : JCasUtil.select(aJCas, Chunk.class)) // TODO Spotlight-NE überspannen häufig mehr als nur ein Token!
-				{
-					if (chunk.getCoveredText().contains(element.getAttribute("surfaceForm")))
-						{
-							Concept concept = new Concept(aJCas);
-							concept.setBegin(chunk.getBegin());
-							concept.setEnd(chunk.getEnd());
-							concept.setText(element.getAttribute("surfaceForm")); //TODO Sinn überdenken. Verfälscht begin und end.
-							concept.addToIndexes();
-							
-							System.out.println(concept.getCoveredText());
-						}
-				}
+				System.out.println(element.getAttribute("surfaceForm")+" von " + begin + " bis " + end); //TODO löschen
+				
+				Concept concept = new Concept(aJCas);
+				concept.setBegin(begin);
+				concept.setEnd(end);
+				concept.setText(element.getAttribute("surfaceForm"));
+				concept.addToIndexes();
+				
+//				
+//				for(Chunk chunk : JCasUtil.select(aJCas, Chunk.class)) // TODO Spotlight-NE überspannen häufig mehr als nur ein Token!
+//				{
+//					if (chunk.getCoveredText().contains(element.getAttribute("surfaceForm")))
+//						{
+//							Concept concept = new Concept(aJCas);
+//							concept.setBegin(chunk.getBegin());
+//							concept.setEnd(chunk.getEnd());
+//							concept.setText(element.getAttribute("surfaceForm")); //TODO Sinn überdenken. Verfälscht begin und end.
+//							concept.addToIndexes();
+//							
+//							System.out.println(concept.getCoveredText());
+//						}
+//				}
 			}
 			
 			

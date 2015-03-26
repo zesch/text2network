@@ -158,12 +158,6 @@ Chunk
    begin: 29
    end: 47
    chunkValue: "NP"
-[a physical chemist]
-Concept
-   sofa: _InitialView
-   begin: 29
-   end: 47
-   text: "a physical chemist"
 [a]
 Token
    sofa: _InitialView
@@ -184,6 +178,12 @@ ART
    begin: 29
    end: 30
    PosValue: "DT"
+[physical chemist]
+Concept
+   sofa: _InitialView
+   begin: 31
+   end: 47
+   text: "physical chemist"
 [physical]
 Token
    sofa: _InitialView
@@ -981,12 +981,6 @@ Chunk
    begin: 235
    end: 259
    chunkValue: "NP"
-[the German reunification]
-Concept
-   sofa: _InitialView
-   begin: 235
-   end: 259
-   text: "the German reunification"
 [the]
 Token
    sofa: _InitialView
@@ -1007,6 +1001,12 @@ ART
    begin: 235
    end: 238
    PosValue: "DT"
+[German reunification]
+Concept
+   sofa: _InitialView
+   begin: 239
+   end: 259
+   text: "German reunification"
 [German]
 Token
    sofa: _InitialView
@@ -1223,12 +1223,6 @@ Chunk
    begin: 288
    end: 301
    chunkValue: "NP"
-[the Bundestag]
-Concept
-   sofa: _InitialView
-   begin: 288
-   end: 301
-   text: "the Bundestag"
 [the]
 Token
    sofa: _InitialView
@@ -1269,6 +1263,12 @@ Token
       end: 301
       PosValue: "NNP"
    morph: <null>
+[Bundestag]
+Concept
+   sofa: _InitialView
+   begin: 292
+   end: 301
+   text: "Bundestag"
 [for]
 Chunk
    sofa: _InitialView
@@ -2026,18 +2026,6 @@ Chunk
    begin: 491
    end: 513
    chunkValue: "NP"
-[Chancellor Helmut Kohl]
-Concept
-   sofa: _InitialView
-   begin: 491
-   end: 513
-   text: "Chancellor Helmut Kohl"
-[Chancellor Helmut Kohl]
-Concept
-   sofa: _InitialView
-   begin: 491
-   end: 513
-   text: "Chancellor Helmut Kohl"
 [Chancellor]
 NP
    sofa: _InitialView
@@ -2058,6 +2046,12 @@ Token
       end: 501
       PosValue: "NNP"
    morph: <null>
+[Helmut Kohl]
+Concept
+   sofa: _InitialView
+   begin: 502
+   end: 513
+   text: "Helmut Kohl"
 [Helmut]
 NP
    sofa: _InitialView
@@ -2661,24 +2655,6 @@ Chunk
    begin: 643
    end: 668
    chunkValue: "NP"
-[the CDU/CSU-FDP coalition]
-Concept
-   sofa: _InitialView
-   begin: 643
-   end: 668
-   text: "the CDU/CSU-FDP coalition"
-[the CDU/CSU-FDP coalition]
-Concept
-   sofa: _InitialView
-   begin: 643
-   end: 668
-   text: "the CDU/CSU-FDP coalition"
-[the CDU/CSU-FDP coalition]
-Concept
-   sofa: _InitialView
-   begin: 643
-   end: 668
-   text: "the CDU/CSU-FDP coalition"
 [the]
 Token
    sofa: _InitialView
@@ -2719,6 +2695,12 @@ Token
       end: 650
       PosValue: "NNP"
    morph: <null>
+[CDU]
+Concept
+   sofa: _InitialView
+   begin: 647
+   end: 650
+   text: "CDU"
 [/]
 NP
    sofa: _InitialView
@@ -3033,24 +3015,6 @@ Chunk
    begin: 728
    end: 735
    chunkValue: "NP"
-[the CDU]
-Concept
-   sofa: _InitialView
-   begin: 728
-   end: 735
-   text: "the CDU"
-[the CDU]
-Concept
-   sofa: _InitialView
-   begin: 728
-   end: 735
-   text: "the CDU"
-[the CDU]
-Concept
-   sofa: _InitialView
-   begin: 728
-   end: 735
-   text: "the CDU"
 [the]
 Token
    sofa: _InitialView
@@ -3091,6 +3055,12 @@ Token
       end: 735
       PosValue: "NNP"
    morph: <null>
+[CDU]
+Concept
+   sofa: _InitialView
+   begin: 732
+   end: 735
+   text: "CDU"
 [before]
 Chunk
    sofa: _InitialView
@@ -3385,24 +3355,6 @@ Chunk
    begin: 804
    end: 829
    chunkValue: "NP"
-[the CDU donations scandal]
-Concept
-   sofa: _InitialView
-   begin: 804
-   end: 829
-   text: "the CDU donations scandal"
-[the CDU donations scandal]
-Concept
-   sofa: _InitialView
-   begin: 804
-   end: 829
-   text: "the CDU donations scandal"
-[the CDU donations scandal]
-Concept
-   sofa: _InitialView
-   begin: 804
-   end: 829
-   text: "the CDU donations scandal"
 [the]
 Token
    sofa: _InitialView
@@ -3443,6 +3395,12 @@ Token
       end: 811
       PosValue: "NNP"
    morph: <null>
+[CDU]
+Concept
+   sofa: _InitialView
+   begin: 808
+   end: 811
+   text: "CDU"
 [donations]
 NN
    sofa: _InitialView
@@ -3561,18 +3519,6 @@ Chunk
    begin: 845
    end: 871
    chunkValue: "NP"
-[party chairman Helmut Kohl]
-Concept
-   sofa: _InitialView
-   begin: 845
-   end: 871
-   text: "party chairman Helmut Kohl"
-[party chairman Helmut Kohl]
-Concept
-   sofa: _InitialView
-   begin: 845
-   end: 871
-   text: "party chairman Helmut Kohl"
 [party]
 NN
    sofa: _InitialView
@@ -3613,6 +3559,12 @@ Token
       end: 859
       PosValue: "NN"
    morph: <null>
+[Helmut Kohl]
+Concept
+   sofa: _InitialView
+   begin: 860
+   end: 871
+   text: "Helmut Kohl"
 [Helmut]
 NP
    sofa: _InitialView
@@ -3679,12 +3631,6 @@ Chunk
    begin: 876
    end: 907
    chunkValue: "NP"
-[his successor Wolfgang Schäuble]
-Concept
-   sofa: _InitialView
-   begin: 876
-   end: 907
-   text: "his successor Wolfgang Schäuble"
 [his]
 Token
    sofa: _InitialView
@@ -3725,6 +3671,12 @@ Token
       end: 889
       PosValue: "NN"
    morph: <null>
+[Wolfgang Schäuble]
+Concept
+   sofa: _InitialView
+   begin: 890
+   end: 907
+   text: "Wolfgang Schäuble"
 [Wolfgang]
 NP
    sofa: _InitialView
