@@ -59,35 +59,31 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.VC;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.components.Nounphrase;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 
+// TODO class documentation 
 public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 {
 	
+	// TODO parameter documentation
 	public static final String PARAM_CONFIDENCE = "confidence";
-	@ConfigurationParameter(name = PARAM_CONFIDENCE, mandatory = false) //TODO auf true setzen? Spotlight Standard 0.1
+	@ConfigurationParameter(name = PARAM_CONFIDENCE, mandatory = true, defaultValue = "0.1")
 	protected double confidence;
 	
+	// TODO parameter documentation
 	public static final String PARAM_SUPPORT = "support";
 	@ConfigurationParameter(name = PARAM_SUPPORT, mandatory = false)
 	protected int support;
 	
-	protected String text;
-
 	@Override
-	public void initialize(UimaContext context) throws ResourceInitializationException
+	public void process(JCas aJCas) 
+			throws AnalysisEngineProcessException
 	{
 		
-		super.initialize(context);
-
-	}
-	
-	@Override
-	public void process(JCas aJCas) throws AnalysisEngineProcessException
-	{
-		
-		text = aJCas.getDocumentText();
+		String text = aJCas.getDocumentText();
+		// TODO URLEncoder.encode() benutzen?
 		text = text.replaceAll(" ", "%20");
 		System.out.println(text);
 		
+		// TODO deprecated -> in JavaDocs steht wie es aktueller geht
 		HttpClient client = new DefaultHttpClient();
 		HttpGet request = new HttpGet(
 				"http://spotlight.sztaki.hu:2222/rest/annotate?text=" + text 
@@ -146,12 +142,7 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 //			System.out.println(rd.readLine());
 //			}
 		} catch (IOException | ParserConfigurationException | IllegalStateException | SAXException e) {
-			// TODO Automatisch generierter Erfassungsblock
-			e.printStackTrace();
-		}
-		
-		
-			
+			throw new AnalysisEngineProcessException(e);
+		}		
 	}
-
 }
