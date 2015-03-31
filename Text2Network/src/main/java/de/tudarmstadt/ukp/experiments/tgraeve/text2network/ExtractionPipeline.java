@@ -87,8 +87,8 @@ public class ExtractionPipeline {
 		AnalysisEngineDescription sgfexp = createEngineDescription(SGFExporter.class);
 	
 		
-//		runPipeline(reader, seg, openPos, openChunker, changeChunker, concAnn, relAnn, gmlexp, sgfexp, cas);
-		runPipeline(reader, seg, openPos, openChunker, changeChunker, spotAnn, relAnn, gmlexp, sgfexp, cas);
+		runPipeline(reader, seg, openPos, openChunker, changeChunker, concAnn, relAnn, gmlexp, sgfexp, cas);
+//		runPipeline(reader, seg, openPos, openChunker, changeChunker, spotAnn, relAnn, gmlexp, sgfexp, cas);
 	}
 
 }

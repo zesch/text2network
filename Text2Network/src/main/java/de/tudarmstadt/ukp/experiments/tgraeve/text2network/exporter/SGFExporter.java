@@ -26,6 +26,7 @@ import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
 import eu.sisob.api.parser.sisob.SGFParser;
 import eu.sisob.api.visualization.format.graph.fields.Edge;
@@ -56,14 +57,23 @@ public class SGFExporter extends JCasConsumer_ImplBase
 		parser = new SGFParser();
 		int eId = 1;
 		
+		for(Concept concept : JCasUtil.select(jCas, Concept.class))
+		{
+			Node node = new Node(concept.getText(), concept.getText());
+			if(!nodeset.contains(node))
+			{
+				nodeset.addNode(node);
+			}
+		}
+		
 		for(Relation relation : JCasUtil.select(jCas, Relation.class))
 		{
-			Node node1 = new Node(relation.getSource().getCoveredText(), relation.getSource().getCoveredText());
+			Node node1 = new Node(relation.getSource().getText(), relation.getSource().getText());
 			if(!nodeset.contains(node1))
 			{
 				nodeset.addNode(node1);
 			}
-			Node node2 = new Node(relation.getTarget().getCoveredText(), relation.getTarget().getCoveredText());
+			Node node2 = new Node(relation.getTarget().getText(), relation.getTarget().getText());
 			if(!nodeset.contains(node2))
 			{
 				nodeset.addNode(node2);
@@ -71,11 +81,11 @@ public class SGFExporter extends JCasConsumer_ImplBase
 			
 			if(relation.getRelation() != null)
 			{
-				Edge edge = new Edge(Integer.toString(eId), relation.getRelation().getText(), relation.getSource().getCoveredText(), relation.getTarget().getCoveredText());
+				Edge edge = new Edge(Integer.toString(eId), relation.getRelation().getText(), relation.getSource().getText(), relation.getTarget().getText());
 				edgeset.add(edge);
 			} else
 			{
-				Edge edge = new Edge(Integer.toString(eId), relation.getSource().getCoveredText(), relation.getTarget().getCoveredText());
+				Edge edge = new Edge(Integer.toString(eId), relation.getSource().getText(), relation.getTarget().getText());
 				edgeset.add(edge);
 			}
 			
