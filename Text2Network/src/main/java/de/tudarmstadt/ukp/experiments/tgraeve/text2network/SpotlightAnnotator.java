@@ -18,57 +18,51 @@
 
 package de.tudarmstadt.ukp.experiments.tgraeve.text2network;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.uima.UimaContext;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.VC;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.components.Nounphrase;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 
-// TODO class documentation 
+/**
+ * 
+ * Der SpotlightAnnotator annotiert {@link Concept}s mithilfe der DBPedia-Wissensdatenbank über die Spotlight-Webschnittstelle.
+ * @see dbpedia.org
+ * 
+ * @author Tobias Graeve
+ *
+ */
 public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 {
 	
-	// TODO parameter documentation
+	/**
+	 * Vertrauensintervall von 0-1.
+	 */
 	public static final String PARAM_CONFIDENCE = "confidence";
-	@ConfigurationParameter(name = PARAM_CONFIDENCE, mandatory = true, defaultValue = "0.1")
+	@ConfigurationParameter(name = PARAM_CONFIDENCE, mandatory = true, defaultValue = "0.2")
 	protected double confidence;
 	
-	// TODO parameter documentation
+	/**
+	 * Prominenz auf Wikipedia (Anzahl der internen Verlinkungen) > 0.
+	 */
 	public static final String PARAM_SUPPORT = "support";
 	@ConfigurationParameter(name = PARAM_SUPPORT, mandatory = false)
 	protected int support;
@@ -78,21 +72,27 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 			throws AnalysisEngineProcessException
 	{
 		
-		String text = aJCas.getDocumentText();
-		// TODO URLEncoder.encode() benutzen?
-		text = text.replaceAll(" ", "%20");
-		System.out.println(text);
+		String text = aJCas.getDocumentText();		
+		try {
+			text = URLEncoder.encode(text, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new AnalysisEngineProcessException(e);
+		}
 		
-		// TODO deprecated -> in JavaDocs steht wie es aktueller geht
-		HttpClient client = new DefaultHttpClient();
-		HttpGet request = new HttpGet(
-				"http://spotlight.sztaki.hu:2222/rest/annotate?text=" + text 
-				+"&confidence="+ confidence);
-//				+ "&support="+ support);
-		request.addHeader("Accept", "text/xml");
+		String request = "http://spotlight.dbpedia.org/rest/annotate?text=" + text 
+				+"&confidence="+ confidence; //alternativ http://spotlight.sztaki.hu:2222/rest
+		
+		if (support != 0)
+		{
+			request = request + "&support="+ support;
+		}
+
+		CloseableHttpClient client = HttpClientBuilder.create().build();
+		HttpGet httpRequest = new HttpGet(request);
+		httpRequest.addHeader("Accept", "text/xml");
 		
 		try {
-			HttpResponse response = client.execute(request);
+			HttpResponse response = client.execute(httpRequest);
 			
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -115,34 +115,17 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 				concept.setBegin(begin);
 				concept.setEnd(end);
 				concept.setText(element.getAttribute("surfaceForm"));
-				concept.addToIndexes();
-				
-//				
-//				for(Chunk chunk : JCasUtil.select(aJCas, Chunk.class)) // TODO Spotlight-NE überspannen häufig mehr als nur ein Token!
-//				{
-//					if (chunk.getCoveredText().contains(element.getAttribute("surfaceForm")))
-//						{
-//							Concept concept = new Concept(aJCas);
-//							concept.setBegin(chunk.getBegin());
-//							concept.setEnd(chunk.getEnd());
-//							concept.setText(element.getAttribute("surfaceForm")); //TODO Sinn überdenken. Verfälscht begin und end.
-//							concept.addToIndexes();
-//							
-//							System.out.println(concept.getCoveredText());
-//						}
-//				}
+				concept.addToIndexes();		
+
 			}
-			
-			
-			//einfacher Stringreader
-//			BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-//			String empty = "";
-//			while ( (empty = rd.readLine()) != null)
-//			{
-//			System.out.println(rd.readLine());
-//			}
-		} catch (IOException | ParserConfigurationException | IllegalStateException | SAXException e) {
-			throw new AnalysisEngineProcessException(e);
-		}		
+			} catch (IOException | ParserConfigurationException | IllegalStateException | SAXException e) {
+				throw new AnalysisEngineProcessException(e);
+			} finally {
+				try {
+					client.close();
+				} catch (IOException e) {
+					throw new AnalysisEngineProcessException(e);
+				}
+			}
 	}
 }

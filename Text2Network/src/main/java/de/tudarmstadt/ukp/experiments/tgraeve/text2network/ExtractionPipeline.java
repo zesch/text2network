@@ -30,8 +30,8 @@ import org.apache.uima.fit.component.CasDumpWriter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.VC;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextWriter;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
@@ -40,10 +40,15 @@ import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerChunker;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.ConceptExporter;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.GraphMLExporter;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.SGFExporter;
 
+/**
+ * In dieser Pipeline können die unterschiedlichen Komponenten ineinander verzahnt werden.
+ * 
+ * @author Tobias Graeve
+ *
+ */
 public class ExtractionPipeline {
 
 	public void startPipeline(String input, String output) throws UIMAException, IOException {
@@ -66,33 +71,24 @@ public class ExtractionPipeline {
 		AnalysisEngineDescription stParser = createEngineDescription(StanfordParser.class);
 		AnalysisEngineDescription openParser = createEngineDescription(OpenNlpParser.class);
 
-		
 		//Chunker
-		AnalysisEngineDescription openChunker = createEngineDescription(OpenNlpChunker.class, OpenNlpChunker.PARAM_PRINT_TAGSET, true); //Der OpenNLPChunker nutzt das Penn Treebank Tagset
+		AnalysisEngineDescription openChunker = createEngineDescription(OpenNlpChunker.class); //Der OpenNLPChunker nutzt das Penn Treebank Tagset
+		AnalysisEngineDescription treeChunker = createEngineDescription(TreeTaggerChunker.class);
 		AnalysisEngineDescription changeChunker = createEngineDescription(ChunkTagChanger.class);
-		AnalysisEngineDescription treeChunker = createEngineDescription(TreeTaggerChunker.class, TreeTaggerChunker.PARAM_PRINT_TAGSET, true);
 		
 		//Annotator
 		AnalysisEngineDescription concAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class);
-		AnalysisEngineDescription npexp = createEngineDescription(ConceptExporter.class, "outputFile", output);
-		AnalysisEngineDescription relAnn = createEngineDescription(RelationAnnotator.class);
 		AnalysisEngineDescription spotAnn = createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5));
+		AnalysisEngineDescription relAnn = createEngineDescription(RelationAnnotator.class);
 			
 		//Ausgabe
-		AnalysisEngineDescription wr = createEngineDescription(TextWriter.class, TextWriter.PARAM_TARGET_LOCATION, "target/output");
-//		AnalysisEngineDescription conw = createEngineDescription(Conll2012Writer.class, Conll2012Writer.PARAM_TARGET_LOCATION, "target/output");
-		AnalysisEngineDescription cas = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, "target/output.txt");
+		AnalysisEngineDescription cas = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, "output/output.txt");
 		AnalysisEngineDescription gmlexp = createEngineDescription(GraphMLExporter.class);
 		AnalysisEngineDescription sgfexp = createEngineDescription(SGFExporter.class);
+	
 		
-
-
-
-		
-		
-		
-//		runPipeline(reader, seg, openPos, openChunker, changeChunker, concAnn, cas);
-		runPipeline(reader, seg, openPos, openChunker, spotAnn, cas);
+		runPipeline(reader, seg, openPos, openChunker, changeChunker, concAnn, relAnn, gmlexp, sgfexp, cas);
+//		runPipeline(reader, seg, openPos, openChunker, spotAnn, cas);
 	}
 
 }

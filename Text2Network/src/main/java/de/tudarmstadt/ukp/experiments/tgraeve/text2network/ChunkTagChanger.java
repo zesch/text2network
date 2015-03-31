@@ -18,40 +18,24 @@
 
 package de.tudarmstadt.ukp.experiments.tgraeve.text2network;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
-
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.VC;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.components.Nounphrase;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
-
+/**
+ * Diese Komponente passt die Tags der Chunks für die Verarbeitung im {@link ConceptAnnotator} an.
+ * 
+ * @author Tobias Graeve
+ *
+ */
 public class ChunkTagChanger extends JCasAnnotator_ImplBase
 {
-
-	@Override
-	public void initialize(UimaContext context) throws ResourceInitializationException
-	{
-		
-		super.initialize(context);
-
-	}
 	
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException
