@@ -36,6 +36,7 @@ import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLTokens;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLWriter;
 
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
 /**
  * Diese Komponente liest Relationen aus und exportiert diese als GraphML-Format.
@@ -54,13 +55,30 @@ public class GraphMLExporter extends JCasConsumer_ImplBase
 		vertexKeyTypes.put("concept", GraphMLTokens.STRING);
 		Graph graph = new TinkerGraph();
 		
+		for(Concept concept : JCasUtil.select(jCas, Concept.class))
+		{	
+			if(graph.getVertices("concept", concept.getText()) == null)
+			{
+				Vertex vert = graph.addVertex(null);
+				vert.setProperty("concept", concept.getText());
+			}
+		}
+		
 		for (Relation relation : JCasUtil.select(jCas, Relation.class))
 		{
 			Vertex a = graph.addVertex(null);
 			Vertex b = graph.addVertex(null);
 			a.setProperty("concept", relation.getSource().getText());
 			b.setProperty("concept", relation.getTarget().getText());
-			Edge e = graph.addEdge(null, a, b, ""); //TODO Benenung der Relationen
+			
+			if(relation.getRelation() != null)
+			{
+				Edge e = graph.addEdge(null, a, b, relation.getRelation().getText());
+			}
+			else 
+			{
+				Edge e = graph.addEdge(null, a, b, "");
+			}
 		}
 		
 		GraphMLWriter writer = new GraphMLWriter(graph);
