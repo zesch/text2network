@@ -40,6 +40,10 @@ import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerChunker;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ChunkTagChanger;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ConceptAnnotator;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.RelationAnnotator;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SpotlightAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.GraphMLExporter;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.SGFExporter;
 
