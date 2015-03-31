@@ -16,7 +16,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package de.tudarmstadt.ukp.experiments.tgraeve.text2network;
+package de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator;
 
 import java.util.Map.Entry;
 
