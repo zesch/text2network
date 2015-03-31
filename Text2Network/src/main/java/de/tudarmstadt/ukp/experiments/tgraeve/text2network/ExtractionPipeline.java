@@ -78,7 +78,7 @@ public class ExtractionPipeline {
 		
 		//Annotator
 		AnalysisEngineDescription concAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class);
-		AnalysisEngineDescription spotAnn = createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5));
+		AnalysisEngineDescription spotAnn = createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.1));
 		AnalysisEngineDescription relAnn = createEngineDescription(RelationAnnotator.class);
 			
 		//Ausgabe
@@ -87,8 +87,8 @@ public class ExtractionPipeline {
 		AnalysisEngineDescription sgfexp = createEngineDescription(SGFExporter.class);
 	
 		
-		runPipeline(reader, seg, openPos, openChunker, changeChunker, concAnn, relAnn, gmlexp, sgfexp, cas);
-//		runPipeline(reader, seg, openPos, openChunker, spotAnn, cas);
+//		runPipeline(reader, seg, openPos, openChunker, changeChunker, concAnn, relAnn, gmlexp, sgfexp, cas);
+		runPipeline(reader, seg, openPos, openChunker, spotAnn, relAnn, gmlexp, sgfexp, cas);
 	}
 
 }

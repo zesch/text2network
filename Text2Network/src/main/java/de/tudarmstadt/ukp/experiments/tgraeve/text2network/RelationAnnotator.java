@@ -19,6 +19,8 @@
 package de.tudarmstadt.ukp.experiments.tgraeve.text2network;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.uima.UimaContext;
@@ -55,6 +57,8 @@ public class RelationAnnotator extends JCasAnnotator_ImplBase
 		
 		for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) // Selektiert Satz aus Gesamtkonstrukt.
 		{
+			
+			HashMap<Concept, ArrayList> relHelper = new HashMap<Concept, ArrayList>();
 			List<Token> tokenSentence = new ArrayList<Token>();
 			int iterator = 0;
 			
@@ -77,13 +81,36 @@ public class RelationAnnotator extends JCasAnnotator_ImplBase
 				}
 				
 				if(conceptsWindow.size()>=2)
-				{
-					Relation relation = new Relation(aJCas);
-					relation.setBegin(conceptsWindow.get(0).getBegin());
-					relation.setEnd(conceptsWindow.get(1).getEnd());
-					relation.setSource(conceptsWindow.get(0));
-					relation.setTarget(conceptsWindow.get(1));
-					relation.addToIndexes();
+				{	
+					
+					
+					if(!relHelper.containsKey(conceptsWindow.get(0)))
+					{
+						Relation relation = new Relation(aJCas);
+						relation.setBegin(conceptsWindow.get(0).getBegin());
+						relation.setEnd(conceptsWindow.get(1).getEnd());
+						relation.setSource(conceptsWindow.get(0));
+						relation.setTarget(conceptsWindow.get(1));
+						relation.addToIndexes();
+						
+						ArrayList array = new ArrayList<Concept>();
+						array.add(conceptsWindow.get(1));
+						relHelper.put(conceptsWindow.get(0), array);
+					}
+					else if (!relHelper.get(conceptsWindow.get(0)).contains(conceptsWindow.get(1)))
+					{
+						Relation relation = new Relation(aJCas);
+						relation.setBegin(conceptsWindow.get(0).getBegin());
+						relation.setEnd(conceptsWindow.get(1).getEnd());
+						relation.setSource(conceptsWindow.get(0));
+						relation.setTarget(conceptsWindow.get(1));
+						relation.addToIndexes();
+						
+						ArrayList array = relHelper.get(conceptsWindow.get(0));
+						array.add(conceptsWindow.get(1));
+						relHelper.put(conceptsWindow.get(0), array);
+					}
+					
 				}
 				
 				iterator++;
