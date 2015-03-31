@@ -34,8 +34,10 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.VC;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.RelationType;
 /**
  * Diese Komponente sucht Verbindungen zwischen Konzepten und verbindet diese zu einer {@link Relation}.
  * 
@@ -82,110 +84,58 @@ public class RelationAnnotator extends JCasAnnotator_ImplBase
 				
 				if(conceptsWindow.size()>=2)
 				{	
+					Concept con1 = conceptsWindow.get(0);
+					Concept con2 = conceptsWindow.get(1);
 					
-					
-					if(!relHelper.containsKey(conceptsWindow.get(0)))
+					if(!relHelper.containsKey(con1))
 					{
 						Relation relation = new Relation(aJCas);
-						relation.setBegin(conceptsWindow.get(0).getBegin());
-						relation.setEnd(conceptsWindow.get(1).getEnd());
-						relation.setSource(conceptsWindow.get(0));
-						relation.setTarget(conceptsWindow.get(1));
+						relation.setBegin(con1.getBegin());
+						relation.setEnd(con2.getEnd());
+						relation.setSource(con1);
+						relation.setTarget(con2);
+						
+						if(!JCasUtil.selectBetween(aJCas, VC.class, con1, con2).isEmpty())
+						{
+							RelationType relType = new RelationType(aJCas);
+							relType.setText(JCasUtil.selectBetween(aJCas, VC.class, con1, con2).get(0).getCoveredText());
+							relType.setBegin(JCasUtil.selectBetween(aJCas, VC.class, con1, con2).get(0).getBegin());
+							relType.setEnd(JCasUtil.selectBetween(aJCas, VC.class, con1, con2).get(0).getEnd());
+							relation.setRelation(relType);
+							relType.addToIndexes();
+						}
+						
 						relation.addToIndexes();
 						
 						ArrayList array = new ArrayList<Concept>();
-						array.add(conceptsWindow.get(1));
-						relHelper.put(conceptsWindow.get(0), array);
+						array.add(con2);
+						relHelper.put(con1, array);
 					}
-					else if (!relHelper.get(conceptsWindow.get(0)).contains(conceptsWindow.get(1)))
+					else if (!relHelper.get(con1).contains(con2))
 					{
 						Relation relation = new Relation(aJCas);
-						relation.setBegin(conceptsWindow.get(0).getBegin());
-						relation.setEnd(conceptsWindow.get(1).getEnd());
-						relation.setSource(conceptsWindow.get(0));
-						relation.setTarget(conceptsWindow.get(1));
+						relation.setBegin(con1.getBegin());
+						relation.setEnd(con2.getEnd());
+						relation.setSource(con1);
+						relation.setTarget(con2);
+						
+						if(!JCasUtil.selectBetween(VC.class, con1, con2).isEmpty())
+						{
+							RelationType relType = new RelationType(aJCas);
+							relType.setText(JCasUtil.selectBetween(VC.class, con1, con2).get(0).getCoveredText());
+							relType.addToIndexes();
+							relation.setRelation(relType);
+						}
+						
 						relation.addToIndexes();
 						
-						ArrayList array = relHelper.get(conceptsWindow.get(0));
-						array.add(conceptsWindow.get(1));
-						relHelper.put(conceptsWindow.get(0), array);
-					}
-					
+						ArrayList array = relHelper.get(con1);
+						array.add(con2);
+						relHelper.put(con1, array);
+					}	
 				}
-				
 				iterator++;
 			}
-		}
-		
-		
-//        Set<Edge> edges = new HashSet();
-//        boolean inWindow;
-//        
-//        for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class))
-//        {
-//        	List<Chunk> chunksSentence = new ArrayList<>();
-//        	List<Token> tokenSentence = new ArrayList<>();
-//        	
-//	        for (Chunk chunk : JCasUtil.selectCovered(Chunk.class, sentence))
-//			{
-//				if (chunk.getChunkValue().equals("NP"))
-//				{
-//					chunksSentence.add(chunk);
-//					System.out.println(chunk.getCoveredText());
-//				}
-//				if (chunk.getChunkValue().equals("VP"))
-//				{
-//					chunksSentence.add(chunk);
-//					System.out.println(chunk.getCoveredText());
-//				}
-//			}
-//	        
-//	        int i = 0;
-//	        while(i<chunksSentence.size()-windowSize-1)
-//	        {
-//        		if (chunksSentence.get(i).getChunkValue().equals("NP")
-//        				&& chunksSentence.get(i+1).getChunkValue().equals("VP")
-//        					&& chunksSentence.get(i+2).getChunkValue().equals("NP"))
-//        		{
-////        			System.out.println("NP:VP:NP = " + 
-////        								chunksSentence.get(i).getCoveredText()+" -> "+
-////        									chunksSentence.get(i+1).getCoveredText()+" -> "+
-////        										chunksSentence.get(i+2).getCoveredText());
-//        			edges.add(new Edge(chunksSentence.get(i).getCoveredText(),
-//        									chunksSentence.get(i+1).getCoveredText(),
-//        										chunksSentence.get(i+2).getCoveredText()));
-//        			
-//        			Relation relation = new Relation(aJCas);
-//        			relation.setSource(chunksSentence.get(i));
-//        			relation.setRelation(chunksSentence.get(i+1));
-//        			relation.setTarget(chunksSentence.get(i+2));
-//    				relation.addToIndexes();
-//    				System.out.println("+++"+relation.getSource().getCoveredText());
-//
-//        		} 
-////        		else if (chunksSentence.get(i).getChunkValue().equals("NP")
-////        						&& chunksSentence.get(i+1).getChunkValue().equals("NP")
-////        							&& chunksSentence.get(i+2).getChunkValue().equals("VP"))
-////        		{
-////        			System.out.println("NP:NP:VP = " + 
-////        								chunksSentence.get(i+1).getCoveredText()+" -> "+
-////    										chunksSentence.get(i+2).getCoveredText()+" -> "+
-////    											chunksSentence.get(i).getCoveredText());
-////        			edges.add(new Edge(chunksSentence.get(i+1).getCoveredText(),
-////    									chunksSentence.get(i+2).getCoveredText(),
-////    										chunksSentence.get(i).getCoveredText()));
-////        		}
-//        		
-//        		
-//        		
-//	        	i++;
-//	        }
-//	        
-//        }
-        
-        
-
-       
+		}       
     }
-
 }

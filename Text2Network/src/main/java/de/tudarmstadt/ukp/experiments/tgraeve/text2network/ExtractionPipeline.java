@@ -88,7 +88,7 @@ public class ExtractionPipeline {
 	
 		
 //		runPipeline(reader, seg, openPos, openChunker, changeChunker, concAnn, relAnn, gmlexp, sgfexp, cas);
-		runPipeline(reader, seg, openPos, openChunker, spotAnn, relAnn, gmlexp, sgfexp, cas);
+		runPipeline(reader, seg, openPos, openChunker, changeChunker, spotAnn, relAnn, gmlexp, sgfexp, cas);
 	}
 
 }
