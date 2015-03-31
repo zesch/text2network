@@ -35,6 +35,12 @@ Sentence
    begin: 0
    end: 224
 [Having earned]
+VC
+   sofa: _InitialView
+   begin: 0
+   end: 13
+   chunkValue: <null>
+[Having earned]
 Chunk
    sofa: _InitialView
    begin: 0
@@ -86,6 +92,18 @@ Chunk
    begin: 14
    end: 25
    chunkValue: "NP"
+[a doctorate]
+NC
+   sofa: _InitialView
+   begin: 14
+   end: 25
+   chunkValue: <null>
+[a doctorate]
+Concept
+   sofa: _InitialView
+   begin: 14
+   end: 25
+   text: "a doctorate"
 [a]
 Token
    sofa: _InitialView
@@ -158,6 +176,18 @@ Chunk
    begin: 29
    end: 47
    chunkValue: "NP"
+[a physical chemist]
+NC
+   sofa: _InitialView
+   begin: 29
+   end: 47
+   chunkValue: <null>
+[a physical chemist]
+Concept
+   sofa: _InitialView
+   begin: 29
+   end: 47
+   text: "a physical chemist"
 [a]
 Token
    sofa: _InitialView
@@ -178,12 +208,6 @@ ART
    begin: 29
    end: 30
    PosValue: "DT"
-[physical chemist]
-Concept
-   sofa: _InitialView
-   begin: 31
-   end: 47
-   text: "physical chemist"
 [physical]
 Token
    sofa: _InitialView
@@ -244,6 +268,38 @@ PUNC
    begin: 47
    end: 48
    PosValue: ","
+[Merkel entered politics]
+Relation
+   sofa: _InitialView
+   begin: 49
+   end: 72
+   source: Concept
+      sofa: _InitialView
+      begin: 49
+      end: 55
+      text: "Merkel"
+   target: Concept
+      sofa: _InitialView
+      begin: 64
+      end: 72
+      text: "politics"
+   relation: <null>
+[Merkel entered politics]
+Relation
+   sofa: _InitialView
+   begin: 49
+   end: 72
+   source: Concept
+      sofa: _InitialView
+      begin: 49
+      end: 55
+      text: "Merkel"
+   target: Concept
+      sofa: _InitialView
+      begin: 64
+      end: 72
+      text: "politics"
+   relation: <null>
 [Merkel]
 Chunk
    sofa: _InitialView
@@ -270,12 +326,30 @@ Token
       end: 55
       PosValue: "NNP"
    morph: <null>
+[Merkel]
+NC
+   sofa: _InitialView
+   begin: 49
+   end: 55
+   chunkValue: <null>
+[Merkel]
+Concept
+   sofa: _InitialView
+   begin: 49
+   end: 55
+   text: "Merkel"
 [entered]
 V
    sofa: _InitialView
    begin: 56
    end: 63
    PosValue: "VBD"
+[entered]
+VC
+   sofa: _InitialView
+   begin: 56
+   end: 63
+   chunkValue: <null>
 [entered]
 Chunk
    sofa: _InitialView
@@ -296,6 +370,22 @@ Token
       end: 63
       PosValue: "VBD"
    morph: <null>
+[politics in the wake]
+Relation
+   sofa: _InitialView
+   begin: 64
+   end: 84
+   source: Concept
+      sofa: _InitialView
+      begin: 64
+      end: 72
+      text: "politics"
+   target: Concept
+      sofa: _InitialView
+      begin: 76
+      end: 84
+      text: "the wake"
+   relation: <null>
 [politics]
 Chunk
    sofa: _InitialView
@@ -322,6 +412,18 @@ Token
       end: 72
       PosValue: "NNS"
    morph: <null>
+[politics]
+NC
+   sofa: _InitialView
+   begin: 64
+   end: 72
+   chunkValue: <null>
+[politics]
+Concept
+   sofa: _InitialView
+   begin: 64
+   end: 72
+   text: "politics"
 [in]
 Chunk
    sofa: _InitialView
@@ -354,6 +456,18 @@ Chunk
    begin: 76
    end: 84
    chunkValue: "NP"
+[the wake]
+NC
+   sofa: _InitialView
+   begin: 76
+   end: 84
+   chunkValue: <null>
+[the wake]
+Concept
+   sofa: _InitialView
+   begin: 76
+   end: 84
+   text: "the wake"
 [the]
 Token
    sofa: _InitialView
@@ -420,12 +534,40 @@ PP
    begin: 85
    end: 87
    PosValue: "IN"
+[the Revolutions of 1989]
+Relation
+   sofa: _InitialView
+   begin: 88
+   end: 111
+   source: Concept
+      sofa: _InitialView
+      begin: 88
+      end: 103
+      text: "the Revolutions"
+   target: Concept
+      sofa: _InitialView
+      begin: 107
+      end: 111
+      text: "1989"
+   relation: <null>
 [the Revolutions]
 Chunk
    sofa: _InitialView
    begin: 88
    end: 103
    chunkValue: "NP"
+[the Revolutions]
+NC
+   sofa: _InitialView
+   begin: 88
+   end: 103
+   chunkValue: <null>
+[the Revolutions]
+Concept
+   sofa: _InitialView
+   begin: 88
+   end: 103
+   text: "the Revolutions"
 [the]
 Token
    sofa: _InitialView
@@ -518,6 +660,18 @@ CARD
    begin: 107
    end: 111
    PosValue: "CD"
+[1989]
+NC
+   sofa: _InitialView
+   begin: 107
+   end: 111
+   chunkValue: <null>
+[1989]
+Concept
+   sofa: _InitialView
+   begin: 107
+   end: 111
+   text: "1989"
 [,]
 Token
    sofa: _InitialView
@@ -571,6 +725,12 @@ V
    end: 128
    PosValue: "VBG"
 [serving]
+VC
+   sofa: _InitialView
+   begin: 121
+   end: 128
+   chunkValue: <null>
+[serving]
 Chunk
    sofa: _InitialView
    begin: 121
@@ -622,6 +782,18 @@ Chunk
    begin: 132
    end: 155
    chunkValue: "NP"
+[the deputy spokesperson]
+NC
+   sofa: _InitialView
+   begin: 132
+   end: 155
+   chunkValue: <null>
+[the deputy spokesperson]
+Concept
+   sofa: _InitialView
+   begin: 132
+   end: 155
+   text: "the deputy spokesperson"
 [the]
 Token
    sofa: _InitialView
@@ -714,6 +886,18 @@ Chunk
    begin: 160
    end: 184
    chunkValue: "NP"
+[the first democratically]
+NC
+   sofa: _InitialView
+   begin: 160
+   end: 184
+   chunkValue: <null>
+[the first democratically]
+Concept
+   sofa: _InitialView
+   begin: 160
+   end: 184
+   text: "the first democratically"
 [the]
 Token
    sofa: _InitialView
@@ -781,6 +965,12 @@ V
    end: 192
    PosValue: "VBN"
 [elected]
+VC
+   sofa: _InitialView
+   begin: 185
+   end: 192
+   chunkValue: <null>
+[elected]
 Chunk
    sofa: _InitialView
    begin: 185
@@ -806,6 +996,12 @@ Chunk
    begin: 193
    end: 215
    chunkValue: "NP"
+[East German Government]
+NC
+   sofa: _InitialView
+   begin: 193
+   end: 215
+   chunkValue: <null>
 [East German Government]
 Concept
    sofa: _InitialView
@@ -924,6 +1120,18 @@ CARD
    begin: 219
    end: 223
    PosValue: "CD"
+[1990]
+NC
+   sofa: _InitialView
+   begin: 219
+   end: 223
+   chunkValue: <null>
+[1990]
+Concept
+   sofa: _InitialView
+   begin: 219
+   end: 223
+   text: "1990"
 [.]
 Token
    sofa: _InitialView
@@ -956,6 +1164,12 @@ V
    end: 234
    PosValue: "VBG"
 [Following]
+VC
+   sofa: _InitialView
+   begin: 225
+   end: 234
+   chunkValue: <null>
+[Following]
 Chunk
    sofa: _InitialView
    begin: 225
@@ -981,6 +1195,18 @@ Chunk
    begin: 235
    end: 259
    chunkValue: "NP"
+[the German reunification]
+NC
+   sofa: _InitialView
+   begin: 235
+   end: 259
+   chunkValue: <null>
+[the German reunification]
+Concept
+   sofa: _InitialView
+   begin: 235
+   end: 259
+   text: "the German reunification"
 [the]
 Token
    sofa: _InitialView
@@ -1001,12 +1227,6 @@ ART
    begin: 235
    end: 238
    PosValue: "DT"
-[German reunification]
-Concept
-   sofa: _InitialView
-   begin: 239
-   end: 259
-   text: "German reunification"
 [German]
 Token
    sofa: _InitialView
@@ -1073,6 +1293,38 @@ PP
    begin: 260
    end: 262
    PosValue: "IN"
+[1990, she]
+Relation
+   sofa: _InitialView
+   begin: 263
+   end: 272
+   source: Concept
+      sofa: _InitialView
+      begin: 263
+      end: 267
+      text: "1990"
+   target: Concept
+      sofa: _InitialView
+      begin: 269
+      end: 272
+      text: "she"
+   relation: <null>
+[1990, she]
+Relation
+   sofa: _InitialView
+   begin: 263
+   end: 272
+   source: Concept
+      sofa: _InitialView
+      begin: 263
+      end: 267
+      text: "1990"
+   target: Concept
+      sofa: _InitialView
+      begin: 269
+      end: 272
+      text: "she"
+   relation: <null>
 [1990]
 Chunk
    sofa: _InitialView
@@ -1099,6 +1351,18 @@ CARD
    begin: 263
    end: 267
    PosValue: "CD"
+[1990]
+NC
+   sofa: _InitialView
+   begin: 263
+   end: 267
+   chunkValue: <null>
+[1990]
+Concept
+   sofa: _InitialView
+   begin: 263
+   end: 267
+   text: "1990"
 [,]
 Token
    sofa: _InitialView
@@ -1145,6 +1409,24 @@ PR
    begin: 269
    end: 272
    PosValue: "PRP"
+[she]
+NC
+   sofa: _InitialView
+   begin: 269
+   end: 272
+   chunkValue: <null>
+[she]
+Concept
+   sofa: _InitialView
+   begin: 269
+   end: 272
+   text: "she"
+[was elected]
+VC
+   sofa: _InitialView
+   begin: 273
+   end: 284
+   chunkValue: <null>
 [was elected]
 Chunk
    sofa: _InitialView
@@ -1217,12 +1499,40 @@ PP
    begin: 285
    end: 287
    PosValue: "TO"
+[the Bundestag for Stralsund-Nordvorpommern-Rügen]
+Relation
+   sofa: _InitialView
+   begin: 288
+   end: 336
+   source: Concept
+      sofa: _InitialView
+      begin: 288
+      end: 301
+      text: "the Bundestag"
+   target: Concept
+      sofa: _InitialView
+      begin: 306
+      end: 336
+      text: "Stralsund-Nordvorpommern-Rügen"
+   relation: <null>
 [the Bundestag]
 Chunk
    sofa: _InitialView
    begin: 288
    end: 301
    chunkValue: "NP"
+[the Bundestag]
+NC
+   sofa: _InitialView
+   begin: 288
+   end: 301
+   chunkValue: <null>
+[the Bundestag]
+Concept
+   sofa: _InitialView
+   begin: 288
+   end: 301
+   text: "the Bundestag"
 [the]
 Token
    sofa: _InitialView
@@ -1263,12 +1573,6 @@ Token
       end: 301
       PosValue: "NNP"
    morph: <null>
-[Bundestag]
-Concept
-   sofa: _InitialView
-   begin: 292
-   end: 301
-   text: "Bundestag"
 [for]
 Chunk
    sofa: _InitialView
@@ -1295,6 +1599,22 @@ PP
    begin: 302
    end: 305
    PosValue: "IN"
+[Stralsund-Nordvorpommern-Rügen in the state]
+Relation
+   sofa: _InitialView
+   begin: 306
+   end: 349
+   source: Concept
+      sofa: _InitialView
+      begin: 306
+      end: 336
+      text: "Stralsund-Nordvorpommern-Rügen"
+   target: Concept
+      sofa: _InitialView
+      begin: 340
+      end: 349
+      text: "the state"
+   relation: <null>
 [Stralsund-Nordvorpommern-Rügen]
 Chunk
    sofa: _InitialView
@@ -1321,6 +1641,18 @@ Token
       end: 336
       PosValue: "NNP"
    morph: <null>
+[Stralsund-Nordvorpommern-Rügen]
+NC
+   sofa: _InitialView
+   begin: 306
+   end: 336
+   chunkValue: <null>
+[Stralsund-Nordvorpommern-Rügen]
+Concept
+   sofa: _InitialView
+   begin: 306
+   end: 336
+   text: "Stralsund-Nordvorpommern-Rügen"
 [in]
 Chunk
    sofa: _InitialView
@@ -1347,12 +1679,40 @@ PP
    begin: 337
    end: 339
    PosValue: "IN"
+[the state of Mecklenburg-Vorpommern]
+Relation
+   sofa: _InitialView
+   begin: 340
+   end: 375
+   source: Concept
+      sofa: _InitialView
+      begin: 340
+      end: 349
+      text: "the state"
+   target: Concept
+      sofa: _InitialView
+      begin: 353
+      end: 375
+      text: "Mecklenburg-Vorpommern"
+   relation: <null>
 [the state]
 Chunk
    sofa: _InitialView
    begin: 340
    end: 349
    chunkValue: "NP"
+[the state]
+NC
+   sofa: _InitialView
+   begin: 340
+   end: 349
+   chunkValue: <null>
+[the state]
+Concept
+   sofa: _InitialView
+   begin: 340
+   end: 349
+   text: "the state"
 [the]
 Token
    sofa: _InitialView
@@ -1419,6 +1779,22 @@ PP
    begin: 350
    end: 352
    PosValue: "IN"
+[Mecklenburg-Vorpommern, a seat]
+Relation
+   sofa: _InitialView
+   begin: 353
+   end: 383
+   source: Concept
+      sofa: _InitialView
+      begin: 353
+      end: 375
+      text: "Mecklenburg-Vorpommern"
+   target: Concept
+      sofa: _InitialView
+      begin: 377
+      end: 383
+      text: "a seat"
+   relation: <null>
 [Mecklenburg-Vorpommern]
 Chunk
    sofa: _InitialView
@@ -1446,6 +1822,12 @@ Token
       PosValue: "NNP"
    morph: <null>
 [Mecklenburg-Vorpommern]
+NC
+   sofa: _InitialView
+   begin: 353
+   end: 375
+   chunkValue: <null>
+[Mecklenburg-Vorpommern]
 Concept
    sofa: _InitialView
    begin: 353
@@ -1471,12 +1853,56 @@ PUNC
    begin: 375
    end: 376
    PosValue: ","
+[a seat she]
+Relation
+   sofa: _InitialView
+   begin: 377
+   end: 387
+   source: Concept
+      sofa: _InitialView
+      begin: 377
+      end: 383
+      text: "a seat"
+   target: Concept
+      sofa: _InitialView
+      begin: 384
+      end: 387
+      text: "she"
+   relation: <null>
+[a seat she]
+Relation
+   sofa: _InitialView
+   begin: 377
+   end: 387
+   source: Concept
+      sofa: _InitialView
+      begin: 377
+      end: 383
+      text: "a seat"
+   target: Concept
+      sofa: _InitialView
+      begin: 384
+      end: 387
+      text: "she"
+   relation: <null>
 [a seat]
 Chunk
    sofa: _InitialView
    begin: 377
    end: 383
    chunkValue: "NP"
+[a seat]
+NC
+   sofa: _InitialView
+   begin: 377
+   end: 383
+   chunkValue: <null>
+[a seat]
+Concept
+   sofa: _InitialView
+   begin: 377
+   end: 383
+   text: "a seat"
 [a]
 Token
    sofa: _InitialView
@@ -1543,6 +1969,24 @@ PR
    begin: 384
    end: 387
    PosValue: "PRP"
+[she]
+NC
+   sofa: _InitialView
+   begin: 384
+   end: 387
+   chunkValue: <null>
+[she]
+Concept
+   sofa: _InitialView
+   begin: 384
+   end: 387
+   text: "she"
+[has held]
+VC
+   sofa: _InitialView
+   begin: 388
+   end: 396
+   chunkValue: <null>
 [has held]
 Chunk
    sofa: _InitialView
@@ -1692,6 +2136,24 @@ PR
    begin: 409
    end: 412
    PosValue: "PRP"
+[She]
+NC
+   sofa: _InitialView
+   begin: 409
+   end: 412
+   chunkValue: <null>
+[She]
+Concept
+   sofa: _InitialView
+   begin: 409
+   end: 412
+   text: "She"
+[was later appointed]
+VC
+   sofa: _InitialView
+   begin: 413
+   end: 432
+   chunkValue: <null>
 [was later appointed]
 Chunk
    sofa: _InitialView
@@ -1790,6 +2252,18 @@ Chunk
    begin: 436
    end: 456
    chunkValue: "NP"
+[the Federal Minister]
+NC
+   sofa: _InitialView
+   begin: 436
+   end: 456
+   chunkValue: <null>
+[the Federal Minister]
+Concept
+   sofa: _InitialView
+   begin: 436
+   end: 456
+   text: "the Federal Minister"
 [the]
 Token
    sofa: _InitialView
@@ -1882,6 +2356,18 @@ Chunk
    begin: 461
    end: 476
    chunkValue: "NP"
+[Women and Youth]
+NC
+   sofa: _InitialView
+   begin: 461
+   end: 476
+   chunkValue: <null>
+[Women and Youth]
+Concept
+   sofa: _InitialView
+   begin: 461
+   end: 476
+   text: "Women and Youth"
 [Women]
 NP
    sofa: _InitialView
@@ -1994,6 +2480,18 @@ CARD
    begin: 480
    end: 484
    PosValue: "CD"
+[1991]
+NC
+   sofa: _InitialView
+   begin: 480
+   end: 484
+   chunkValue: <null>
+[1991]
+Concept
+   sofa: _InitialView
+   begin: 480
+   end: 484
+   text: "1991"
 [under]
 Chunk
    sofa: _InitialView
@@ -2026,6 +2524,18 @@ Chunk
    begin: 491
    end: 513
    chunkValue: "NP"
+[Chancellor Helmut Kohl]
+NC
+   sofa: _InitialView
+   begin: 491
+   end: 513
+   chunkValue: <null>
+[Chancellor Helmut Kohl]
+Concept
+   sofa: _InitialView
+   begin: 491
+   end: 513
+   text: "Chancellor Helmut Kohl"
 [Chancellor]
 NP
    sofa: _InitialView
@@ -2046,12 +2556,6 @@ Token
       end: 501
       PosValue: "NNP"
    morph: <null>
-[Helmut Kohl]
-Concept
-   sofa: _InitialView
-   begin: 502
-   end: 513
-   text: "Helmut Kohl"
 [Helmut]
 NP
    sofa: _InitialView
@@ -2139,6 +2643,12 @@ V
    end: 525
    PosValue: "VBD"
 [became]
+VC
+   sofa: _InitialView
+   begin: 519
+   end: 525
+   chunkValue: <null>
+[became]
 Chunk
    sofa: _InitialView
    begin: 519
@@ -2164,6 +2674,18 @@ Chunk
    begin: 526
    end: 546
    chunkValue: "NP"
+[the Federal Minister]
+NC
+   sofa: _InitialView
+   begin: 526
+   end: 546
+   chunkValue: <null>
+[the Federal Minister]
+Concept
+   sofa: _InitialView
+   begin: 526
+   end: 546
+   text: "the Federal Minister"
 [the]
 Token
    sofa: _InitialView
@@ -2256,6 +2778,18 @@ Chunk
    begin: 551
    end: 566
    chunkValue: "NP"
+[the Environment]
+NC
+   sofa: _InitialView
+   begin: 551
+   end: 566
+   chunkValue: <null>
+[the Environment]
+Concept
+   sofa: _InitialView
+   begin: 551
+   end: 566
+   text: "the Environment"
 [the]
 Token
    sofa: _InitialView
@@ -2322,6 +2856,18 @@ Chunk
    begin: 568
    end: 587
    chunkValue: "NP"
+[Nature Conservation]
+NC
+   sofa: _InitialView
+   begin: 568
+   end: 587
+   chunkValue: <null>
+[Nature Conservation]
+Concept
+   sofa: _InitialView
+   begin: 568
+   end: 587
+   text: "Nature Conservation"
 [Nature]
 NP
    sofa: _InitialView
@@ -2402,12 +2948,40 @@ Token
       end: 592
       PosValue: "CC"
    morph: <null>
+[Nuclear Safety in 1994]
+Relation
+   sofa: _InitialView
+   begin: 593
+   end: 615
+   source: Concept
+      sofa: _InitialView
+      begin: 593
+      end: 607
+      text: "Nuclear Safety"
+   target: Concept
+      sofa: _InitialView
+      begin: 611
+      end: 615
+      text: "1994"
+   relation: <null>
 [Nuclear Safety]
 Chunk
    sofa: _InitialView
    begin: 593
    end: 607
    chunkValue: "NP"
+[Nuclear Safety]
+NC
+   sofa: _InitialView
+   begin: 593
+   end: 607
+   chunkValue: <null>
+[Nuclear Safety]
+Concept
+   sofa: _InitialView
+   begin: 593
+   end: 607
+   text: "Nuclear Safety"
 [Nuclear]
 NP
    sofa: _InitialView
@@ -2500,6 +3074,18 @@ CARD
    begin: 611
    end: 615
    PosValue: "CD"
+[1994]
+NC
+   sofa: _InitialView
+   begin: 611
+   end: 615
+   chunkValue: <null>
+[1994]
+Concept
+   sofa: _InitialView
+   begin: 611
+   end: 615
+   text: "1994"
 [,]
 Token
    sofa: _InitialView
@@ -2526,6 +3112,12 @@ V
    begin: 617
    end: 624
    PosValue: "VBG"
+[serving]
+VC
+   sofa: _InitialView
+   begin: 617
+   end: 624
+   chunkValue: <null>
 [serving]
 Chunk
    sofa: _InitialView
@@ -2598,6 +3190,18 @@ CARD
    begin: 631
    end: 635
    PosValue: "CD"
+[1998]
+NC
+   sofa: _InitialView
+   begin: 631
+   end: 635
+   chunkValue: <null>
+[1998]
+Concept
+   sofa: _InitialView
+   begin: 631
+   end: 635
+   text: "1998"
 [.]
 Token
    sofa: _InitialView
@@ -2655,6 +3259,18 @@ Chunk
    begin: 643
    end: 668
    chunkValue: "NP"
+[the CDU/CSU-FDP coalition]
+NC
+   sofa: _InitialView
+   begin: 643
+   end: 668
+   chunkValue: <null>
+[the CDU/CSU-FDP coalition]
+Concept
+   sofa: _InitialView
+   begin: 643
+   end: 668
+   text: "the CDU/CSU-FDP coalition"
 [the]
 Token
    sofa: _InitialView
@@ -2695,12 +3311,6 @@ Token
       end: 650
       PosValue: "NNP"
    morph: <null>
-[CDU]
-Concept
-   sofa: _InitialView
-   begin: 647
-   end: 650
-   text: "CDU"
 [/]
 NP
    sofa: _InitialView
@@ -2761,6 +3371,12 @@ Token
       end: 668
       PosValue: "NN"
    morph: <null>
+[was defeated]
+VC
+   sofa: _InitialView
+   begin: 669
+   end: 681
+   chunkValue: <null>
 [was defeated]
 Chunk
    sofa: _InitialView
@@ -2833,6 +3449,38 @@ PP
    begin: 682
    end: 684
    PosValue: "IN"
+[1998, she]
+Relation
+   sofa: _InitialView
+   begin: 685
+   end: 694
+   source: Concept
+      sofa: _InitialView
+      begin: 685
+      end: 689
+      text: "1998"
+   target: Concept
+      sofa: _InitialView
+      begin: 691
+      end: 694
+      text: "she"
+   relation: <null>
+[1998, she]
+Relation
+   sofa: _InitialView
+   begin: 685
+   end: 694
+   source: Concept
+      sofa: _InitialView
+      begin: 685
+      end: 689
+      text: "1998"
+   target: Concept
+      sofa: _InitialView
+      begin: 691
+      end: 694
+      text: "she"
+   relation: <null>
 [1998]
 Chunk
    sofa: _InitialView
@@ -2859,6 +3507,18 @@ CARD
    begin: 685
    end: 689
    PosValue: "CD"
+[1998]
+NC
+   sofa: _InitialView
+   begin: 685
+   end: 689
+   chunkValue: <null>
+[1998]
+Concept
+   sofa: _InitialView
+   begin: 685
+   end: 689
+   text: "1998"
 [,]
 Token
    sofa: _InitialView
@@ -2879,6 +3539,22 @@ PUNC
    begin: 689
    end: 690
    PosValue: ","
+[she was elected Secretary-General]
+Relation
+   sofa: _InitialView
+   begin: 691
+   end: 724
+   source: Concept
+      sofa: _InitialView
+      begin: 691
+      end: 694
+      text: "she"
+   target: Concept
+      sofa: _InitialView
+      begin: 707
+      end: 724
+      text: "Secretary-General"
+   relation: <null>
 [she]
 Chunk
    sofa: _InitialView
@@ -2905,6 +3581,24 @@ PR
    begin: 691
    end: 694
    PosValue: "PRP"
+[she]
+NC
+   sofa: _InitialView
+   begin: 691
+   end: 694
+   chunkValue: <null>
+[she]
+Concept
+   sofa: _InitialView
+   begin: 691
+   end: 694
+   text: "she"
+[was elected]
+VC
+   sofa: _InitialView
+   begin: 695
+   end: 706
+   chunkValue: <null>
 [was elected]
 Chunk
    sofa: _InitialView
@@ -2951,6 +3645,22 @@ Token
       end: 706
       PosValue: "VBN"
    morph: <null>
+[Secretary-General of the CDU]
+Relation
+   sofa: _InitialView
+   begin: 707
+   end: 735
+   source: Concept
+      sofa: _InitialView
+      begin: 707
+      end: 724
+      text: "Secretary-General"
+   target: Concept
+      sofa: _InitialView
+      begin: 728
+      end: 735
+      text: "the CDU"
+   relation: <null>
 [Secretary-General]
 Chunk
    sofa: _InitialView
@@ -2977,6 +3687,12 @@ Token
       end: 724
       PosValue: "NNP"
    morph: <null>
+[Secretary-General]
+NC
+   sofa: _InitialView
+   begin: 707
+   end: 724
+   chunkValue: <null>
 [Secretary-General]
 Concept
    sofa: _InitialView
@@ -3015,6 +3731,18 @@ Chunk
    begin: 728
    end: 735
    chunkValue: "NP"
+[the CDU]
+NC
+   sofa: _InitialView
+   begin: 728
+   end: 735
+   chunkValue: <null>
+[the CDU]
+Concept
+   sofa: _InitialView
+   begin: 728
+   end: 735
+   text: "the CDU"
 [the]
 Token
    sofa: _InitialView
@@ -3055,12 +3783,6 @@ Token
       end: 735
       PosValue: "NNP"
    morph: <null>
-[CDU]
-Concept
-   sofa: _InitialView
-   begin: 732
-   end: 735
-   text: "CDU"
 [before]
 Chunk
    sofa: _InitialView
@@ -3087,6 +3809,12 @@ PP
    begin: 736
    end: 742
    PosValue: "IN"
+[being elected]
+VC
+   sofa: _InitialView
+   begin: 743
+   end: 756
+   chunkValue: <null>
 [being elected]
 Chunk
    sofa: _InitialView
@@ -3139,6 +3867,18 @@ Chunk
    begin: 757
    end: 775
    chunkValue: "NP"
+[the party's leader]
+NC
+   sofa: _InitialView
+   begin: 757
+   end: 775
+   chunkValue: <null>
+[the party's leader]
+Concept
+   sofa: _InitialView
+   begin: 757
+   end: 775
+   text: "the party's leader"
 [the]
 Token
    sofa: _InitialView
@@ -3225,6 +3965,22 @@ PP
    begin: 776
    end: 778
    PosValue: "IN"
+[2000 in the aftermath]
+Relation
+   sofa: _InitialView
+   begin: 779
+   end: 800
+   source: Concept
+      sofa: _InitialView
+      begin: 779
+      end: 783
+      text: "2000"
+   target: Concept
+      sofa: _InitialView
+      begin: 787
+      end: 800
+      text: "the aftermath"
+   relation: <null>
 [2000]
 Chunk
    sofa: _InitialView
@@ -3251,6 +4007,18 @@ CARD
    begin: 779
    end: 783
    PosValue: "CD"
+[2000]
+NC
+   sofa: _InitialView
+   begin: 779
+   end: 783
+   chunkValue: <null>
+[2000]
+Concept
+   sofa: _InitialView
+   begin: 779
+   end: 783
+   text: "2000"
 [in]
 Chunk
    sofa: _InitialView
@@ -3283,6 +4051,18 @@ Chunk
    begin: 787
    end: 800
    chunkValue: "NP"
+[the aftermath]
+NC
+   sofa: _InitialView
+   begin: 787
+   end: 800
+   chunkValue: <null>
+[the aftermath]
+Concept
+   sofa: _InitialView
+   begin: 787
+   end: 800
+   text: "the aftermath"
 [the]
 Token
    sofa: _InitialView
@@ -3355,6 +4135,18 @@ Chunk
    begin: 804
    end: 829
    chunkValue: "NP"
+[the CDU donations scandal]
+NC
+   sofa: _InitialView
+   begin: 804
+   end: 829
+   chunkValue: <null>
+[the CDU donations scandal]
+Concept
+   sofa: _InitialView
+   begin: 804
+   end: 829
+   text: "the CDU donations scandal"
 [the]
 Token
    sofa: _InitialView
@@ -3395,12 +4187,6 @@ Token
       end: 811
       PosValue: "NNP"
    morph: <null>
-[CDU]
-Concept
-   sofa: _InitialView
-   begin: 808
-   end: 811
-   text: "CDU"
 [donations]
 NN
    sofa: _InitialView
@@ -3487,12 +4273,30 @@ ART
    begin: 831
    end: 836
    PosValue: "WDT"
+[which]
+NC
+   sofa: _InitialView
+   begin: 831
+   end: 836
+   chunkValue: <null>
+[which]
+Concept
+   sofa: _InitialView
+   begin: 831
+   end: 836
+   text: "which"
 [toppled]
 V
    sofa: _InitialView
    begin: 837
    end: 844
    PosValue: "VBD"
+[toppled]
+VC
+   sofa: _InitialView
+   begin: 837
+   end: 844
+   chunkValue: <null>
 [toppled]
 Chunk
    sofa: _InitialView
@@ -3519,6 +4323,18 @@ Chunk
    begin: 845
    end: 871
    chunkValue: "NP"
+[party chairman Helmut Kohl]
+NC
+   sofa: _InitialView
+   begin: 845
+   end: 871
+   chunkValue: <null>
+[party chairman Helmut Kohl]
+Concept
+   sofa: _InitialView
+   begin: 845
+   end: 871
+   text: "party chairman Helmut Kohl"
 [party]
 NN
    sofa: _InitialView
@@ -3559,12 +4375,6 @@ Token
       end: 859
       PosValue: "NN"
    morph: <null>
-[Helmut Kohl]
-Concept
-   sofa: _InitialView
-   begin: 860
-   end: 871
-   text: "Helmut Kohl"
 [Helmut]
 NP
    sofa: _InitialView
@@ -3631,6 +4441,18 @@ Chunk
    begin: 876
    end: 907
    chunkValue: "NP"
+[his successor Wolfgang Schäuble]
+NC
+   sofa: _InitialView
+   begin: 876
+   end: 907
+   chunkValue: <null>
+[his successor Wolfgang Schäuble]
+Concept
+   sofa: _InitialView
+   begin: 876
+   end: 907
+   text: "his successor Wolfgang Schäuble"
 [his]
 Token
    sofa: _InitialView
@@ -3671,12 +4493,6 @@ Token
       end: 889
       PosValue: "NN"
    morph: <null>
-[Wolfgang Schäuble]
-Concept
-   sofa: _InitialView
-   begin: 890
-   end: 907
-   text: "Wolfgang Schäuble"
 [Wolfgang]
 NP
    sofa: _InitialView

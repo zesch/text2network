@@ -34,20 +34,20 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
-
+/**
+ * Diese Komponente sucht Verbindungen zwischen Konzepten und verbindet diese zu einer {@link Relation}.
+ * 
+ * @author Tobias Graeve
+ *
+ */
 public class RelationAnnotator extends JCasAnnotator_ImplBase
 {
-	
+	/**
+	 * Größe des Fensters über dem Text, in dem nach Verbindungen gesucht wird.
+	 */
 	public static final String PARAM_WINDOW_SIZE = "PARAM_WINDOW_SIZE";
 	@ConfigurationParameter(name = PARAM_WINDOW_SIZE, mandatory = true, defaultValue = "4")
 	protected int windowSize;
-
-
-	@Override
-	public void initialize(UimaContext context) throws ResourceInitializationException
-	{
-		super.initialize(context);
-	}
 	
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException
@@ -88,14 +88,7 @@ public class RelationAnnotator extends JCasAnnotator_ImplBase
 				
 				iterator++;
 			}
-			
-			
 		}
-		
-		
-		
-		
-		
 		
 		
 //        Set<Edge> edges = new HashSet();

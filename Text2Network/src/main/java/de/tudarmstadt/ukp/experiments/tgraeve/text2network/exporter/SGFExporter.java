@@ -21,12 +21,10 @@ package de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
 import eu.sisob.api.parser.sisob.SGFParser;
@@ -37,7 +35,12 @@ import eu.sisob.api.visualization.format.graph.fields.NodeSet;
 import eu.sisob.api.visualization.format.metadata.Metadata;
 
 
-
+/**
+ * Diese Komponente liest Relationen aus und exportiert diese als SGF-Format.
+ * 
+ * @author Tobias Graeve
+ *
+ */
 
 public class SGFExporter extends JCasConsumer_ImplBase
 {
@@ -45,23 +48,12 @@ public class SGFExporter extends JCasConsumer_ImplBase
 	protected EdgeSet edgeset;
 	protected SGFParser parser;
 	
-	
-	@Override
-	public void initialize(UimaContext context) throws ResourceInitializationException
-	{
-		
-		super.initialize(context);
-		
-		nodeset = new NodeSet();
-		edgeset = new EdgeSet();
-		parser = new SGFParser();
-
-
-	}
-
 	@Override
 	public void process(JCas jCas) throws AnalysisEngineProcessException
 	{
+		nodeset = new NodeSet();
+		edgeset = new EdgeSet();
+		parser = new SGFParser();
 		int eId = 1;
 		
 		for(Relation relation : JCasUtil.select(jCas, Relation.class))
@@ -83,11 +75,9 @@ public class SGFExporter extends JCasConsumer_ImplBase
 			eId++;
 		}
 		
-		parser.setMetadata(new Metadata("Text2Network", "1 mode network", "false"));
+		parser.setParsingMetadata(new Metadata("Text2Network", "1 mode network", "false"));
 		parser.setParsingNodeSet(nodeset);
 		parser.setParsingEdgeSet(edgeset);
-		
-		System.out.println(parser.encode());
 		
 		FileWriter writer = null;
 		
@@ -95,19 +85,13 @@ public class SGFExporter extends JCasConsumer_ImplBase
 			writer = new FileWriter("output/output.sgf");
 			writer.write(parser.encode());
 		} catch (IOException e) {
-			// FIXME Exceptions nie werfen, sondern in AnalysisEngineProcessException wrappen
-			// TODO Automatisch generierter Erfassungsblock
-			e.printStackTrace();
+			throw new AnalysisEngineProcessException(e);
 		} finally {
 			try {
 				writer.close();
 			} catch (IOException e) {
-				// TODO Automatisch generierter Erfassungsblock
-				e.printStackTrace();
+				throw new AnalysisEngineProcessException(e);
 			}
 		}
-		
-		
 	}
-
 }
