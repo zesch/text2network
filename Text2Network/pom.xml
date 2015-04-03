@@ -1,10 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-    <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-    <version>1.7.0</version>
-  </parent>
   <groupId>de.tudarmstadt.ukp.experiments.tgraeve</groupId>
   <artifactId>de.tudarmstadt.ukp.experiments.tgraeve.text2network</artifactId>
   <version>0.0.1-SNAPSHOT</version>
@@ -29,15 +24,15 @@
   			<groupId>com.tinkerpop.blueprints</groupId>
   			<artifactId>blueprints-core</artifactId>
   			<version>2.6.0</version>
-  			<scope>import</scope>
   			<type>pom</type>
+  			<scope>import</scope>
   		</dependency>
   		<dependency>
   			<groupId>eu.sisob</groupId>
   			<artifactId>api-data</artifactId>
   			<version>1.0.1</version>
-  			<scope>import</scope>
   			<type>pom</type>
+  			<scope>import</scope>
   		</dependency>
   	</dependencies>
   </dependencyManagement>
@@ -81,10 +76,12 @@
   	<dependency>
   		<groupId>com.tinkerpop.blueprints</groupId>
   		<artifactId>blueprints-core</artifactId>
+  		<version>2.6.0</version>
   	</dependency>
   	<dependency>
   		<groupId>eu.sisob</groupId>
   		<artifactId>api-data</artifactId>
+  		<version>1.0.1</version>
   	</dependency>
   	<dependency>
   		<groupId>junit</groupId>
