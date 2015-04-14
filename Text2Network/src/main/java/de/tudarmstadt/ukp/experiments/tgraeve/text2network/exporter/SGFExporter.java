@@ -18,11 +18,13 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 
@@ -45,18 +47,24 @@ import eu.sisob.api.visualization.format.metadata.Metadata;
 
 public class SGFExporter extends JCasConsumer_ImplBase
 {
-	protected NodeSet nodeset;
-	protected EdgeSet edgeset;
-	protected SGFParser parser;
+	
+	/**
+	 * SPeicherort der Ausgabedatei.
+	 */
+	public static final String PARAM_OUTPUT_FILE = "outputFile";
+
+	  @ConfigurationParameter(name = PARAM_OUTPUT_FILE, mandatory = true, defaultValue = "output/network.sgf")
+	  private File outputFile;
+	
+	
+	protected NodeSet nodeset = new NodeSet();
+	protected EdgeSet edgeset = new EdgeSet();
+	protected SGFParser parser = new SGFParser();
+	int eId = 1;
 	
 	@Override
 	public void process(JCas jCas) throws AnalysisEngineProcessException
-	{
-		nodeset = new NodeSet();
-		edgeset = new EdgeSet();
-		parser = new SGFParser();
-		int eId = 1;
-		
+	{	
 		for(Concept concept : JCasUtil.select(jCas, Concept.class))
 		{
 			Node node = new Node(concept.getText(), concept.getText());
@@ -99,7 +107,7 @@ public class SGFExporter extends JCasConsumer_ImplBase
 		FileWriter writer = null;
 		
 		try {
-			writer = new FileWriter("output/output.sgf");
+			writer = new FileWriter(outputFile);
 			writer.write(parser.encode());
 		} catch (IOException e) {
 			throw new AnalysisEngineProcessException(e);

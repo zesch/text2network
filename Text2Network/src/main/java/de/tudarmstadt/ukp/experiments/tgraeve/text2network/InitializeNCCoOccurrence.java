@@ -41,7 +41,7 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SpotlightAn
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SyntaxRelationAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.SGFExporter;
 
-public class Initialize {
+public class InitializeNCCoOccurrence {
 
 	public static void main(String[] args) throws UIMAException, IOException {
 		

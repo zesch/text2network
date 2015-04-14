@@ -19,18 +19,13 @@
 package de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
-import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -39,19 +34,13 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.RelationType;
 /**
- * Diese Komponente sucht Verbindungen zwischen Konzepten und verbindet diese zu einer {@link Relation}.
+ * Diese Komponente sucht Verbindungen zwischen Konzepten anhand zwischenliegender Verbphrasen und verbindet diese zu einer {@link Relation}.
  * 
  * @author Tobias Graeve
  *
  */
-public class RelationAnnotator extends JCasAnnotator_ImplBase
+public class SyntaxRelationAnnotator extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Größe des Fensters über dem Text, in dem nach Verbindungen gesucht wird.
-	 */
-	public static final String PARAM_WINDOW_SIZE = "PARAM_WINDOW_SIZE";
-	@ConfigurationParameter(name = PARAM_WINDOW_SIZE, mandatory = true, defaultValue = "4")
-	protected int windowSize;
 	
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException
@@ -62,79 +51,74 @@ public class RelationAnnotator extends JCasAnnotator_ImplBase
 			
 			HashMap<Concept, ArrayList> relHelper = new HashMap<Concept, ArrayList>();
 			List<Token> tokenSentence = new ArrayList<Token>();
-			int iterator = 0;
 			
 			for (Token token : JCasUtil.selectCovered(Token.class, sentence)) // Selektiert einzelne Token aus Satz.
 			{
 				tokenSentence.add(token);
 			}
 			
-			while (iterator <= tokenSentence.size()-windowSize) // Betrachtet Fenster innerhalb dieses Satzes.
+			List<Concept> conceptsSentence = new ArrayList<Concept>();
+				
+			for (Concept concept : JCasUtil.selectCovered(Concept.class, sentence)) // Durchsucht das aktuelle Fenster nach Konzepten.
 			{
-				Annotation window = new Annotation(aJCas);
-				window.setBegin(tokenSentence.get(iterator).getBegin());
-				window.setEnd(tokenSentence.get(iterator+windowSize-1).getEnd());
+				conceptsSentence.add(concept);
+			}
 				
-				List<Concept> conceptsWindow = new ArrayList<Concept>();
+			if(conceptsSentence.size()>=2) //Mehr als 2 Konzepte innerhalb des Satzes gefunden
+			{	
+				int iterator = 0;
 				
-				for (Concept concept : JCasUtil.selectCovered(Concept.class, window)) // Durchsucht das aktuelle Fenster nach Konzepten.
+				while(iterator < conceptsSentence.size()-1)
 				{
-					conceptsWindow.add(concept);
-				}
+					Concept con1 = conceptsSentence.get(iterator);
+					Concept con2 = conceptsSentence.get(iterator+1);
 				
-				if(conceptsWindow.size()>=2)
-				{	
-					Concept con1 = conceptsWindow.get(0);
-					Concept con2 = conceptsWindow.get(1);
-					
-					if(!relHelper.containsKey(con1))
+					if(!JCasUtil.selectBetween(aJCas, VC.class, con1, con2).isEmpty())
 					{
-						Relation relation = new Relation(aJCas);
-						relation.setBegin(con1.getBegin());
-						relation.setEnd(con2.getEnd());
-						relation.setSource(con1);
-						relation.setTarget(con2);
-						
-						if(!JCasUtil.selectBetween(aJCas, VC.class, con1, con2).isEmpty())
+					
+						if(!relHelper.containsKey(con1))
 						{
+							Relation relation = new Relation(aJCas);
+							relation.setBegin(con1.getBegin());
+							relation.setEnd(con2.getEnd());
+							relation.setSource(con1);
+							relation.setTarget(con2);
+							
 							RelationType relType = new RelationType(aJCas);
 							relType.setText(JCasUtil.selectBetween(aJCas, VC.class, con1, con2).get(0).getCoveredText());
 							relType.setBegin(JCasUtil.selectBetween(aJCas, VC.class, con1, con2).get(0).getBegin());
 							relType.setEnd(JCasUtil.selectBetween(aJCas, VC.class, con1, con2).get(0).getEnd());
 							relation.setRelation(relType);
 							relType.addToIndexes();
+							
+							relation.addToIndexes();
+							
+							ArrayList array = new ArrayList<Concept>();
+							array.add(con2);
+							relHelper.put(con1, array);
 						}
-						
-						relation.addToIndexes();
-						
-						ArrayList array = new ArrayList<Concept>();
-						array.add(con2);
-						relHelper.put(con1, array);
-					}
-					else if (!relHelper.get(con1).contains(con2))
-					{
-						Relation relation = new Relation(aJCas);
-						relation.setBegin(con1.getBegin());
-						relation.setEnd(con2.getEnd());
-						relation.setSource(con1);
-						relation.setTarget(con2);
-						
-						if(!JCasUtil.selectBetween(VC.class, con1, con2).isEmpty())
+						else if (!relHelper.get(con1).contains(con2))
 						{
+							Relation relation = new Relation(aJCas);
+							relation.setBegin(con1.getBegin());
+							relation.setEnd(con2.getEnd());
+							relation.setSource(con1);
+							relation.setTarget(con2);
+							
 							RelationType relType = new RelationType(aJCas);
 							relType.setText(JCasUtil.selectBetween(VC.class, con1, con2).get(0).getCoveredText());
 							relType.addToIndexes();
 							relation.setRelation(relType);
-						}
-						
-						relation.addToIndexes();
-						
-						ArrayList array = relHelper.get(con1);
-						array.add(con2);
-						relHelper.put(con1, array);
-					}	
+							
+							relation.addToIndexes();
+							
+							ArrayList array = relHelper.get(con1);
+							array.add(con2);
+							relHelper.put(con1, array);
+						}	
+					}
+					iterator++;
 				}
-				iterator++;
 			}
 		}       
     }
