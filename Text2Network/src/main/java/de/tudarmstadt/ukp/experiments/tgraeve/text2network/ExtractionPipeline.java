@@ -22,6 +22,7 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.apache.commons.logging.Log;
 import org.apache.uima.UIMAException;
@@ -57,110 +58,132 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.SGFExporter;
  */
 public class ExtractionPipeline {
 	
-//	protected String[] input;
-//	protected String output;
-//	protected String concept;
-//	protected String relation;
-//	protected String export;
-//	
-//	public ExtractionPipeline(String... input) throws UIMAException, IOException
-//	{
-//		int i = 0;
-//		boolean fail = false;
-//		this.input = input;
-//		
-//		if(input.length>0)
-//		{
-//			
-//			AnalysisEngineDescription concAnn;
-//			switch (input[i]) { //Konzeptextraktion
-//			case "Concept":
-//				i++;
-//				switch (input[i]) {
-//				case "NC":
-//					concAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class);
-//					break;
-//				case "VC":
-//					concAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, VC.class);
-//					break;
-//				default:
-//					System.out.println("Keine gültige Annotation angegeben!");
-//					fail = true;
-//					break;
-//				}
-//				i++;
-//				break;
-//			case "Spotlight":
-//				i++;
-//				if(0<Float.parseFloat(input[i]) && Float.parseFloat(input[i])<1)
-//				{
-//					AnalysisEngineDescription spotAnn = createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, Float.parseFloat(input[i]));
-//				}
-//				else{
-//					System.out.println("Kein gültiges Konfidenzintervall angegeben!");
-//					fail = true;
-//				}
-//				i++;
-//				break;
-//			default:
-//				System.out.println("Keine gültige Konzeptextraktion angegeben!");
-//				fail = true;
-//				break;
-//			}
-//			
-//			
-//			AnalysisEngineDescription relAnnotator;
-//			switch (input[i]) { //Relationsextraktion
-//			case "CoOccurrence":
-//				i++;
-//				if(Integer.parseInt(input[i])>0)
-//				{
-//					relAnnotator = createEngineDescription(CoOccurrenceRelationAnnotator.class, CoOccurrenceRelationAnnotator.PARAM_WINDOW_SIZE, Integer.parseInt(input[i]));
-//				}
-//				else {
-//					System.out.println("Ungültige Fenstergröße angegeben!");
-//				}
-//				i++;
-//				break;
-//			case "Syntax":
-//				relAnnotator = createEngineDescription(SyntaxRelationAnnotator.class);
-//				i++;
-//				break;
-//			default:
-//				System.out.println("Ungültige Relationsextraktion angegeben!");
-//				break;
-//			}
-//			
-//			AnalysisEngineDescription exporter;
-//			switch (input[i]) {
-//			case "SGF":
-//				exporter = createEngineDescription(SGFExporter.class);
-//				break;
-//			case "GraphML":
-//				exporter = createEngineDescription(GraphMLExporter.class);
-//				break;
-//			default:
-//				break;
-//			}
-//			
-//			CollectionReaderDescription reader = createReaderDescription(
-//			         TextReader.class,
-//			         TextReader.PARAM_SOURCE_LOCATION, input,
-//			         TextReader.PARAM_PATTERNS, new String[] {"[+]*.txt"},
-//			         TextReader.PARAM_LANGUAGE, "en");
-//			AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
-//			AnalysisEngineDescription pos = createEngineDescription(OpenNlpPosTagger.class);
-//			AnalysisEngineDescription chunker = createEngineDescription(OpenNlpChunker.class);
-//			AnalysisEngineDescription changeChunker = createEngineDescription(ChunkTagChanger.class);
-//			AnalysisEngineDescription cas = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, "output/+|.*");
-//
-//			runPipeline(reader, segmenter, pos, chunker, changeChunker, concAnn, relAnnotator, exporter, cas);
-//			
-//			
-//		} else{
-//			System.out.println("Keine Parameter angegeben!");
-//		}
-//	}
+	protected String[] input;
+	protected String output;
+	protected String concept;
+	protected String relation;
+	protected String export;
+	
+	public ExtractionPipeline(String... input) throws UIMAException, IOException
+	{
+		
+		ArrayList<AnalysisEngineDescription> config = new ArrayList<>();
+		int i = 0;
+		boolean fail = false;
+		this.input = input;
+		
+		CollectionReaderDescription reader = createReaderDescription(
+		         TextReader.class,
+		         TextReader.PARAM_SOURCE_LOCATION, "input/",
+		         TextReader.PARAM_PATTERNS, new String[] {"[+]*.txt"},
+		         TextReader.PARAM_LANGUAGE, "en");
+		AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+		AnalysisEngineDescription pos = createEngineDescription(OpenNlpPosTagger.class);
+		AnalysisEngineDescription chunker = createEngineDescription(OpenNlpChunker.class);
+		AnalysisEngineDescription changeChunker = createEngineDescription(ChunkTagChanger.class);
+		AnalysisEngineDescription cas = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, "output/+|.*");
+		
+		config.add(segmenter);
+		config.add(pos);
+		config.add(chunker);
+		config.add(changeChunker);
+		
+		
+		if(input.length>0)
+		{
+			
+			AnalysisEngineDescription concAnn = null;
+			switch (input[i]) { //Konzeptextraktion
+			case "Concept":
+				i++;
+				switch (input[i]) {
+				case "NC":
+					concAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class);
+					config.add(concAnn);
+					break;
+				case "VC":
+					concAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, VC.class);
+					config.add(concAnn);
+					break;
+				default:
+					System.out.println("Keine gültige Annotation angegeben!");
+					fail = true;
+					break;
+				}
+				i++;
+				break;
+			case "Spotlight":
+				i++;
+				if(0<Float.parseFloat(input[i]) && Float.parseFloat(input[i])<1)
+				{
+					AnalysisEngineDescription spotAnn = createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, Float.parseFloat(input[i]));
+					config.add(spotAnn);
+				}
+				else{
+					System.out.println("Kein gültiges Konfidenzintervall angegeben!");
+					fail = true;
+				}
+				i++;
+				break;
+			default:
+				System.out.println("Keine gültige Konzeptextraktion angegeben!");
+				fail = true;
+				break;
+			}
+			
+			
+			AnalysisEngineDescription relAnnotator = null;
+			switch (input[i]) { //Relationsextraktion
+			case "CoOccurrence":
+				i++;
+				if(Integer.parseInt(input[i])>0)
+				{
+					relAnnotator = createEngineDescription(CoOccurrenceRelationAnnotator.class, CoOccurrenceRelationAnnotator.PARAM_WINDOW_SIZE, Integer.parseInt(input[i]));
+					config.add(relAnnotator);
+				}
+				else {
+					System.out.println("Ungültige Fenstergröße angegeben!");
+				}
+				i++;
+				break;
+			case "Syntax":
+				relAnnotator = createEngineDescription(SyntaxRelationAnnotator.class);
+				config.add(relAnnotator);
+				i++;
+				break;
+			default:
+				System.out.println("Ungültige Relationsextraktion angegeben!");
+				break;
+			}
+			
+			AnalysisEngineDescription exporter = null;
+			switch (input[i]) {
+			case "SGF":
+				exporter = createEngineDescription(SGFExporter.class);
+				config.add(exporter);
+				break;
+			case "GraphML":
+				exporter = createEngineDescription(GraphMLExporter.class);
+				config.add(exporter);
+				break;
+			default:
+				break;
+			}
+			
+			config.add(cas);
+			AnalysisEngineDescription[] pipe = new AnalysisEngineDescription[config.size()];
+			config.toArray(pipe);
+
+			try {
+				runPipeline(reader, pipe);
+			} catch (Exception e) {
+				System.out.println("Falsche Konfiguration - bitte Eingaben überprüfen!");
+			}
+				
+		} else{
+			System.out.println("Keine Parameter angegeben!");
+		}
+	}
 
 	
 	public void startPipeline(CollectionReaderDescription reader,

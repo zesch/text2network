@@ -48,25 +48,25 @@ public class Initialize {
 		String input = "input/";
 		String output = "output/CASout.txt";
 		
-		ExtractionPipeline extractor = new ExtractionPipeline();
+		ExtractionPipeline extractor = new ExtractionPipeline("Spotlight", "0.5", "CoOccurrence", "7", "SGF");
 		
-		CollectionReaderDescription reader = createReaderDescription(
-		         TextReader.class,
-		         TextReader.PARAM_SOURCE_LOCATION, input,
-		         TextReader.PARAM_PATTERNS, new String[] {"[+]*.txt"},
-		         TextReader.PARAM_LANGUAGE, "en");
-		
-		AnalysisEngineDescription dSegmenter = createEngineDescription(BreakIteratorSegmenter.class);	
-		AnalysisEngineDescription dPosTagger = createEngineDescription(OpenNlpPosTagger.class);	
-		AnalysisEngineDescription dChunker = createEngineDescription(OpenNlpChunker.class);
-		AnalysisEngineDescription dConAnnotator = createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5));
-//		AnalysisEngineDescription dConAnnotator = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class);
-//		AnalysisEngineDescription dRelAnnotator = createEngineDescription(CoOccurrenceRelationAnnotator.class, CoOccurrenceRelationAnnotator.PARAM_WINDOW_SIZE, 7);
-		AnalysisEngineDescription dRelAnnotator = createEngineDescription(SyntaxRelationAnnotator.class);
-//		AnalysisEngineDescription dExporter = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, output);
-		AnalysisEngineDescription dExporter = createEngineDescription(SGFExporter.class);
-
-		extractor.startPipeline(reader, dSegmenter, dPosTagger, dChunker, dConAnnotator, dRelAnnotator, dExporter);
+//		CollectionReaderDescription reader = createReaderDescription(
+//		         TextReader.class,
+//		         TextReader.PARAM_SOURCE_LOCATION, input,
+//		         TextReader.PARAM_PATTERNS, new String[] {"[+]*.txt"},
+//		         TextReader.PARAM_LANGUAGE, "en");
+//		
+//		AnalysisEngineDescription dSegmenter = createEngineDescription(BreakIteratorSegmenter.class);	
+//		AnalysisEngineDescription dPosTagger = createEngineDescription(OpenNlpPosTagger.class);	
+//		AnalysisEngineDescription dChunker = createEngineDescription(OpenNlpChunker.class);
+//		AnalysisEngineDescription dConAnnotator = createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5));
+////		AnalysisEngineDescription dConAnnotator = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class);
+////		AnalysisEngineDescription dRelAnnotator = createEngineDescription(CoOccurrenceRelationAnnotator.class, CoOccurrenceRelationAnnotator.PARAM_WINDOW_SIZE, 7);
+//		AnalysisEngineDescription dRelAnnotator = createEngineDescription(SyntaxRelationAnnotator.class);
+////		AnalysisEngineDescription dExporter = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, output);
+//		AnalysisEngineDescription dExporter = createEngineDescription(SGFExporter.class);
+//
+//		extractor.startPipeline(reader, dSegmenter, dPosTagger, dChunker, dConAnnotator, dRelAnnotator, dExporter);
 	}
 
 }
