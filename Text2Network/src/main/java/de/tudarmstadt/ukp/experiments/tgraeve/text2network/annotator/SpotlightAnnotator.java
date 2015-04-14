@@ -27,9 +27,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -79,20 +81,21 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 			throw new AnalysisEngineProcessException(e);
 		}
 		
-		String request = "http://spotlight.dbpedia.org/rest/annotate?text=" + text 
-				+"&confidence="+ confidence; //alternativ http://spotlight.sztaki.hu:2222/rest
+		String request = "http://spotlight.sztaki.hu:2222/rest/annotate?text=" + text 
+				+"&confidence="+ confidence; //alternativ http://spotlight.dbpedia.org/rest - veraltete Schnittstelle
+		
+		System.out.println(text);
 		
 		if (support != 0)
 		{
 			request = request + "&support="+ support;
 		}
 
-		CloseableHttpClient client = HttpClientBuilder.create().build();
+		CloseableHttpClient client = HttpClients.createDefault();
 		HttpGet httpRequest = new HttpGet(request);
 		httpRequest.addHeader("Accept", "text/xml");
 		
-		try {
-			HttpResponse response = client.execute(httpRequest);
+		try(CloseableHttpResponse response = client.execute(httpRequest)) {			
 			
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -115,8 +118,9 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 				concept.setBegin(begin);
 				concept.setEnd(end);
 				concept.setText(element.getAttribute("surfaceForm"));
-				concept.addToIndexes();		
-
+				concept.addToIndexes();	
+				
+				response.close();
 			}
 			} catch (IOException | ParserConfigurationException | IllegalStateException | SAXException e) {
 				throw new AnalysisEngineProcessException(e);

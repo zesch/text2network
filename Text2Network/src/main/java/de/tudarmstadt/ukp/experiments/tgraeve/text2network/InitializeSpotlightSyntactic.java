@@ -26,27 +26,31 @@ import java.io.IOException;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.component.CasDumpWriter;
 
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ChunkTagChanger;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ConceptAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.CoOccurrenceRelationAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SpotlightAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SyntaxRelationAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.SGFExporter;
 
-public class Initialize {
+/**
+ * 
+ * @author Tobias Graeve
+ * 
+ * Lässt Texte von Spotlight annotieren und verbindet gefundene Konzepte durch zugehörige Verbphrasen.
+ * 
+ * @param input
+ * @param output
+ *
+ */
+public class InitializeSpotlightSyntactic {
 
 	public static void main(String[] args) throws UIMAException, IOException {
 		
 		String input = "input/";
-		String output = "output/CASout.txt";
+		String output = "output/";
 		
 		ExtractionPipeline extractor = new ExtractionPipeline();
 		
@@ -60,10 +64,7 @@ public class Initialize {
 		AnalysisEngineDescription dPosTagger = createEngineDescription(OpenNlpPosTagger.class);	
 		AnalysisEngineDescription dChunker = createEngineDescription(OpenNlpChunker.class);
 		AnalysisEngineDescription dConAnnotator = createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5));
-//		AnalysisEngineDescription dConAnnotator = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class);
-//		AnalysisEngineDescription dRelAnnotator = createEngineDescription(CoOccurrenceRelationAnnotator.class, CoOccurrenceRelationAnnotator.PARAM_WINDOW_SIZE, 7);
 		AnalysisEngineDescription dRelAnnotator = createEngineDescription(SyntaxRelationAnnotator.class);
-//		AnalysisEngineDescription dExporter = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, output);
 		AnalysisEngineDescription dExporter = createEngineDescription(SGFExporter.class);
 
 		extractor.startPipeline(reader, dSegmenter, dPosTagger, dChunker, dConAnnotator, dRelAnnotator, dExporter);
