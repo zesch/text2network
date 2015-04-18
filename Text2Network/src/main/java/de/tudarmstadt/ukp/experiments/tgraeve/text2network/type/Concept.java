@@ -10,7 +10,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Tue Mar 10 12:24:25 CET 2015
+ * Updated by JCasGen Sun Apr 19 01:02:38 CEST 2015
  * XML source: /Users/Tobias/Dropbox/Studium/BA II/Programmierung/de.tudarmstadt.ukp.experiments.tgraeve.text2network/src/main/resources/desc/type/Concept.xml
  * @generated */
 public class Concept extends Annotation {
@@ -93,6 +93,28 @@ public class Concept extends Annotation {
     if (Concept_Type.featOkTst && ((Concept_Type)jcasType).casFeat_text == null)
       jcasType.jcas.throwFeatMissing("text", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept");
     jcasType.ll_cas.ll_setStringValue(addr, ((Concept_Type)jcasType).casFeatCode_text, v);}    
+   
+    
+  //*--------------*
+  //* Feature: URI
+
+  /** getter for URI - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public String getURI() {
+    if (Concept_Type.featOkTst && ((Concept_Type)jcasType).casFeat_URI == null)
+      jcasType.jcas.throwFeatMissing("URI", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((Concept_Type)jcasType).casFeatCode_URI);}
+    
+  /** setter for URI - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setURI(String v) {
+    if (Concept_Type.featOkTst && ((Concept_Type)jcasType).casFeat_URI == null)
+      jcasType.jcas.throwFeatMissing("URI", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept");
+    jcasType.ll_cas.ll_setStringValue(addr, ((Concept_Type)jcasType).casFeatCode_URI, v);}    
   }
 
     

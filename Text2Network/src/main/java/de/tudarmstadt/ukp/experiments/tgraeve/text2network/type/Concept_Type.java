@@ -14,7 +14,7 @@ import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Tue Mar 10 12:24:25 CET 2015
+ * Updated by JCasGen Sun Apr 19 01:02:38 CEST 2015
  * @generated */
 public class Concept_Type extends Annotation_Type {
   /** @generated 
@@ -71,6 +71,30 @@ public class Concept_Type extends Annotation_Type {
     ll_cas.ll_setStringValue(addr, casFeatCode_text, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_URI;
+  /** @generated */
+  final int     casFeatCode_URI;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public String getURI(int addr) {
+        if (featOkTst && casFeat_URI == null)
+      jcas.throwFeatMissing("URI", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_URI);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setURI(int addr, String v) {
+        if (featOkTst && casFeat_URI == null)
+      jcas.throwFeatMissing("URI", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept");
+    ll_cas.ll_setStringValue(addr, casFeatCode_URI, v);}
+    
+  
 
 
 
@@ -86,6 +110,10 @@ public class Concept_Type extends Annotation_Type {
  
     casFeat_text = jcas.getRequiredFeatureDE(casType, "text", "uima.cas.String", featOkTst);
     casFeatCode_text  = (null == casFeat_text) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_text).getCode();
+
+ 
+    casFeat_URI = jcas.getRequiredFeatureDE(casType, "URI", "uima.cas.String", featOkTst);
+    casFeatCode_URI  = (null == casFeat_URI) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_URI).getCode();
 
   }
 }
