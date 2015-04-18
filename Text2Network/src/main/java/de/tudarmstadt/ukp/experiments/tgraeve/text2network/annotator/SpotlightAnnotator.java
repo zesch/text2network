@@ -69,6 +69,10 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 	@ConfigurationParameter(name = PARAM_SUPPORT, mandatory = false)
 	protected int support;
 	
+	public static final String PARAM_RENAME_CONCEPTS = "renameConcepts";
+	@ConfigurationParameter(name = PARAM_RENAME_CONCEPTS, mandatory = true, defaultValue = "true")
+	protected boolean renameConcepts;
+	
 	@Override
 	public void process(JCas aJCas) 
 			throws AnalysisEngineProcessException
@@ -112,12 +116,20 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 				int begin = Integer.parseInt(element.getAttribute("offset"));
 				int end = begin + element.getAttribute("surfaceForm").length();
 				
-				System.out.println(element.getAttribute("surfaceForm")+" von " + begin + " bis " + end); //TODO löschen
+				System.out.println(element.getAttribute("surfaceForm")+" von " + begin + " bis " + end + " URI:" + element.getAttribute("URI").substring(28)); //TODO löschen
 				
 				Concept concept = new Concept(aJCas);
 				concept.setBegin(begin);
 				concept.setEnd(end);
-				concept.setText(element.getAttribute("surfaceForm"));
+				if(renameConcepts)
+				{
+					concept.setText(element.getAttribute("URI").substring(28));
+				}
+				else
+				{
+					concept.setText(element.getAttribute("surfaceForm"));
+				}
+				concept.setURI(element.getAttribute("URI"));
 				concept.addToIndexes();	
 				
 				response.close();

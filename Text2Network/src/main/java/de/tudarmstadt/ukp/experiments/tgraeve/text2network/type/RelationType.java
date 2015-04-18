@@ -10,7 +10,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Tue Mar 10 12:24:25 CET 2015
+ * Updated by JCasGen Sun Apr 19 01:02:38 CEST 2015
  * XML source: /Users/Tobias/Dropbox/Studium/BA II/Programmierung/de.tudarmstadt.ukp.experiments.tgraeve.text2network/src/main/resources/desc/type/Concept.xml
  * @generated */
 public class RelationType extends Annotation {
