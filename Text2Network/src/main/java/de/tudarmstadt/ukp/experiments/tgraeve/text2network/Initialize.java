@@ -43,7 +43,7 @@ public class Initialize {
 		
 		Text2NetworkPipeline t2npipe = new Text2NetworkPipeline();
 		
-		t2npipe.startPipeline(createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5), SpotlightAnnotator.PARAM_RENAME_CONCEPTS, false),
+		t2npipe.startPipeline(createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5), SpotlightAnnotator.PARAM_RENAME_CONCEPTS, true),
 								createEngineDescription(CoOccurrenceRelationAnnotator.class),
 									createEngineDescription(SGFExporter.class));
 		
