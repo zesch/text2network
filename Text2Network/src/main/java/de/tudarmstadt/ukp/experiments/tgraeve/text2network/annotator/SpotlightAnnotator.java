@@ -69,6 +69,9 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 	@ConfigurationParameter(name = PARAM_SUPPORT, mandatory = false)
 	protected int support;
 	
+	/**
+	 * Benennung des Konzepts nach URI oder ursprünglichem Inhalt aus dem Text.
+	 */
 	public static final String PARAM_RENAME_CONCEPTS = "renameConcepts";
 	@ConfigurationParameter(name = PARAM_RENAME_CONCEPTS, mandatory = true, defaultValue = "true")
 	protected boolean renameConcepts;
