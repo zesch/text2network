@@ -19,54 +19,38 @@
 package de.tudarmstadt.ukp.experiments.tgraeve.text2network;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
 import java.io.IOException;
 
 import org.apache.uima.UIMAException;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.component.CasDumpWriter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ChunkTagChanger;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ConceptAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.CoOccurrenceRelationAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SpotlightAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SyntaxRelationAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.SGFExporter;
 
+/**
+ * Dient dem initialisieren von Pipelines zur Netzwerkextraktion.
+ * 
+ * @author Tobias Graeve
+ *
+ */
 public class Initialize {
 
 	public static void main(String[] args) throws UIMAException, IOException {
 		
-		String input = "input/";
-		String output = "output/CASout.txt";
+		Text2NetworkPipeline t2npipe = new Text2NetworkPipeline();
 		
-		ExtractionPipeline extractor = new ExtractionPipeline("Spotlight", "0.5", "CoOccurrence", "7", "SGF");
+		t2npipe.startPipeline(createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5), SpotlightAnnotator.PARAM_RENAME_CONCEPTS, false),
+								createEngineDescription(CoOccurrenceRelationAnnotator.class),
+									createEngineDescription(SGFExporter.class));
 		
-//		CollectionReaderDescription reader = createReaderDescription(
-//		         TextReader.class,
-//		         TextReader.PARAM_SOURCE_LOCATION, input,
-//		         TextReader.PARAM_PATTERNS, new String[] {"[+]*.txt"},
-//		         TextReader.PARAM_LANGUAGE, "en");
-//		
-//		AnalysisEngineDescription dSegmenter = createEngineDescription(BreakIteratorSegmenter.class);	
-//		AnalysisEngineDescription dPosTagger = createEngineDescription(OpenNlpPosTagger.class);	
-//		AnalysisEngineDescription dChunker = createEngineDescription(OpenNlpChunker.class);
-//		AnalysisEngineDescription dConAnnotator = createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5));
-////		AnalysisEngineDescription dConAnnotator = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class);
-////		AnalysisEngineDescription dRelAnnotator = createEngineDescription(CoOccurrenceRelationAnnotator.class, CoOccurrenceRelationAnnotator.PARAM_WINDOW_SIZE, 7);
-//		AnalysisEngineDescription dRelAnnotator = createEngineDescription(SyntaxRelationAnnotator.class);
-////		AnalysisEngineDescription dExporter = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, output);
-//		AnalysisEngineDescription dExporter = createEngineDescription(SGFExporter.class);
-//
-//		extractor.startPipeline(reader, dSegmenter, dPosTagger, dChunker, dConAnnotator, dRelAnnotator, dExporter);
+		t2npipe.startPipeline(createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class),
+				createEngineDescription(CoOccurrenceRelationAnnotator.class),
+					createEngineDescription(SGFExporter.class));
+
 	}
 
 }

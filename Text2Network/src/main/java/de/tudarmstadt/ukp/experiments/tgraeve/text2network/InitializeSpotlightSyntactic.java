@@ -41,7 +41,7 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.SGFExporter;
  * 
  * Lässt Texte von Spotlight annotieren und verbindet gefundene Konzepte durch zugehörige Verbphrasen.
  * 
- * @param input
+ * @param components
  * @param output
  *
  */

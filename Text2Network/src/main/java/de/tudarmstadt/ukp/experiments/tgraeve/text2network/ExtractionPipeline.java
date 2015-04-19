@@ -78,6 +78,7 @@ public class ExtractionPipeline {
 		         TextReader.PARAM_PATTERNS, new String[] {"[+]*.txt"},
 		         TextReader.PARAM_LANGUAGE, "en");
 		AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+		
 		AnalysisEngineDescription pos = createEngineDescription(OpenNlpPosTagger.class);
 		AnalysisEngineDescription chunker = createEngineDescription(OpenNlpChunker.class);
 		AnalysisEngineDescription changeChunker = createEngineDescription(ChunkTagChanger.class);
