@@ -47,9 +47,9 @@ public class Initialize {
 								createEngineDescription(CoOccurrenceRelationAnnotator.class),
 									createEngineDescription(SGFExporter.class));
 		
-		t2npipe.startPipeline(createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class),
-				createEngineDescription(CoOccurrenceRelationAnnotator.class),
-					createEngineDescription(SGFExporter.class));
+//		t2npipe.startPipeline(createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class),
+//				createEngineDescription(CoOccurrenceRelationAnnotator.class),
+//					createEngineDescription(SGFExporter.class));
 
 	}
 
