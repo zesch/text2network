@@ -35,13 +35,16 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.tcas.Annotation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 
 /**
@@ -81,70 +84,171 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 			throws AnalysisEngineProcessException
 	{
 		
-		String text = aJCas.getDocumentText();		
-		try {
-			text = URLEncoder.encode(text, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			throw new AnalysisEngineProcessException(e);
-		}
-		
-		String request = "http://spotlight.sztaki.hu:2222/rest/annotate?text=" + text 
-				+"&confidence="+ confidence; //alternativ http://spotlight.dbpedia.org/rest - veraltete Schnittstelle
-		
-		System.out.println(text);
-		
-		if (support != 0)
+		if(aJCas.getDocumentText().length()>7000)
 		{
-			request = request + "&support="+ support;
-		}
-
-		CloseableHttpClient client = HttpClients.createDefault();
-		HttpGet httpRequest = new HttpGet(request);
-		httpRequest.addHeader("Accept", "text/xml");
-		
-		try(CloseableHttpResponse response = client.execute(httpRequest)) {			
+			Annotation paragraph = new Annotation(aJCas);
+			paragraph.setBegin(0);
 			
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(response.getEntity().getContent());
+			Annotation paragraphEnd = new Annotation(aJCas);
+			paragraphEnd.setBegin(7000);
+			paragraphEnd.setEnd(7000);
 			
-			doc.getDocumentElement().normalize();
+			System.out.println(aJCas.getDocumentText().length());
 			
-			NodeList list = doc.getElementsByTagName("Resource");
-			
-			for(int i = 0; i < list.getLength(); i++)
+			while(paragraph.getBegin()<aJCas.getDocumentText().length() && JCasUtil.selectFollowing(aJCas, Sentence.class, paragraph, 1) != JCasUtil.selectFollowing(aJCas, Sentence.class, paragraph, 0))
 			{
-				Node node = list.item(i);
-				Element element = (Element) node;
-				int begin = Integer.parseInt(element.getAttribute("offset"));
-				int end = begin + element.getAttribute("surfaceForm").length();
+				Annotation border = JCasUtil.selectSingleRelative(aJCas, Sentence.class, paragraphEnd, -1);
+				paragraph.setEnd(border.getEnd());
 				
-				System.out.println(element.getAttribute("surfaceForm")+" von " + begin + " bis " + end + " URI:" + element.getAttribute("URI").substring(28)); //TODO löschen
+				String text = paragraph.getCoveredText();
 				
-				Concept concept = new Concept(aJCas);
-				concept.setBegin(begin);
-				concept.setEnd(end);
-				if(renameConcepts)
-				{
-					concept.setText(element.getAttribute("URI").substring(28));
-				}
-				else
-				{
-					concept.setText(element.getAttribute("surfaceForm"));
-				}
-				concept.setURI(element.getAttribute("URI"));
-				concept.addToIndexes();	
-				
-				response.close();
-			}
-			} catch (IOException | ParserConfigurationException | IllegalStateException | SAXException e) {
-				throw new AnalysisEngineProcessException(e);
-			} finally {
 				try {
-					client.close();
-				} catch (IOException e) {
+					text = URLEncoder.encode(text, "UTF-8");
+				} catch (UnsupportedEncodingException e) {
 					throw new AnalysisEngineProcessException(e);
 				}
+				
+				String request = "http://spotlight.sztaki.hu:2222/rest/annotate?text=" + text 
+						+"&confidence="+ confidence; //alternativ http://spotlight.dbpedia.org/rest - veraltete Schnittstelle
+				
+				System.out.println(text);
+				
+				if (support != 0)
+				{
+					request = request + "&support="+ support;
+				}
+
+				CloseableHttpClient client = HttpClients.createDefault();
+				HttpGet httpRequest = new HttpGet(request);
+				httpRequest.addHeader("Accept", "text/xml");
+				
+				try {			
+					CloseableHttpResponse response = client.execute(httpRequest);
+					
+					DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+					DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+					Document doc = dBuilder.parse(response.getEntity().getContent());
+					
+					doc.getDocumentElement().normalize();
+					
+					NodeList list = doc.getElementsByTagName("Resource");
+					
+					for(int i = 0; i < list.getLength(); i++)
+					{
+						Node node = list.item(i);
+						Element element = (Element) node;
+						int begin = Integer.parseInt(element.getAttribute("offset"))+paragraph.getBegin();
+						int end = begin + element.getAttribute("surfaceForm").length();
+						
+						System.out.println(element.getAttribute("surfaceForm")+" von " + begin + " bis " + end + " URI:" + element.getAttribute("URI").substring(28)); //TODO löschen
+						
+						Concept concept = new Concept(aJCas);
+						concept.setBegin(begin);
+						concept.setEnd(end);
+						if(renameConcepts)
+						{
+							concept.setText(element.getAttribute("URI").substring(28));
+						}
+						else
+						{
+							concept.setText(element.getAttribute("surfaceForm"));
+						}
+						concept.setURI(element.getAttribute("URI"));
+						concept.addToIndexes();	
+						
+						response.close();
+					}
+					} catch (IOException | ParserConfigurationException | IllegalStateException | SAXException e) {
+						throw new AnalysisEngineProcessException(e);
+					} finally {
+						try {
+							client.close();
+						} catch (IOException e) {
+							throw new AnalysisEngineProcessException(e);
+						}
+					}
+				
+				paragraph.setBegin(border.getEnd());
+				paragraph.setEnd(border.getEnd());
+				paragraphEnd.setBegin(border.getEnd()+7000);
+				paragraphEnd.setEnd(border.getEnd()+7000);
+				
+				System.out.println("######################"+paragraph.getBegin()+" "+paragraph.getEnd()+" "+paragraphEnd.getBegin()+" "+paragraphEnd.getEnd());
+				System.out.println(JCasUtil.selectFollowing(aJCas, Sentence.class, paragraph, 1));
+				
 			}
+			
+			
+		}
+		else
+		{
+			String text = aJCas.getDocumentText();
+			
+			try {
+				text = URLEncoder.encode(text, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				throw new AnalysisEngineProcessException(e);
+			}
+			
+			String request = "http://spotlight.sztaki.hu:2222/rest/annotate?text=" + text 
+					+"&confidence="+ confidence; //alternativ http://spotlight.dbpedia.org/rest - veraltete Schnittstelle
+			
+			System.out.println(text);
+			
+			if (support != 0)
+			{
+				request = request + "&support="+ support;
+			}
+
+			CloseableHttpClient client = HttpClients.createDefault();
+			HttpGet httpRequest = new HttpGet(request);
+			httpRequest.addHeader("Accept", "text/xml");
+			
+			try {			
+				CloseableHttpResponse response = client.execute(httpRequest);
+				
+				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+				Document doc = dBuilder.parse(response.getEntity().getContent());
+				
+				doc.getDocumentElement().normalize();
+				
+				NodeList list = doc.getElementsByTagName("Resource");
+				
+				for(int i = 0; i < list.getLength(); i++)
+				{
+					Node node = list.item(i);
+					Element element = (Element) node;
+					int begin = Integer.parseInt(element.getAttribute("offset"));
+					int end = begin + element.getAttribute("surfaceForm").length();
+					
+					System.out.println(element.getAttribute("surfaceForm")+" von " + begin + " bis " + end + " URI:" + element.getAttribute("URI").substring(28)); //TODO löschen
+					
+					Concept concept = new Concept(aJCas);
+					concept.setBegin(begin);
+					concept.setEnd(end);
+					if(renameConcepts)
+					{
+						concept.setText(element.getAttribute("URI").substring(28));
+					}
+					else
+					{
+						concept.setText(element.getAttribute("surfaceForm"));
+					}
+					concept.setURI(element.getAttribute("URI"));
+					concept.addToIndexes();	
+					
+					response.close();
+				}
+				} catch (IOException | ParserConfigurationException | IllegalStateException | SAXException e) {
+					throw new AnalysisEngineProcessException(e);
+				} finally {
+					try {
+						client.close();
+					} catch (IOException e) {
+						throw new AnalysisEngineProcessException(e);
+					}
+				}
+		}
 	}
 }
