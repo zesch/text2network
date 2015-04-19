@@ -21,6 +21,7 @@ package de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -79,6 +80,14 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 	@ConfigurationParameter(name = PARAM_RENAME_CONCEPTS, mandatory = true, defaultValue = "true")
 	protected boolean renameConcepts;
 	
+	/**
+	 * Beschränkung der Konzepte auf bestimmte Types.
+	 * @see http://wiki.dbpedia.org/Ontology
+	 */
+	public static final String PARAM_TYPES = "types";
+	@ConfigurationParameter(name = PARAM_TYPES, mandatory = false)
+	protected String[] types;
+	
 	@Override
 	public void process(JCas aJCas) 
 			throws AnalysisEngineProcessException
@@ -117,6 +126,16 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 				{
 					request = request + "&support="+ support;
 				}
+				else if(types.length>0)
+				{
+					request = request + "&types=" + types[0];
+					for(int i=1; i<types.length;i++)
+					{
+						request = request + "," +types[i];
+					}
+				}
+				
+				System.out.println(request);
 
 				CloseableHttpClient client = HttpClients.createDefault();
 				HttpGet httpRequest = new HttpGet(request);
