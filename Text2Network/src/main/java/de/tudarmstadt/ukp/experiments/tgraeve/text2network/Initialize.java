@@ -26,13 +26,14 @@ import org.apache.uima.UIMAException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ConceptAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.CoOccurrenceRelationAnnotator;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SlidingWindowRelationAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SpotlightAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SyntaxRelationAnnotator;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.GraphMLExporter;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.SGFExporter;
 
 /**
- * Dient dem initialisieren von Pipelines zur Netzwerkextraktion.
+ * Dient der Initialisierung von Pipelines zur Netzwerkextraktion.
  * 
  * @author Tobias Graeve
  *
@@ -41,11 +42,15 @@ public class Initialize {
 
 	public static void main(String[] args) throws UIMAException, IOException {
 		
-		Text2NetworkPipeline t2npipe = new Text2NetworkPipeline();
+		Text2NetworkExtractor t2npipe = new Text2NetworkExtractor();
 		
-		t2npipe.startPipeline(createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5), SpotlightAnnotator.PARAM_RENAME_CONCEPTS, true, SpotlightAnnotator.PARAM_TYPES, new String[] {"Person"}),
-								createEngineDescription(CoOccurrenceRelationAnnotator.class),
-									createEngineDescription(SGFExporter.class));
+		t2npipe.startPipeline(createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5),
+																				SpotlightAnnotator.PARAM_RENAME_TO_URI, true,
+																				SpotlightAnnotator.PARAM_TYPES, new String[]{"Person,Place"}
+																				),
+								createEngineDescription(SlidingWindowRelationAnnotator.class, SlidingWindowRelationAnnotator.PARAM_WINDOW_SIZE, 10),
+									createEngineDescription(SGFExporter.class),
+									createEngineDescription(GraphMLExporter.class));
 		
 //		t2npipe.startPipeline(createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class),
 //				createEngineDescription(CoOccurrenceRelationAnnotator.class),

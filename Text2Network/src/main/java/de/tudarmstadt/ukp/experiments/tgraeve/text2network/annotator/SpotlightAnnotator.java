@@ -76,9 +76,9 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 	/**
 	 * Benennung des Konzepts nach URI oder ursprünglichem Inhalt aus dem Text.
 	 */
-	public static final String PARAM_RENAME_CONCEPTS = "renameConcepts";
-	@ConfigurationParameter(name = PARAM_RENAME_CONCEPTS, mandatory = true, defaultValue = "true")
-	protected boolean renameConcepts;
+	public static final String PARAM_RENAME_TO_URI = "renameToUri";
+	@ConfigurationParameter(name = PARAM_RENAME_TO_URI, mandatory = true, defaultValue = "true")
+	protected boolean renameToUri;
 	
 	/**
 	 * Beschränkung der Konzepte auf bestimmte Types.
@@ -126,7 +126,7 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 				{
 					request = request + "&support="+ support;
 				}
-				else if(types.length>0)
+				else if(types != null && types.length>0)
 				{
 					request = request + "&types=" + types[0];
 					for(int i=1; i<types.length;i++)
@@ -164,7 +164,7 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 						Concept concept = new Concept(aJCas);
 						concept.setBegin(begin);
 						concept.setEnd(end);
-						if(renameConcepts)
+						if(renameToUri)
 						{
 							concept.setText(element.getAttribute("URI").substring(28));
 						}
@@ -246,7 +246,7 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 					Concept concept = new Concept(aJCas);
 					concept.setBegin(begin);
 					concept.setEnd(end);
-					if(renameConcepts)
+					if(renameToUri)
 					{
 						concept.setText(element.getAttribute("URI").substring(28));
 					}

@@ -44,7 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerChunker;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ChunkTagChanger;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ConceptAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.CoOccurrenceRelationAnnotator;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SlidingWindowRelationAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SpotlightAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SyntaxRelationAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.GraphMLExporter;
@@ -139,7 +139,7 @@ public class ExtractionPipeline {
 				i++;
 				if(Integer.parseInt(input[i])>0)
 				{
-					relAnnotator = createEngineDescription(CoOccurrenceRelationAnnotator.class, CoOccurrenceRelationAnnotator.PARAM_WINDOW_SIZE, Integer.parseInt(input[i]));
+					relAnnotator = createEngineDescription(SlidingWindowRelationAnnotator.class, SlidingWindowRelationAnnotator.PARAM_WINDOW_SIZE, Integer.parseInt(input[i]));
 					config.add(relAnnotator);
 				}
 				else {
@@ -233,7 +233,7 @@ public class ExtractionPipeline {
 		//Annotator
 		AnalysisEngineDescription concAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class);
 		AnalysisEngineDescription spotAnn = createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.1));
-		AnalysisEngineDescription relAnn = createEngineDescription(CoOccurrenceRelationAnnotator.class);
+		AnalysisEngineDescription relAnn = createEngineDescription(SlidingWindowRelationAnnotator.class);
 			
 		//Ausgabe
 		AnalysisEngineDescription cas = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, "output/output.txt");
