@@ -19,7 +19,7 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ChunkTagChanger;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ConceptAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.CoOccurrenceRelationAnnotator;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SlidingWindowRelationAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
 
 public class RelationAnnotatorTest {
@@ -59,7 +59,7 @@ public class RelationAnnotatorTest {
 		conceptEngine.process(jcas);
 		
 		//RelationAnnotation
-		AnalysisEngineDescription relationAnn = createEngineDescription(CoOccurrenceRelationAnnotator.class);
+		AnalysisEngineDescription relationAnn = createEngineDescription(SlidingWindowRelationAnnotator.class);
 		AnalysisEngine relationEngine = createEngine(relationAnn);
 		relationEngine.process(jcas);
 		

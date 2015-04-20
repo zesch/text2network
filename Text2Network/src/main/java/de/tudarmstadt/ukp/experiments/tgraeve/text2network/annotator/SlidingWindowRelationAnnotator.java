@@ -39,7 +39,7 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
  * @author Tobias Graeve
  *
  */
-public class CoOccurrenceRelationAnnotator extends JCasAnnotator_ImplBase
+public class SlidingWindowRelationAnnotator extends JCasAnnotator_ImplBase
 {
 	/**
 	 * Größe des Fensters über dem Text, in dem nach Verbindungen gesucht wird.

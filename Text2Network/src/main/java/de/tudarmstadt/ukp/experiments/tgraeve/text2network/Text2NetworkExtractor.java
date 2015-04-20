@@ -22,36 +22,22 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import org.apache.commons.logging.Log;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.CasDumpWriter;
-import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.VC;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerChunker;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ChunkTagChanger;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ConceptAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.CoOccurrenceRelationAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SpotlightAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SyntaxRelationAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.GraphMLExporter;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.SGFExporter;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.interfaces.I_Extractor;
 
 /**
- * Diese Pipeline dient dem extrahieren von Netzwerken aus reinen Textdateien.
+ * Dieser Extractor dient dem extrahieren von Netzwerken aus reinen Textdateien.
+ * Er beinhaltet bereits das Auslesen von Texten und einige Vorverarbeitungen.
  * 
  * Quelle: input/
  * Ziel: output/
@@ -59,15 +45,11 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.SGFExporter;
  * @author Tobias Graeve
  *
  */
-public class Text2NetworkPipeline {
+
+public class Text2NetworkExtractor implements I_Extractor {
 	
 	protected AnalysisEngineDescription[] components;
-	
-	public Text2NetworkPipeline()
-	{
-	}
 
-	
 	public void startPipeline(AnalysisEngineDescription... components) throws UIMAException, IOException
 	{
 		this.components = components;	
@@ -103,5 +85,11 @@ public class Text2NetworkPipeline {
 		pipe[i] = cas;
 		
 		runPipeline(reader, pipe);	
+	}
+
+	@Override
+	public void startPipeline() {
+		// TODO Automatisch generierter Methodenstub
+		
 	}
 }
