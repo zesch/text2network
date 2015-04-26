@@ -25,7 +25,7 @@ import java.io.IOException;
 import org.apache.uima.UIMAException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ConceptAnnotator;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SimpleConceptAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SlidingWindowRelationAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SpotlightAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SyntaxRelationAnnotator;

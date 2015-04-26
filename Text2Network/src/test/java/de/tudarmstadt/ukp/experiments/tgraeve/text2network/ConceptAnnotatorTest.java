@@ -19,7 +19,7 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ChunkTagChanger;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ConceptAnnotator;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SimpleConceptAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 
 public class ConceptAnnotatorTest {
@@ -54,7 +54,7 @@ public class ConceptAnnotatorTest {
 		changeEngine.process(jcas);
 		
 		//ConceptAnnotation
-		AnalysisEngineDescription conceptAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class);
+		AnalysisEngineDescription conceptAnn = createEngineDescription(SimpleConceptAnnotator.class, SimpleConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class);
 		AnalysisEngine conceptEngine = createEngine(conceptAnn);
 		conceptEngine.process(jcas);
 		
@@ -95,7 +95,7 @@ public class ConceptAnnotatorTest {
 		changeEngine.process(jcas);
 		
 		//ConceptAnnotation
-		AnalysisEngineDescription conceptAnn = createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, VC.class);
+		AnalysisEngineDescription conceptAnn = createEngineDescription(SimpleConceptAnnotator.class, SimpleConceptAnnotator.PARAM_CONCEPT_TYPE, VC.class);
 		AnalysisEngine conceptEngine = createEngine(conceptAnn);
 		conceptEngine.process(jcas);
 		
