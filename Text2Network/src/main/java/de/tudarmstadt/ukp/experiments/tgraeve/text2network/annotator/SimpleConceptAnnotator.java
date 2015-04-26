@@ -35,7 +35,7 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
  * @author Tobias Graeve
  *
  */
-public class ConceptAnnotator extends JCasAnnotator_ImplBase
+public class SimpleConceptAnnotator extends JCasAnnotator_ImplBase
 {
 	/**
 	 * Bestimmt den Typ der Chunks, die als Konzepte dienen sollen.
