@@ -29,7 +29,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.VC;
 /**
- * Diese Komponente passt die Tags der Chunks für die Verarbeitung im {@link ConceptAnnotator} an.
+ * Diese Komponente passt die Tags der Chunks für die Verarbeitung im {@link SimpleConceptAnnotator} an.
  * 
  * @author Tobias Graeve
  *
