@@ -84,10 +84,9 @@ public class Text2NetworkExtractor implements I_Extractor {
 		}
 		pipe[i] = cas;
 		
-		runPipeline(reader, pipe);	
+		runPipeline(reader, pipe);
 	}
 
-	@Override
 	public void startPipeline() {
 		// TODO Automatisch generierter Methodenstub
 		

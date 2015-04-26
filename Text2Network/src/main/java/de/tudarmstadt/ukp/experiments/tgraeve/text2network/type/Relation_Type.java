@@ -14,7 +14,7 @@ import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Sun Apr 19 01:02:38 CEST 2015
+ * Updated by JCasGen Mon Apr 27 00:03:21 CEST 2015
  * @generated */
 public class Relation_Type extends Annotation_Type {
   /** @generated 

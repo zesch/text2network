@@ -65,8 +65,8 @@ public class RelationAnnotatorTest {
 		
 		//Test
 		Relation result = JCasUtil.selectSingle(jcas, Relation.class);
-		assertEquals("This", result.getSource().getText());
-		assertEquals("a test", result.getTarget().getText());
+		assertEquals("This", result.getSource().getLabel());
+		assertEquals("a test", result.getTarget().getLabel());
 			
 	}
 }

@@ -11,7 +11,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 
 public interface I_Extractor {
 
-	public void startPipeline();
+	public void startPipeline() throws UIMAException, IOException;
 	public void startPipeline(AnalysisEngineDescription... components) throws UIMAException, IOException;
 	
 }

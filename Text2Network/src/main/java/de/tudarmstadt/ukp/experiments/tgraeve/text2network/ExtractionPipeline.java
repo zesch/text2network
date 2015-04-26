@@ -67,7 +67,7 @@ public class ExtractionPipeline {
 	public ExtractionPipeline(String... input) throws UIMAException, IOException
 	{
 		
-		ArrayList<AnalysisEngineDescription> config = new ArrayList<>();
+		ArrayList<AnalysisEngineDescription> config = new ArrayList<AnalysisEngineDescription>();
 		int i = 0;
 		boolean fail = false;
 		this.input = input;

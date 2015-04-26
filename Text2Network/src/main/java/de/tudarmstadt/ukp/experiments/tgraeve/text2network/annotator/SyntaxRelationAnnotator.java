@@ -85,7 +85,7 @@ public class SyntaxRelationAnnotator extends JCasAnnotator_ImplBase
 							relation.setTarget(con2);
 							
 							RelationType relType = new RelationType(aJCas);
-							relType.setText(JCasUtil.selectBetween(aJCas, VC.class, con1, con2).get(0).getCoveredText());
+							relType.setLabel(JCasUtil.selectBetween(aJCas, VC.class, con1, con2).get(0).getCoveredText());
 							relType.setBegin(JCasUtil.selectBetween(aJCas, VC.class, con1, con2).get(0).getBegin());
 							relType.setEnd(JCasUtil.selectBetween(aJCas, VC.class, con1, con2).get(0).getEnd());
 							relation.setRelation(relType);
@@ -106,7 +106,7 @@ public class SyntaxRelationAnnotator extends JCasAnnotator_ImplBase
 							relation.setTarget(con2);
 							
 							RelationType relType = new RelationType(aJCas);
-							relType.setText(JCasUtil.selectBetween(VC.class, con1, con2).get(0).getCoveredText());
+							relType.setLabel(JCasUtil.selectBetween(VC.class, con1, con2).get(0).getCoveredText());
 							relType.addToIndexes();
 							relation.setRelation(relType);
 							

@@ -67,7 +67,7 @@ public class SGFExporter extends JCasConsumer_ImplBase
 	{	
 		for(Concept concept : JCasUtil.select(jCas, Concept.class))
 		{
-			Node node = new Node(concept.getText(), concept.getText());
+			Node node = new Node(concept.getLabel(), concept.getLabel());
 			if(!nodeset.contains(node))
 			{
 				nodeset.addNode(node);
@@ -76,12 +76,12 @@ public class SGFExporter extends JCasConsumer_ImplBase
 		
 		for(Relation relation : JCasUtil.select(jCas, Relation.class))
 		{
-			Node node1 = new Node(relation.getSource().getText(), relation.getSource().getText());
+			Node node1 = new Node(relation.getSource().getLabel(), relation.getSource().getLabel());
 			if(!nodeset.contains(node1))
 			{
 				nodeset.addNode(node1);
 			}
-			Node node2 = new Node(relation.getTarget().getText(), relation.getTarget().getText());
+			Node node2 = new Node(relation.getTarget().getLabel(), relation.getTarget().getLabel());
 			if(!nodeset.contains(node2))
 			{
 				nodeset.addNode(node2);
@@ -89,11 +89,11 @@ public class SGFExporter extends JCasConsumer_ImplBase
 			
 			if(relation.getRelation() != null)
 			{
-				Edge edge = new Edge(Integer.toString(eId), relation.getRelation().getText(), relation.getSource().getText(), relation.getTarget().getText());
+				Edge edge = new Edge(Integer.toString(eId), relation.getRelation().getLabel(), relation.getSource().getLabel(), relation.getTarget().getLabel());
 				edgeset.add(edge);
 			} else
 			{
-				Edge edge = new Edge(Integer.toString(eId), relation.getSource().getText(), relation.getTarget().getText());
+				Edge edge = new Edge(Integer.toString(eId), relation.getSource().getLabel(), relation.getTarget().getLabel());
 				edgeset.add(edge);
 			}
 			

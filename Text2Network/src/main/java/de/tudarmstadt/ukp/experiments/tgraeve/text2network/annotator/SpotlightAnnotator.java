@@ -166,11 +166,11 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 						concept.setEnd(end);
 						if(renameToUri)
 						{
-							concept.setText(element.getAttribute("URI").substring(28));
+							concept.setLabel(element.getAttribute("URI").substring(28));
 						}
 						else
 						{
-							concept.setText(element.getAttribute("surfaceForm"));
+							concept.setLabel(element.getAttribute("surfaceForm"));
 						}
 						concept.setURI(element.getAttribute("URI"));
 						concept.addToIndexes();	
@@ -248,11 +248,11 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 					concept.setEnd(end);
 					if(renameToUri)
 					{
-						concept.setText(element.getAttribute("URI").substring(28));
+						concept.setLabel(element.getAttribute("URI").substring(28));
 					}
 					else
 					{
-						concept.setText(element.getAttribute("surfaceForm"));
+						concept.setLabel(element.getAttribute("surfaceForm"));
 					}
 					concept.setURI(element.getAttribute("URI"));
 					concept.addToIndexes();	
