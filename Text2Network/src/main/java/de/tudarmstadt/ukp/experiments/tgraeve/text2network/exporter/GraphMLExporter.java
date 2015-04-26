@@ -57,10 +57,10 @@ public class GraphMLExporter extends JCasConsumer_ImplBase
 		
 		for(Concept concept : JCasUtil.select(jCas, Concept.class))
 		{	
-			if(graph.getVertices("concept", concept.getText()) == null)
+			if(graph.getVertices("concept", concept.getLabel()) == null)
 			{
 				Vertex vert = graph.addVertex(null);
-				vert.setProperty("concept", concept.getText());
+				vert.setProperty("concept", concept.getLabel());
 			}
 		}
 		
@@ -68,12 +68,12 @@ public class GraphMLExporter extends JCasConsumer_ImplBase
 		{
 			Vertex a = graph.addVertex(null);
 			Vertex b = graph.addVertex(null);
-			a.setProperty("concept", relation.getSource().getText());
-			b.setProperty("concept", relation.getTarget().getText());
+			a.setProperty("concept", relation.getSource().getLabel());
+			b.setProperty("concept", relation.getTarget().getLabel());
 			
 			if(relation.getRelation() != null)
 			{
-				Edge e = graph.addEdge(null, a, b, relation.getRelation().getText());
+				Edge e = graph.addEdge(null, a, b, relation.getRelation().getLabel());
 			}
 			else 
 			{

@@ -42,18 +42,17 @@ public class Initialize {
 
 	public static void main(String[] args) throws UIMAException, IOException {
 		
-		Text2NetworkExtractor t2npipe = new Text2NetworkExtractor();
+		Text2NetworkExtractor t2nExtractor = new Text2NetworkExtractor();
 		
-		t2npipe.startPipeline(createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5),
-																				SpotlightAnnotator.PARAM_RENAME_TO_URI, true,
+		t2nExtractor.startPipeline(createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5),
 																				SpotlightAnnotator.PARAM_TYPES, new String[]{"Person,Place"}
 																				),
 								createEngineDescription(SlidingWindowRelationAnnotator.class, SlidingWindowRelationAnnotator.PARAM_WINDOW_SIZE, 10),
-									createEngineDescription(SGFExporter.class),
-									createEngineDescription(GraphMLExporter.class));
+									createEngineDescription(SGFExporter.class)
+									);
 		
 //		t2npipe.startPipeline(createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class),
-//				createEngineDescription(CoOccurrenceRelationAnnotator.class),
+//				createEngineDescription(SlidingWindowRelationAnnotator.class),
 //					createEngineDescription(SGFExporter.class));
 
 	}

@@ -14,7 +14,7 @@ import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Sun Apr 19 01:02:38 CEST 2015
+ * Updated by JCasGen Mon Apr 27 00:03:22 CEST 2015
  * @generated */
 public class RelationType_Type extends Annotation_Type {
   /** @generated 
@@ -47,26 +47,26 @@ public class RelationType_Type extends Annotation_Type {
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.RelationType");
  
   /** @generated */
-  final Feature casFeat_text;
+  final Feature casFeat_label;
   /** @generated */
-  final int     casFeatCode_text;
+  final int     casFeatCode_label;
   /** @generated
    * @param addr low level Feature Structure reference
    * @return the feature value 
    */ 
-  public String getText(int addr) {
-        if (featOkTst && casFeat_text == null)
-      jcas.throwFeatMissing("text", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.RelationType");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_text);
+  public String getLabel(int addr) {
+        if (featOkTst && casFeat_label == null)
+      jcas.throwFeatMissing("label", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.RelationType");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_label);
   }
   /** @generated
    * @param addr low level Feature Structure reference
    * @param v value to set 
    */    
-  public void setText(int addr, String v) {
-        if (featOkTst && casFeat_text == null)
-      jcas.throwFeatMissing("text", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.RelationType");
-    ll_cas.ll_setStringValue(addr, casFeatCode_text, v);}
+  public void setLabel(int addr, String v) {
+        if (featOkTst && casFeat_label == null)
+      jcas.throwFeatMissing("label", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.RelationType");
+    ll_cas.ll_setStringValue(addr, casFeatCode_label, v);}
     
   
  
@@ -106,8 +106,8 @@ public class RelationType_Type extends Annotation_Type {
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
  
-    casFeat_text = jcas.getRequiredFeatureDE(casType, "text", "uima.cas.String", featOkTst);
-    casFeatCode_text  = (null == casFeat_text) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_text).getCode();
+    casFeat_label = jcas.getRequiredFeatureDE(casType, "label", "uima.cas.String", featOkTst);
+    casFeatCode_label  = (null == casFeat_label) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_label).getCode();
 
  
     casFeat_rType = jcas.getRequiredFeatureDE(casType, "rType", "uima.tcas.Annotation", featOkTst);

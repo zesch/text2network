@@ -10,7 +10,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Sun Apr 19 01:02:38 CEST 2015
+ * Updated by JCasGen Mon Apr 27 00:03:22 CEST 2015
  * XML source: /Users/Tobias/Dropbox/Studium/BA II/Programmierung/de.tudarmstadt.ukp.experiments.tgraeve.text2network/src/main/resources/desc/type/Concept.xml
  * @generated */
 public class RelationType extends Annotation {
@@ -76,25 +76,25 @@ public class RelationType extends Annotation {
  
     
   //*--------------*
-  //* Feature: text
+  //* Feature: label
 
-  /** getter for text - gets 
+  /** getter for label - gets 
    * @generated
    * @return value of the feature 
    */
-  public String getText() {
-    if (RelationType_Type.featOkTst && ((RelationType_Type)jcasType).casFeat_text == null)
-      jcasType.jcas.throwFeatMissing("text", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.RelationType");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((RelationType_Type)jcasType).casFeatCode_text);}
+  public String getLabel() {
+    if (RelationType_Type.featOkTst && ((RelationType_Type)jcasType).casFeat_label == null)
+      jcasType.jcas.throwFeatMissing("label", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.RelationType");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((RelationType_Type)jcasType).casFeatCode_label);}
     
-  /** setter for text - sets  
+  /** setter for label - sets  
    * @generated
    * @param v value to set into the feature 
    */
-  public void setText(String v) {
-    if (RelationType_Type.featOkTst && ((RelationType_Type)jcasType).casFeat_text == null)
-      jcasType.jcas.throwFeatMissing("text", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.RelationType");
-    jcasType.ll_cas.ll_setStringValue(addr, ((RelationType_Type)jcasType).casFeatCode_text, v);}    
+  public void setLabel(String v) {
+    if (RelationType_Type.featOkTst && ((RelationType_Type)jcasType).casFeat_label == null)
+      jcasType.jcas.throwFeatMissing("label", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.RelationType");
+    jcasType.ll_cas.ll_setStringValue(addr, ((RelationType_Type)jcasType).casFeatCode_label, v);}    
    
     
   //*--------------*

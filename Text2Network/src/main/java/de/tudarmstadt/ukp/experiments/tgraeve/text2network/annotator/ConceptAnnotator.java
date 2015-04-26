@@ -58,7 +58,7 @@ public class ConceptAnnotator extends JCasAnnotator_ImplBase
 				Concept concept = new Concept(aJCas);
 				concept.setBegin(entry.getKey().getBegin());
 				concept.setEnd(entry.getKey().getEnd());
-				concept.setText(entry.getKey().getCoveredText());
+				concept.setLabel(entry.getKey().getCoveredText());
 				concept.addToIndexes();
 			}
 			
