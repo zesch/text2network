@@ -39,7 +39,7 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.RelationType;
  * @author Tobias Graeve
  *
  */
-public class SyntaxRelationAnnotator extends JCasAnnotator_ImplBase
+public class SvoRelationAnnotator extends JCasAnnotator_ImplBase
 {
 	
 	@Override

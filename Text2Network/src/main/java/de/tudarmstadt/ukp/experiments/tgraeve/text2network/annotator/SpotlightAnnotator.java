@@ -63,7 +63,7 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 	 * Vertrauensintervall von 0-1.
 	 */
 	public static final String PARAM_CONFIDENCE = "confidence";
-	@ConfigurationParameter(name = PARAM_CONFIDENCE, mandatory = true, defaultValue = "0.2")
+	@ConfigurationParameter(name = PARAM_CONFIDENCE, mandatory = true, defaultValue = "0.5")
 	protected double confidence;
 	
 	/**

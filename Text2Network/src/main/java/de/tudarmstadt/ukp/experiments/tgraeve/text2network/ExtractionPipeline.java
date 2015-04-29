@@ -46,7 +46,7 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ChunkTagCha
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SimpleConceptAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SlidingWindowRelationAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SpotlightAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SyntaxRelationAnnotator;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SvoRelationAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.GraphMLExporter;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.SGFExporter;
 
@@ -148,7 +148,7 @@ public class ExtractionPipeline {
 				i++;
 				break;
 			case "Syntax":
-				relAnnotator = createEngineDescription(SyntaxRelationAnnotator.class);
+				relAnnotator = createEngineDescription(SvoRelationAnnotator.class);
 				config.add(relAnnotator);
 				i++;
 				break;
