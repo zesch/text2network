@@ -28,7 +28,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SimpleConceptAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SlidingWindowRelationAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SpotlightAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SyntaxRelationAnnotator;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SvoRelationAnnotator;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SvoRelationClassifier;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.GraphMLExporter;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.SGFExporter;
 
@@ -48,6 +49,7 @@ public class Initialize {
 																				SpotlightAnnotator.PARAM_TYPES, new String[]{"Person,Place"}
 																				),
 								createEngineDescription(SlidingWindowRelationAnnotator.class, SlidingWindowRelationAnnotator.PARAM_WINDOW_SIZE, 10),
+								createEngineDescription(SvoRelationAnnotator.class),
 									createEngineDescription(SGFExporter.class)
 									);
 		
