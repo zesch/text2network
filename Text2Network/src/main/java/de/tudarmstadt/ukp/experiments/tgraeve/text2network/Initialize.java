@@ -49,7 +49,7 @@ public class Initialize {
 																						SpotlightAnnotator.PARAM_RENAME_TO_URI, false
 																				),
 								createEngineDescription(SlidingWindowRelationAnnotator.class, SlidingWindowRelationAnnotator.PARAM_WINDOW_SIZE, 10),
-								createEngineDescription(SvoRelationAnnotator.class),
+								createEngineDescription(SvoRelationClassifier.class),
 									createEngineDescription(SGFExporter.class)
 									);
 		
