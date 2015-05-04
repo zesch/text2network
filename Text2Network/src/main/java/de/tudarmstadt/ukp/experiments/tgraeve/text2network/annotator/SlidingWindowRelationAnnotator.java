@@ -65,11 +65,20 @@ public class SlidingWindowRelationAnnotator extends JCasAnnotator_ImplBase
 				tokenSentence.add(token);
 			}
 			
-			while (iterator <= tokenSentence.size()-windowSize) // Betrachtet Fenster innerhalb dieses Satzes.
+			while (iterator < tokenSentence.size()) // Betrachtet Fenster innerhalb dieses Satzes.
 			{
 				Annotation window = new Annotation(aJCas);
 				window.setBegin(tokenSentence.get(iterator).getBegin());
-				window.setEnd(tokenSentence.get(iterator+windowSize-1).getEnd());
+				
+				if(iterator+windowSize < tokenSentence.size()) // Falls Window Satzende erreicht
+				{
+					window.setEnd(tokenSentence.get(iterator+windowSize-1).getEnd());
+				}
+				else
+				{
+					window.setEnd(tokenSentence.get(tokenSentence.size()-1).getEnd());
+				}
+				
 				
 				List<Concept> conceptsWindow = new ArrayList<Concept>();
 				

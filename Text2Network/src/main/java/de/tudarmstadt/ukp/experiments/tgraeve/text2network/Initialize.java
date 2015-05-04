@@ -46,7 +46,7 @@ public class Initialize {
 		Text2NetworkExtractor t2nExtractor = new Text2NetworkExtractor();
 		
 		t2nExtractor.startPipeline(createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5),
-																				SpotlightAnnotator.PARAM_TYPES, new String[]{"Person,Place"}
+																						SpotlightAnnotator.PARAM_RENAME_TO_URI, false
 																				),
 								createEngineDescription(SlidingWindowRelationAnnotator.class, SlidingWindowRelationAnnotator.PARAM_WINDOW_SIZE, 10),
 								createEngineDescription(SvoRelationAnnotator.class),

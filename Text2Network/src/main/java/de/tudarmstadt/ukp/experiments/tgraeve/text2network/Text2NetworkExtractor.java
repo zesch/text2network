@@ -31,6 +31,7 @@ import org.apache.uima.fit.component.CasDumpWriter;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordLemmatizer;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ChunkTagChanger;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.interfaces.I_Extractor;
@@ -62,11 +63,12 @@ public class Text2NetworkExtractor implements I_Extractor {
 		
 		AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 		AnalysisEngineDescription pos = createEngineDescription(OpenNlpPosTagger.class);
+		AnalysisEngineDescription stem = createEngineDescription(StanfordLemmatizer.class);
 		AnalysisEngineDescription chunker = createEngineDescription(OpenNlpChunker.class);
 		AnalysisEngineDescription changeChunker = createEngineDescription(ChunkTagChanger.class);
 		AnalysisEngineDescription cas = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, "output/CASout.txt");	
 		
-		AnalysisEngineDescription[] pipe = new AnalysisEngineDescription[components.length+5];
+		AnalysisEngineDescription[] pipe = new AnalysisEngineDescription[components.length+6];
 		
 		int i = 0;
 		pipe[i] = segmenter;
@@ -77,9 +79,11 @@ public class Text2NetworkExtractor implements I_Extractor {
 		i++;
 		pipe[i] = changeChunker;
 		i++;
-		while(i<components.length+4)
+		pipe[i] = stem;
+		i++;
+		while(i<components.length+5)
 		{
-			pipe[i] = components[i-4];
+			pipe[i] = components[i-5];
 			i++;
 		}
 		pipe[i] = cas;
