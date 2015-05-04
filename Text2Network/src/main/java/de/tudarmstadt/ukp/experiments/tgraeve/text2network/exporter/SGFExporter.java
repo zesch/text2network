@@ -86,14 +86,17 @@ public class SGFExporter extends JCasConsumer_ImplBase
 			{
 				nodeset.addNode(node2);
 			}
-			
+			Edge edge;
 			if(relation.getRelation() != null)
 			{
-				Edge edge = new Edge(Integer.toString(eId), relation.getRelation().getLabel(), relation.getSource().getLabel(), relation.getTarget().getLabel());
-				edgeset.add(edge);
+				edge = new Edge(Integer.toString(eId), relation.getRelation().getLabel(), relation.getSource().getLabel(), relation.getTarget().getLabel());
 			} else
 			{
-				Edge edge = new Edge(Integer.toString(eId), relation.getSource().getLabel(), relation.getTarget().getLabel());
+				edge = new Edge(Integer.toString(eId), relation.getSource().getLabel(), relation.getTarget().getLabel());
+			}
+			
+			if(!edgeset.contains(edge))
+			{
 				edgeset.add(edge);
 			}
 			
