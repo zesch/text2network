@@ -45,7 +45,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 
 /**
@@ -170,7 +172,14 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 						}
 						else
 						{
-							concept.setLabel(element.getAttribute("surfaceForm"));
+							if(!JCasUtil.selectCovered(aJCas, Lemma.class, begin, end).isEmpty())
+							{
+								concept.setLabel(JCasUtil.selectCovered(aJCas, Lemma.class, begin, end).get(0).getValue());
+							}
+							else
+							{
+								concept.setLabel(element.getAttribute("surfaceForm"));
+							}
 						}
 						concept.setURI(element.getAttribute("URI"));
 						concept.addToIndexes();	
@@ -252,7 +261,14 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 					}
 					else
 					{
-						concept.setLabel(element.getAttribute("surfaceForm"));
+						if(!JCasUtil.selectCovered(aJCas, Lemma.class, begin, end).isEmpty())
+						{
+							concept.setLabel(JCasUtil.selectCovered(aJCas, Lemma.class, begin, end).get(0).getValue());
+						}
+						else
+						{
+							concept.setLabel(element.getAttribute("surfaceForm"));
+						}
 					}
 					concept.setURI(element.getAttribute("URI"));
 					concept.addToIndexes();	
