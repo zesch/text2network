@@ -39,7 +39,9 @@ import eu.sisob.api.visualization.format.metadata.Metadata;
 
 
 /**
- * Diese Komponente liest Relationen aus und exportiert diese als SGF-Format.
+ * Exportiert Konzepte und Relationen als SGF-Format.
+ * 
+ * Output: /output
  * 
  * @author Tobias Graeve
  *

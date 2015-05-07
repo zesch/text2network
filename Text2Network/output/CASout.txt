@@ -1,0 +1,335 @@
+======== CAS 0 begin ==================================
+
+-------- View _InitialView begin ----------------------------------
+
+DocumentMetaData
+   sofa: _InitialView
+   begin: 0
+   end: 47
+   language: "en"
+   documentTitle: "test.txt"
+   documentId: "test.txt"
+   isLastSegment: false
+
+CAS-Text:
+Network textanalysis is a type of textanalysis.
+[Network textanalysis is a type of textanalysis.]
+Sentence
+   sofa: _InitialView
+   begin: 0
+   end: 47
+[Network textanalysis is a type of textanalysis.]
+TagsetDescription
+   sofa: _InitialView
+   begin: 0
+   end: 47
+   layer: "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"
+   name: "ptb"
+   tags: FSArray
+[Network textanalysis is a type of textanalysis.]
+TagsetDescription
+   sofa: _InitialView
+   begin: 0
+   end: 47
+   layer: "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk"
+   name: "conll2000"
+   tags: FSArray
+[Network textanalysis]
+Chunk
+   sofa: _InitialView
+   begin: 0
+   end: 20
+   chunkValue: "NP"
+[Network textanalysis]
+NC
+   sofa: _InitialView
+   begin: 0
+   end: 20
+   chunkValue: <null>
+[Network]
+NP
+   sofa: _InitialView
+   begin: 0
+   end: 7
+   PosValue: "NNP"
+[Network]
+Token
+   sofa: _InitialView
+   begin: 0
+   end: 7
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 0
+      end: 7
+      value: "network"
+   stem: <null>
+   pos: NP
+      sofa: _InitialView
+      begin: 0
+      end: 7
+      PosValue: "NNP"
+   morph: <null>
+[Network]
+Lemma
+   sofa: _InitialView
+   begin: 0
+   end: 7
+   value: "network"
+[textanalysis]
+NN
+   sofa: _InitialView
+   begin: 8
+   end: 20
+   PosValue: "NN"
+[textanalysis]
+Token
+   sofa: _InitialView
+   begin: 8
+   end: 20
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 8
+      end: 20
+      value: "textanalysis"
+   stem: <null>
+   pos: NN
+      sofa: _InitialView
+      begin: 8
+      end: 20
+      PosValue: "NN"
+   morph: <null>
+[textanalysis]
+Lemma
+   sofa: _InitialView
+   begin: 8
+   end: 20
+   value: "textanalysis"
+[is]
+V
+   sofa: _InitialView
+   begin: 21
+   end: 23
+   PosValue: "VBZ"
+[is]
+VC
+   sofa: _InitialView
+   begin: 21
+   end: 23
+   chunkValue: <null>
+[is]
+Chunk
+   sofa: _InitialView
+   begin: 21
+   end: 23
+   chunkValue: "VP"
+[is]
+Token
+   sofa: _InitialView
+   begin: 21
+   end: 23
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 21
+      end: 23
+      value: "be"
+   stem: <null>
+   pos: V
+      sofa: _InitialView
+      begin: 21
+      end: 23
+      PosValue: "VBZ"
+   morph: <null>
+[is]
+Lemma
+   sofa: _InitialView
+   begin: 21
+   end: 23
+   value: "be"
+[a type]
+Chunk
+   sofa: _InitialView
+   begin: 24
+   end: 30
+   chunkValue: "NP"
+[a type]
+NC
+   sofa: _InitialView
+   begin: 24
+   end: 30
+   chunkValue: <null>
+[a]
+Token
+   sofa: _InitialView
+   begin: 24
+   end: 25
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 24
+      end: 25
+      value: "a"
+   stem: <null>
+   pos: ART
+      sofa: _InitialView
+      begin: 24
+      end: 25
+      PosValue: "DT"
+   morph: <null>
+[a]
+Lemma
+   sofa: _InitialView
+   begin: 24
+   end: 25
+   value: "a"
+[a]
+ART
+   sofa: _InitialView
+   begin: 24
+   end: 25
+   PosValue: "DT"
+[type]
+NN
+   sofa: _InitialView
+   begin: 26
+   end: 30
+   PosValue: "NN"
+[type]
+Token
+   sofa: _InitialView
+   begin: 26
+   end: 30
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 26
+      end: 30
+      value: "type"
+   stem: <null>
+   pos: NN
+      sofa: _InitialView
+      begin: 26
+      end: 30
+      PosValue: "NN"
+   morph: <null>
+[type]
+Lemma
+   sofa: _InitialView
+   begin: 26
+   end: 30
+   value: "type"
+[of]
+Chunk
+   sofa: _InitialView
+   begin: 31
+   end: 33
+   chunkValue: "PP"
+[of]
+Token
+   sofa: _InitialView
+   begin: 31
+   end: 33
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 31
+      end: 33
+      value: "of"
+   stem: <null>
+   pos: PP
+      sofa: _InitialView
+      begin: 31
+      end: 33
+      PosValue: "IN"
+   morph: <null>
+[of]
+Lemma
+   sofa: _InitialView
+   begin: 31
+   end: 33
+   value: "of"
+[of]
+PP
+   sofa: _InitialView
+   begin: 31
+   end: 33
+   PosValue: "IN"
+[textanalysis]
+Chunk
+   sofa: _InitialView
+   begin: 34
+   end: 46
+   chunkValue: "NP"
+[textanalysis]
+NN
+   sofa: _InitialView
+   begin: 34
+   end: 46
+   PosValue: "NN"
+[textanalysis]
+Token
+   sofa: _InitialView
+   begin: 34
+   end: 46
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 34
+      end: 46
+      value: "textanalysis"
+   stem: <null>
+   pos: NN
+      sofa: _InitialView
+      begin: 34
+      end: 46
+      PosValue: "NN"
+   morph: <null>
+[textanalysis]
+Lemma
+   sofa: _InitialView
+   begin: 34
+   end: 46
+   value: "textanalysis"
+[textanalysis]
+NC
+   sofa: _InitialView
+   begin: 34
+   end: 46
+   chunkValue: <null>
+[.]
+Token
+   sofa: _InitialView
+   begin: 46
+   end: 47
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 46
+      end: 47
+      value: "."
+   stem: <null>
+   pos: PUNC
+      sofa: _InitialView
+      begin: 46
+      end: 47
+      PosValue: "."
+   morph: <null>
+[.]
+Lemma
+   sofa: _InitialView
+   begin: 46
+   end: 47
+   value: "."
+[.]
+PUNC
+   sofa: _InitialView
+   begin: 46
+   end: 47
+   PosValue: "."
+-------- View _InitialView end ----------------------------------
+
+======== CAS 0 end ==================================
+
+

@@ -18,6 +18,7 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SpotlightAn
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 
 public class SpotlightAnnotatorTest {
+	
 	protected String text = "Germany was reunified in 1990 - Thanks to David Hasselhoff!";
 	protected double confidence = 0.2;
 	
@@ -26,7 +27,7 @@ public class SpotlightAnnotatorTest {
 	{
 		
 		JCas jcas = JCasFactory.createJCas();
-		jcas.setDocumentText("Test");
+		jcas.setDocumentText(text);
 		jcas.setDocumentLanguage("en");
 		
 		//Segmenter
@@ -42,7 +43,7 @@ public class SpotlightAnnotatorTest {
 		//Test
 		Concept concept1 = JCasUtil.selectByIndex(jcas, Concept.class, 0);
 		Concept concept2 = JCasUtil.selectByIndex(jcas, Concept.class, 1);
-		assertEquals("Germany", concept1.getCoveredText());
-		assertEquals("David_Hasselhoff", concept2.getCoveredText());
+		assertEquals("Germany", concept1.getLabel());
+		assertEquals("David_Hasselhoff", concept2.getLabel());
 	}
 }

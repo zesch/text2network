@@ -39,7 +39,9 @@ import com.tinkerpop.blueprints.util.io.graphml.GraphMLWriter;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
 /**
- * Diese Komponente liest Relationen aus und exportiert diese als GraphML-Format.
+ * Exportiert Konzepte und Relationen als GraphML-Format.
+ * 
+ * Output: /output
  * 
  * @author Tobias Graeve
  *
