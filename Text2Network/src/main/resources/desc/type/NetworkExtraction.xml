@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
-  <name>ConceptExtraction</name>
-  <description/>
+  <name>NetworkExtraction</name>
+  <description>Typesystem for Network Extraction from texts.</description>
   <version/>
   <vendor/>
   <types>

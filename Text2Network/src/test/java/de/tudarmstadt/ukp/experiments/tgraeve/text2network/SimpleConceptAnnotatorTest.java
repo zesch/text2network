@@ -14,20 +14,20 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.VC;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ChunkTagChanger;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SimpleConceptAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SlidingWindowRelationAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 
-public class RelationAnnotatorTest {
+public class SimpleConceptAnnotatorTest {
 	
 	protected String text = "This is a test.";
 	
 	@Test
-	public void testRelationAnnotation() throws UIMAException
+	public void testConceptAnnotationNC() throws UIMAException
 	{
 		JCas jcas = JCasFactory.createJCas();
 		jcas.setDocumentText(text);
@@ -58,15 +58,51 @@ public class RelationAnnotatorTest {
 		AnalysisEngine conceptEngine = createEngine(conceptAnn);
 		conceptEngine.process(jcas);
 		
-		//RelationAnnotation
-		AnalysisEngineDescription relationAnn = createEngineDescription(SlidingWindowRelationAnnotator.class);
-		AnalysisEngine relationEngine = createEngine(relationAnn);
-		relationEngine.process(jcas);
-		
 		//Test
-		Relation result = JCasUtil.selectSingle(jcas, Relation.class);
-		assertEquals("This", result.getSource().getLabel());
-		assertEquals("a test", result.getTarget().getLabel());
+		Concept result1 = JCasUtil.selectByIndex(jcas, Concept.class, 0);
+		assertEquals("This", result1.getCoveredText());
+		
+		Concept result2 = JCasUtil.selectByIndex(jcas, Concept.class, 1);
+		assertEquals("a test", result2.getCoveredText());
 			
 	}
+	
+	@Test
+	public void testConceptAnnotationVC() throws UIMAException
+	{
+		JCas jcas = JCasFactory.createJCas();
+		jcas.setDocumentText(text);
+		jcas.setDocumentLanguage("en");
+		
+		//Segmenter
+		AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+		AnalysisEngine segEngine = createEngine(segmenter);
+		segEngine.process(jcas);
+		
+		//POS
+		AnalysisEngineDescription openPos = createEngineDescription(OpenNlpPosTagger.class);
+		AnalysisEngine posEngine = createEngine(openPos);
+		posEngine.process(jcas);
+		
+		//Chunker
+		AnalysisEngineDescription openChunk = createEngineDescription(OpenNlpChunker.class);
+		AnalysisEngine chunkEngine = createEngine(openChunk);
+		chunkEngine.process(jcas);
+		
+		//ChangeChunker
+		AnalysisEngineDescription changeChunker = createEngineDescription(ChunkTagChanger.class);
+		AnalysisEngine changeEngine = createEngine(changeChunker);
+		changeEngine.process(jcas);
+		
+		//ConceptAnnotation
+		AnalysisEngineDescription conceptAnn = createEngineDescription(SimpleConceptAnnotator.class, SimpleConceptAnnotator.PARAM_CONCEPT_TYPE, VC.class);
+		AnalysisEngine conceptEngine = createEngine(conceptAnn);
+		conceptEngine.process(jcas);
+		
+		//Test
+		Concept result1 = JCasUtil.selectByIndex(jcas, Concept.class, 0);
+		assertEquals("is", result1.getCoveredText());
+			
+	}
+
 }

@@ -28,7 +28,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SimpleConceptAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SlidingWindowRelationAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SpotlightAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SvoRelationAnnotator;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SvoRelationClassifier;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.GraphMLExporter;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.SGFExporter;
@@ -43,18 +42,16 @@ public class Initialize {
 
 	public static void main(String[] args) throws UIMAException, IOException {
 		
-		Text2NetworkExtractor t2nExtractor = new Text2NetworkExtractor();
-		
+		Text2NetworkExtractor t2nExtractor = new Text2NetworkExtractor();	
 		t2nExtractor.startPipeline(createEngineDescription(SpotlightAnnotator.class, SpotlightAnnotator.PARAM_CONFIDENCE, new Float(0.5),
-																						SpotlightAnnotator.PARAM_RENAME_TO_URI, false
-																				),
-								createEngineDescription(SlidingWindowRelationAnnotator.class, SlidingWindowRelationAnnotator.PARAM_WINDOW_SIZE, 10),
+																						SpotlightAnnotator.PARAM_RENAME_TO_URI, true),
+								createEngineDescription(SlidingWindowRelationAnnotator.class, SlidingWindowRelationAnnotator.PARAM_WINDOW_SIZE, 7),
 								createEngineDescription(SvoRelationClassifier.class),
 									createEngineDescription(SGFExporter.class)
 									);
 		
-//		t2npipe.startPipeline(createEngineDescription(ConceptAnnotator.class, ConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class),
-//				createEngineDescription(SlidingWindowRelationAnnotator.class),
+//		t2nExtractor.startPipeline(createEngineDescription(SimpleConceptAnnotator.class, SimpleConceptAnnotator.PARAM_CONCEPT_TYPE, NC.class),
+//				createEngineDescription(SlidingWindowRelationAnnotator.class, SlidingWindowRelationAnnotator.PARAM_BORDER_SENTENCE, false),
 //					createEngineDescription(SGFExporter.class));
 
 	}
