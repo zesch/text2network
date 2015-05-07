@@ -18,15 +18,15 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SpotlightAn
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 
 public class SpotlightAnnotatorTest {
-	
-	protected String text = "Germany was xxx reunified in 1990 - Thanks to David Hasselhoff!";
-	protected static double confidence = 0.2;
+	protected String text = "Germany was reunified in 1990 - Thanks to David Hasselhoff!";
+	protected double confidence = 0.2;
 	
 	@Test
-	public void testConceptAnnotationNC() throws UIMAException
+	public void testSpotlightAnnotator() throws UIMAException
 	{
+		
 		JCas jcas = JCasFactory.createJCas();
-		jcas.setDocumentText(text);
+		jcas.setDocumentText("Test");
 		jcas.setDocumentLanguage("en");
 		
 		//Segmenter
