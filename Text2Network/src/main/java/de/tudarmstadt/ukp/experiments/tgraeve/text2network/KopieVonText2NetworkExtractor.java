@@ -54,7 +54,7 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.interfaces.I_Extracto
  *
  */
 
-public class Text2NetworkExtractor implements I_Extractor {
+public class KopieVonText2NetworkExtractor implements I_Extractor {
 	
 	protected AnalysisEngineDescription[] components;
 

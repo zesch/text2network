@@ -53,6 +53,7 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 /**
  * 
  * Der SpotlightAnnotator annotiert {@link Concept}s mithilfe der DBPedia-Wissensdatenbank über die Spotlight-Webschnittstelle.
+ * Erwartet Text, schreibt Concept Annotationen.
  * @see dbpedia.org
  * 
  * @author Tobias Graeve
@@ -161,7 +162,7 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 						int begin = Integer.parseInt(element.getAttribute("offset"))+paragraph.getBegin();
 						int end = begin + element.getAttribute("surfaceForm").length();
 						
-						System.out.println(element.getAttribute("surfaceForm")+" von " + begin + " bis " + end + " URI:" + element.getAttribute("URI").substring(28)); //TODO löschen
+//						System.out.println(element.getAttribute("surfaceForm")+" von " + begin + " bis " + end + " URI:" + element.getAttribute("URI").substring(28)); //TODO löschen
 						
 						Concept concept = new Concept(aJCas);
 						concept.setBegin(begin);
@@ -250,7 +251,7 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 					int begin = Integer.parseInt(element.getAttribute("offset"));
 					int end = begin + element.getAttribute("surfaceForm").length();
 					
-					System.out.println(element.getAttribute("surfaceForm")+" von " + begin + " bis " + end + " URI:" + element.getAttribute("URI").substring(28)); //TODO löschen
+//					System.out.println(element.getAttribute("surfaceForm")+" von " + begin + " bis " + end + " URI:" + element.getAttribute("URI").substring(28)); //TODO löschen
 					
 					Concept concept = new Concept(aJCas);
 					concept.setBegin(begin);
