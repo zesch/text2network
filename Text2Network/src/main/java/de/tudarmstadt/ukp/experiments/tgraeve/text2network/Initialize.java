@@ -33,7 +33,7 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.GraphMLExpor
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.SGFExporter;
 
 /**
- * Dient der Initialisierung von Pipelines zur Netzwerkextraktion.
+ * Dient der Initialisierung der Extractor zur Netzwerkextraktion.
  * 
  * @author Tobias Graeve
  *

@@ -138,8 +138,6 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 					}
 				}
 				
-				System.out.println(request);
-
 				CloseableHttpClient client = HttpClients.createDefault();
 				HttpGet httpRequest = new HttpGet(request);
 				httpRequest.addHeader("Accept", "text/xml");
@@ -161,9 +159,7 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 						Element element = (Element) node;
 						int begin = Integer.parseInt(element.getAttribute("offset"))+paragraph.getBegin();
 						int end = begin + element.getAttribute("surfaceForm").length();
-						
-//						System.out.println(element.getAttribute("surfaceForm")+" von " + begin + " bis " + end + " URI:" + element.getAttribute("URI").substring(28)); //TODO löschen
-						
+												
 						Concept concept = new Concept(aJCas);
 						concept.setBegin(begin);
 						concept.setEnd(end);
@@ -222,8 +218,6 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 			String request = "http://spotlight.sztaki.hu:2222/rest/annotate?text=" + text 
 					+"&confidence="+ confidence; //alternativ http://spotlight.dbpedia.org/rest - veraltete Schnittstelle
 			
-			System.out.println(text);
-			
 			if (support != 0)
 			{
 				request = request + "&support="+ support;
@@ -250,9 +244,7 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 					Element element = (Element) node;
 					int begin = Integer.parseInt(element.getAttribute("offset"));
 					int end = begin + element.getAttribute("surfaceForm").length();
-					
-//					System.out.println(element.getAttribute("surfaceForm")+" von " + begin + " bis " + end + " URI:" + element.getAttribute("URI").substring(28)); //TODO löschen
-					
+										
 					Concept concept = new Concept(aJCas);
 					concept.setBegin(begin);
 					concept.setEnd(end);

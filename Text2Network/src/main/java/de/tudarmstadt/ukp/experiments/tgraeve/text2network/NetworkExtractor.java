@@ -37,13 +37,8 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.ChunkTagCha
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.interfaces.I_Extractor;
 
 /**
- * Dieser Extractor dient dem Extrahieren von Netzwerken aus reinen Textdateien.
- * Er beinhaltet bereits das Auslesen von Texten und folgende Vorverarbeitungen:
- * 
- * Segmentieren
- * POS-Tagging
- * Stemming
- * Chunking
+ * Dieser Extractor kann vollständig konfigueriert werden.
+ * Er beinhaltet nur das Einlesen von Text.
  * 
  * 
  * 
@@ -54,7 +49,7 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.interfaces.I_Extracto
  *
  */
 
-public class KopieVonText2NetworkExtractor implements I_Extractor {
+public class NetworkExtractor implements I_Extractor {
 	
 	protected AnalysisEngineDescription[] components;
 
@@ -68,32 +63,16 @@ public class KopieVonText2NetworkExtractor implements I_Extractor {
 		         TextReader.PARAM_PATTERNS, new String[] {"[+]*.txt"},
 		         TextReader.PARAM_LANGUAGE, "en");
 		
-		AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
-		AnalysisEngineDescription pos = createEngineDescription(OpenNlpPosTagger.class);
-		AnalysisEngineDescription stem = createEngineDescription(StanfordLemmatizer.class);
-		AnalysisEngineDescription chunker = createEngineDescription(OpenNlpChunker.class);
-		AnalysisEngineDescription changeChunker = createEngineDescription(ChunkTagChanger.class);
-		AnalysisEngineDescription cas = createEngineDescription(CasDumpWriter.class, CasDumpWriter.PARAM_OUTPUT_FILE, "output/CASout.txt");	
 		
-		AnalysisEngineDescription[] pipe = new AnalysisEngineDescription[components.length+6];
+		
+		AnalysisEngineDescription[] pipe = new AnalysisEngineDescription[components.length];
 		
 		int i = 0;
-		pipe[i] = segmenter;
-		i++;
-		pipe[i] = pos;
-		i++;
-		pipe[i] = chunker;
-		i++;
-		pipe[i] = changeChunker;
-		i++;
-		pipe[i] = stem;
-		i++;
-		while(i<components.length+5)
+		while(i<components.length)
 		{
-			pipe[i] = components[i-5];
+			pipe[i] = components[i];
 			i++;
 		}
-		pipe[i] = cas;
 		
 		runPipeline(reader, pipe);
 	}

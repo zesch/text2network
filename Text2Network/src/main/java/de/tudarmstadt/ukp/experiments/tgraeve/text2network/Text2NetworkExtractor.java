@@ -46,7 +46,6 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.interfaces.I_Extracto
  * Chunking
  * 
  * 
- * 
  * Quelle: input/
  * Ziel: output/
  * 
