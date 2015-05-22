@@ -1,1 +1,0 @@
-Network textanalysis is a type of textanalysis.
