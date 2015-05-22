@@ -84,7 +84,7 @@ public class Example {
 				createReaderDescription(
 				         TextReader.class,
 				         TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/text",
-				         TextReader.PARAM_PATTERNS, new String[] {"[+]*.txt"},
+				         TextReader.PARAM_PATTERNS, new String[] {"[+]small.txt"},
 				         TextReader.PARAM_LANGUAGE, "en"
 				 ), 
 				createEngineDescription(

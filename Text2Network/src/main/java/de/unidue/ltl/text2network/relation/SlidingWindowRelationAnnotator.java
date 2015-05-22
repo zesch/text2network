@@ -54,43 +54,40 @@ public class SlidingWindowRelationAnnotator
 			// get tokens in that sentence
 			List<Token> tokens = new ArrayList<Token>(JCasUtil.selectCovered(Token.class, sentence));
 			
-			int maxOffset = tokens.size() - windowSize + 1;
-			if (tokens.size() < windowSize) {
-				maxOffset = tokens.size();
-			}
+			if (tokens.size() >= windowSize) {
 
-			for (int offset=0; offset<maxOffset; offset++) {
-
-				// construct dummy annotation that is later used to select concepts in its span
-				Annotation window = new Annotation(aJCas);
-				window.setBegin(tokens.get(offset).getBegin());
-				window.setEnd(tokens.get(offset+windowSize-1).getEnd());
-				
-				
-				List<Concept> concepts = new ArrayList<>(JCasUtil.selectCovered(Concept.class, window));
-				
-				if (concepts.size() > 1)
-				{	
-					Concept con1 = concepts.get(0);
-					Concept con2 = concepts.get(1);
+				for (int offset=0; offset<tokens.size() - windowSize; offset++) {
+		
+					// construct dummy annotation that is later used to select concepts in its span
+					Annotation window = new Annotation(aJCas);
+					window.setBegin(tokens.get(offset).getBegin());
+					window.setEnd(tokens.get(offset+windowSize-1).getEnd());
+									
+					List<Concept> concepts = new ArrayList<>(JCasUtil.selectCovered(Concept.class, window));
 					
-					String relationType = "untyped";
-					for (Chunk chunk : JCasUtil.selectBetween(aJCas, Chunk.class, con1, con2)) {
-						if (chunk.getChunkValue().equals("VP")) {
-							relationType = chunk.getCoveredText();
+					if (concepts.size() > 1)
+					{	
+						Concept con1 = concepts.get(0);
+						Concept con2 = concepts.get(1);
+						
+						String relationType = "untyped";
+						for (Chunk chunk : JCasUtil.selectBetween(aJCas, Chunk.class, con1, con2)) {
+							if (chunk.getChunkValue().equals("VP")) {
+								relationType = chunk.getCoveredText();
+							}
 						}
+						
+						Relation relation = new Relation(aJCas);
+						relation.setBegin(con1.getBegin());
+						relation.setEnd(con2.getEnd());
+						relation.setSource(con1);
+						relation.setTarget(con2);
+						relation.setRelationType(relationType);
+						relation.addToIndexes();					
 					}
 					
-					Relation relation = new Relation(aJCas);
-					relation.setBegin(con1.getBegin());
-					relation.setEnd(con2.getEnd());
-					relation.setSource(con1);
-					relation.setTarget(con2);
-					relation.setRelationType(relationType);
-					relation.addToIndexes();					
+					offset++;
 				}
-				
-				offset++;
 			}
 		}
 	}
