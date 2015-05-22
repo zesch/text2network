@@ -16,7 +16,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator;
+package de.unidue.ltl.text2network.relation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +31,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
+import de.unidue.ltl.text2network.type.Concept;
+import de.unidue.ltl.text2network.type.Relation;
 
 
 public class SlidingWindowRelationAnnotator 

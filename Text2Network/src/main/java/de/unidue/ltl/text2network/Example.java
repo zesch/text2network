@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.experiments.tgraeve.text2network;
+package de.unidue.ltl.text2network;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -27,10 +27,10 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SimpleConceptAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SlidingWindowRelationAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SpotlightAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter.GraphMLExporter;
+import de.unidue.ltl.text2network.concept.SimpleConceptAnnotator;
+import de.unidue.ltl.text2network.concept.SpotlightAnnotator;
+import de.unidue.ltl.text2network.exporter.GraphMLExporter;
+import de.unidue.ltl.text2network.relation.SlidingWindowRelationAnnotator;
 
 public class Example {
 

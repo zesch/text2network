@@ -16,7 +16,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator;
+package de.unidue.ltl.text2network.concept;
 
 import java.util.Map.Entry;
 
@@ -28,7 +28,7 @@ import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
+import de.unidue.ltl.text2network.type.Concept;
 
 
 public class SimpleConceptAnnotator

@@ -6,7 +6,7 @@
   <vendor/>
   <types>
     <typeDescription>
-      <name>de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept</name>
+      <name>de.unidue.ltl.text2network.type.Concept</name>
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
@@ -18,19 +18,19 @@
       </features>
     </typeDescription>
   <typeDescription>
-      <name>de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation</name>
+      <name>de.unidue.ltl.text2network.type.Relation</name>
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
           <name>source</name>
           <description/>
-          <rangeTypeName>de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept</rangeTypeName>
+          <rangeTypeName>de.unidue.ltl.text2network.type.Concept</rangeTypeName>
         </featureDescription>
         <featureDescription>
           <name>target</name>
           <description/>
-          <rangeTypeName>de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept</rangeTypeName>
+          <rangeTypeName>de.unidue.ltl.text2network.type.Concept</rangeTypeName>
         </featureDescription>
       <featureDescription>
           <name>relationType</name>

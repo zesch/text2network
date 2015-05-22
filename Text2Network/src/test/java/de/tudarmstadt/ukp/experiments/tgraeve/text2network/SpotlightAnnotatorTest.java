@@ -33,8 +33,8 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SpotlightAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
+import de.unidue.ltl.text2network.concept.SpotlightAnnotator;
+import de.unidue.ltl.text2network.type.Concept;
 
 public class SpotlightAnnotatorTest {
 	

@@ -16,7 +16,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator;
+package de.unidue.ltl.text2network.concept;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -44,7 +44,7 @@ import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
+import de.unidue.ltl.text2network.type.Concept;
 
 /**
  * 

@@ -1,6 +1,6 @@
 
-/* First created by JCasGen Tue Mar 03 01:38:25 CET 2015 */
-package de.tudarmstadt.ukp.experiments.tgraeve.text2network.type;
+/* First created by JCasGen Fri May 22 10:25:43 CEST 2015 */
+package de.unidue.ltl.text2network.type;
 
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.FeatureStructure;
@@ -14,7 +14,7 @@ import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Thu May 21 20:55:02 CEST 2015
+ * Updated by JCasGen Fri May 22 10:25:43 CEST 2015
  * @generated */
 public class Relation_Type extends Annotation_Type {
   /** @generated 
@@ -44,7 +44,7 @@ public class Relation_Type extends Annotation_Type {
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.unidue.ltl.text2network.type.Relation");
  
   /** @generated */
   final Feature casFeat_source;
@@ -56,7 +56,7 @@ public class Relation_Type extends Annotation_Type {
    */ 
   public int getSource(int addr) {
         if (featOkTst && casFeat_source == null)
-      jcas.throwFeatMissing("source", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation");
+      jcas.throwFeatMissing("source", "de.unidue.ltl.text2network.type.Relation");
     return ll_cas.ll_getRefValue(addr, casFeatCode_source);
   }
   /** @generated
@@ -65,7 +65,7 @@ public class Relation_Type extends Annotation_Type {
    */    
   public void setSource(int addr, int v) {
         if (featOkTst && casFeat_source == null)
-      jcas.throwFeatMissing("source", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation");
+      jcas.throwFeatMissing("source", "de.unidue.ltl.text2network.type.Relation");
     ll_cas.ll_setRefValue(addr, casFeatCode_source, v);}
     
   
@@ -80,7 +80,7 @@ public class Relation_Type extends Annotation_Type {
    */ 
   public int getTarget(int addr) {
         if (featOkTst && casFeat_target == null)
-      jcas.throwFeatMissing("target", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation");
+      jcas.throwFeatMissing("target", "de.unidue.ltl.text2network.type.Relation");
     return ll_cas.ll_getRefValue(addr, casFeatCode_target);
   }
   /** @generated
@@ -89,7 +89,7 @@ public class Relation_Type extends Annotation_Type {
    */    
   public void setTarget(int addr, int v) {
         if (featOkTst && casFeat_target == null)
-      jcas.throwFeatMissing("target", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation");
+      jcas.throwFeatMissing("target", "de.unidue.ltl.text2network.type.Relation");
     ll_cas.ll_setRefValue(addr, casFeatCode_target, v);}
     
   
@@ -104,7 +104,7 @@ public class Relation_Type extends Annotation_Type {
    */ 
   public String getRelationType(int addr) {
         if (featOkTst && casFeat_relationType == null)
-      jcas.throwFeatMissing("relationType", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation");
+      jcas.throwFeatMissing("relationType", "de.unidue.ltl.text2network.type.Relation");
     return ll_cas.ll_getStringValue(addr, casFeatCode_relationType);
   }
   /** @generated
@@ -113,7 +113,7 @@ public class Relation_Type extends Annotation_Type {
    */    
   public void setRelationType(int addr, String v) {
         if (featOkTst && casFeat_relationType == null)
-      jcas.throwFeatMissing("relationType", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation");
+      jcas.throwFeatMissing("relationType", "de.unidue.ltl.text2network.type.Relation");
     ll_cas.ll_setStringValue(addr, casFeatCode_relationType, v);}
     
   
@@ -130,11 +130,11 @@ public class Relation_Type extends Annotation_Type {
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
  
-    casFeat_source = jcas.getRequiredFeatureDE(casType, "source", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept", featOkTst);
+    casFeat_source = jcas.getRequiredFeatureDE(casType, "source", "de.unidue.ltl.text2network.type.Concept", featOkTst);
     casFeatCode_source  = (null == casFeat_source) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_source).getCode();
 
  
-    casFeat_target = jcas.getRequiredFeatureDE(casType, "target", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept", featOkTst);
+    casFeat_target = jcas.getRequiredFeatureDE(casType, "target", "de.unidue.ltl.text2network.type.Concept", featOkTst);
     casFeatCode_target  = (null == casFeat_target) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_target).getCode();
 
  

@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.experiments.tgraeve.text2network.exporter;
+package de.unidue.ltl.text2network.exporter;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,8 +36,8 @@ import com.tinkerpop.blueprints.impls.tg.TinkerGraph;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLTokens;
 import com.tinkerpop.blueprints.util.io.graphml.GraphMLWriter;
 
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
+import de.unidue.ltl.text2network.type.Concept;
+import de.unidue.ltl.text2network.type.Relation;
 
 /**
  * TODO add documentation

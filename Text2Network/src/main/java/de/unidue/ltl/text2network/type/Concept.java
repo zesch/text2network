@@ -1,7 +1,7 @@
 
 
-/* First created by JCasGen Mon Mar 02 01:35:08 CET 2015 */
-package de.tudarmstadt.ukp.experiments.tgraeve.text2network.type;
+/* First created by JCasGen Fri May 22 10:25:43 CEST 2015 */
+package de.unidue.ltl.text2network.type;
 
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
@@ -10,7 +10,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Thu May 21 20:55:02 CEST 2015
+ * Updated by JCasGen Fri May 22 10:25:43 CEST 2015
  * XML source: /Users/zesch/git/text2network/Text2Network/src/main/resources/desc/type/NetworkExtraction.xml
  * @generated */
 public class Concept extends Annotation {
@@ -73,6 +73,8 @@ public class Concept extends Annotation {
    */
   private void readObject() {/*default - does nothing empty block */}
      
+ 
+    
   //*--------------*
   //* Feature: label
 
@@ -82,7 +84,7 @@ public class Concept extends Annotation {
    */
   public String getLabel() {
     if (Concept_Type.featOkTst && ((Concept_Type)jcasType).casFeat_label == null)
-      jcasType.jcas.throwFeatMissing("label", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept");
+      jcasType.jcas.throwFeatMissing("label", "de.unidue.ltl.text2network.type.Concept");
     return jcasType.ll_cas.ll_getStringValue(addr, ((Concept_Type)jcasType).casFeatCode_label);}
     
   /** setter for label - sets  
@@ -91,7 +93,7 @@ public class Concept extends Annotation {
    */
   public void setLabel(String v) {
     if (Concept_Type.featOkTst && ((Concept_Type)jcasType).casFeat_label == null)
-      jcasType.jcas.throwFeatMissing("label", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept");
+      jcasType.jcas.throwFeatMissing("label", "de.unidue.ltl.text2network.type.Concept");
     jcasType.ll_cas.ll_setStringValue(addr, ((Concept_Type)jcasType).casFeatCode_label, v);}    
   }
 

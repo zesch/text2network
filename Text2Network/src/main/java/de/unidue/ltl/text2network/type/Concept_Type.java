@@ -1,6 +1,6 @@
 
-/* First created by JCasGen Mon Mar 02 01:35:08 CET 2015 */
-package de.tudarmstadt.ukp.experiments.tgraeve.text2network.type;
+/* First created by JCasGen Fri May 22 10:25:43 CEST 2015 */
+package de.unidue.ltl.text2network.type;
 
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.FeatureStructure;
@@ -14,7 +14,7 @@ import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Thu May 21 20:55:02 CEST 2015
+ * Updated by JCasGen Fri May 22 10:25:43 CEST 2015
  * @generated */
 public class Concept_Type extends Annotation_Type {
   /** @generated 
@@ -44,10 +44,8 @@ public class Concept_Type extends Annotation_Type {
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept");
-
-
-
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.unidue.ltl.text2network.type.Concept");
+ 
   /** @generated */
   final Feature casFeat_label;
   /** @generated */
@@ -58,7 +56,7 @@ public class Concept_Type extends Annotation_Type {
    */ 
   public String getLabel(int addr) {
         if (featOkTst && casFeat_label == null)
-      jcas.throwFeatMissing("label", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept");
+      jcas.throwFeatMissing("label", "de.unidue.ltl.text2network.type.Concept");
     return ll_cas.ll_getStringValue(addr, casFeatCode_label);
   }
   /** @generated
@@ -67,7 +65,7 @@ public class Concept_Type extends Annotation_Type {
    */    
   public void setLabel(int addr, String v) {
         if (featOkTst && casFeat_label == null)
-      jcas.throwFeatMissing("label", "de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept");
+      jcas.throwFeatMissing("label", "de.unidue.ltl.text2network.type.Concept");
     ll_cas.ll_setStringValue(addr, casFeatCode_label, v);}
     
   

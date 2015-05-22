@@ -33,9 +33,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpChunker;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SimpleConceptAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.SlidingWindowRelationAnnotator;
-import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
+import de.unidue.ltl.text2network.concept.SimpleConceptAnnotator;
+import de.unidue.ltl.text2network.relation.SlidingWindowRelationAnnotator;
+import de.unidue.ltl.text2network.type.Relation;
 
 public class SlidingWindowRelationAnnotatorTest {
 	
