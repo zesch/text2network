@@ -1,7 +1,7 @@
 /*******************************************************************************
- * Copyright 2010
- * Ubiquitous Knowledge Processing (UKP) Lab
- * Technische Universität Darmstadt
+ * Copyright 2015
+ * Language Technlogy Lab
+ * University of Duisburg-Essen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,37 +29,37 @@ import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
-/**
- * Diese Komponente annotiert {@link Concept}s nach Parametervorgabe.
- * 
- * @author Tobias Graeve
- *
- */
-public class SimpleConceptAnnotator extends JCasAnnotator_ImplBase
+
+
+public class SimpleConceptAnnotator
+	extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Bestimmt den Typ der Chunks, die als Konzepte dienen sollen.
-	 */
-	public static final String PARAM_CONCEPT_TYPE = "conceptType";
-	@ConfigurationParameter(name = PARAM_CONCEPT_TYPE, mandatory = true)
-	protected Class conceptType;
+
+	public static final String PARAM_CONCEPT_FEATURE_PATH = "conceptFeaturePath";
+	@ConfigurationParameter(name = PARAM_CONCEPT_FEATURE_PATH, mandatory = true)
+	protected String conceptFeaturePath;
 	
-	@Override
-	public void process(JCas aJCas) throws AnalysisEngineProcessException
+	public static final String PARAM_CONCEPT_VALUE = "conceptValue";
+	@ConfigurationParameter(name = PARAM_CONCEPT_VALUE, mandatory = true)
+	protected String conceptValue;
+	
+	public void process(JCas aJCas) 
+			throws AnalysisEngineProcessException
 	{
 
 		try {
 
-			for (Entry<AnnotationFS, String> entry : FeaturePathFactory.select(aJCas.getCas(), conceptType.getName()))
+			for (Entry<AnnotationFS, String> entry : FeaturePathFactory.select(aJCas.getCas(), conceptFeaturePath))
 			{
-				System.out.println(conceptType.getName());
-				System.out.println(entry.getValue());
-				
-				Concept concept = new Concept(aJCas);
-				concept.setBegin(entry.getKey().getBegin());
-				concept.setEnd(entry.getKey().getEnd());
-				concept.setLabel(entry.getKey().getCoveredText());
-				concept.addToIndexes();
+				AnnotationFS annotation = entry.getKey();
+
+				if (entry.getValue().equals(conceptValue)) {
+					Concept concept = new Concept(aJCas);
+					concept.setBegin(annotation.getBegin());
+					concept.setEnd(annotation.getEnd());
+					concept.setLabel(annotation.getCoveredText());
+					concept.addToIndexes();
+				}
 			}
 			
 		} catch (FeaturePathException e) {

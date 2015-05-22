@@ -1,7 +1,7 @@
 /*******************************************************************************
- * Copyright 2010
- * Ubiquitous Knowledge Processing (UKP) Lab
- * Technische Universität Darmstadt
+ * Copyright 2015
+ * Language Technlogy Lab
+ * University of Duisburg-Essen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,17 +21,14 @@ package de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
@@ -47,7 +44,6 @@ import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 
 /**
@@ -59,7 +55,8 @@ import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
  * @author Tobias Graeve
  *
  */
-public class SpotlightAnnotator extends JCasAnnotator_ImplBase
+public class SpotlightAnnotator
+	extends JCasAnnotator_ImplBase
 {
 	
 	/**
@@ -91,7 +88,6 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 	@ConfigurationParameter(name = PARAM_TYPES, mandatory = false)
 	protected String[] types;
 	
-	@Override
 	public void process(JCas aJCas) 
 			throws AnalysisEngineProcessException
 	{
@@ -178,7 +174,7 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 								concept.setLabel(element.getAttribute("surfaceForm"));
 							}
 						}
-						concept.setURI(element.getAttribute("URI"));
+//						concept.setURI(element.getAttribute("URI"));
 						concept.addToIndexes();	
 						
 						response.close();
@@ -263,7 +259,7 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase
 							concept.setLabel(element.getAttribute("surfaceForm"));
 						}
 					}
-					concept.setURI(element.getAttribute("URI"));
+//					concept.setURI(element.getAttribute("URI"));
 					concept.addToIndexes();	
 					
 					response.close();

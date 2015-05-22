@@ -1,4 +1,0 @@
-Class: de.tudarmstadt.ukp.experiments.tgraeve.text2network.DBPediaSpotlightClient
-  No description found for parameter [conceptType]
-  No description found for parameter [conceptValue]
-

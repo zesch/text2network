@@ -1,8 +1,7 @@
-
 /*******************************************************************************
- * Copyright 2010
- * Ubiquitous Knowledge Processing (UKP) Lab
- * Technische Universität Darmstadt
+ * Copyright 2015
+ * Language Technlogy Lab
+ * University of Duisburg-Essen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +27,7 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 
+import de.tudarmstadt.ukp.experiments.tgraeve.text2network.annotator.GraphExporter_ImplBase;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Concept;
 import de.tudarmstadt.ukp.experiments.tgraeve.text2network.type.Relation;
 import eu.sisob.api.parser.sisob.SGFParser;
@@ -47,7 +47,8 @@ import eu.sisob.api.visualization.format.metadata.Metadata;
  *
  */
 
-public class SGFExporter extends JCasConsumer_ImplBase
+public class SGFExporter
+	extends GraphExporter_ImplBase
 {
 	
 	/**
