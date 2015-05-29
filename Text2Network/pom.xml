@@ -4,7 +4,11 @@
   <artifactId>de.unidue.ltl.text2network</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>Text2Network</name>
-  <dependencyManagement>
+	<properties>
+	  <maven.compiler.source>1.7</maven.compiler.source>
+	  <maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+	<dependencyManagement>
   	<dependencies>
   		<dependency>
   			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
